@@ -19,4 +19,9 @@ class Constant {
   static const String system = 'system';
 
   static const String user = 'user';
+
+  static const String sosList = 'SOSItemList';
+
+  static const String sosRepeat = 'SOSRepeat';
+  static const String sosVoicer = 'SOSVoicer';
 }

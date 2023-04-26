@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/toolkit/add_sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 
@@ -12,6 +14,7 @@ class SOSPage extends StatefulWidget {
 
 class _SOSPageState extends State<SOSPage> {
   bool _repeat = true;
+  bool _voicer = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class _SOSPageState extends State<SOSPage> {
                   value: _repeat,
                   onChanged: (bool value) {
                     _repeat = value;
-                    if (_repeat) {}
+                    setValue(Constant.sosRepeat, _repeat);
                     setState(() {});
                   },
                 ),
@@ -68,10 +71,10 @@ class _SOSPageState extends State<SOSPage> {
                 const Expanded(child: SizedBox()),
                 NeumorphicSwitch(
                   height: 20,
-                  value: _repeat,
+                  value: _voicer,
                   onChanged: (bool value) {
-                    _repeat = value;
-                    if (_repeat) {}
+                    _voicer = value;
+                    setValue(Constant.sosVoicer, _voicer);
                     setState(() {});
                   },
                 ),

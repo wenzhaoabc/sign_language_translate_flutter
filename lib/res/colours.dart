@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Colours {
-  static const Color app_main = Color.fromARGB(0xff, 219, 230, 232);
+  static const Color app_main = Color.fromARGB(0xFF, 0x83, 0xB8, 0xFF);
   static const Color dark_app_main = Color.fromARGB(0xFF, 0x18, 0x19, 0x1A);
+
+  static const Color d_bg = Color.fromARGB(0xFF, 0xC6, 0xCD, 0xFF);
+  static const Color er_bg = Color.fromARGB(0xFF, 0x24, 0x8B, 0xD6);
+  static const Color most_bg = Color.fromARGB(0xFF, 0x0F, 0x6B, 0xAE);
 
   static const Color bg_color = Color.fromARGB(0xff, 219, 230, 232);
   static const Color dark_bg_color = Color(0xFF18191A);
@@ -47,10 +51,12 @@ class Colours {
   static const Color bottomBar_bg = app_main;
   static const Color dark_bottomBar_bg = Color.fromARGB(0x11, 0xc9, 0xd1, 0xd9);
 
-  static const Color dark_bottomBar_bbg = Color.fromARGB(0xff, 0xc9, 0xd1, 0xd9);
+  static const Color dark_bottomBar_bbg =
+      Color.fromARGB(0xff, 0xc9, 0xd1, 0xd9);
 
   // 深色模式下按钮背景色
   static const Color dark_btn_bg = Color.fromARGB(0xff, 0x33, 0x33, 0x33);
+
   // 深泽模式下按钮图标颜色
   static const Color dark_btn_icon = Colors.green;
 }

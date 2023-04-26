@@ -27,7 +27,7 @@ class _LearnItemWidgetState extends State<LearnItemWidget> {
     // 当前设备的宽度
     double deviceWidth = MediaQuery.of(context).size.width;
     // 当前主要颜色
-    Color currentColor = isInDark() ? Colours.dark_app_main : Colours.app_main;
+    Color currentColor = isInDark() ? Colours.dark_app_main : Colours.d_bg;
     double marginTop = 10;
     // 字体大小
     double wordFontSize = 22;

@@ -7,6 +7,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/res/colours.dart';
+import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
 class AddSOS extends StatefulWidget {
@@ -21,7 +22,22 @@ class _AddSOSState extends State<AddSOS> {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
   }
 
-  SOSItem? newItem;
+  String? to, title, content;
+  List<SOSItem> SosItemList = [];
+
+  // 初始化紧急呼救数据列表
+  void initSosList() {
+    List<String>? strList = getStringListAsync(Constant.sosList);
+    if (strList == null || strList.isEmpty) {
+      return;
+    }
+    debugPrint("添加SOS : strList = $strList");
+    for (var value in strList) {
+      var jsonItem = jsonDecode(value);
+      SOSItem item = SOSItem.fromJson(jsonItem);
+      SosItemList.add(item);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +51,9 @@ class _AddSOSState extends State<AddSOS> {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: Column(
           children: [
-            _getTagInput('名称', '取个标题', (title) => newItem?.title = title),
+            _getTagInput('名称', '取个标题', (t) => title = t),
             const SizedBox(height: 20),
-            _getTagInput('TO', '呼叫的手机号', (to) => newItem?.to = to),
+            _getTagInput('TO', '呼叫的手机号', (t) => to = t),
             const SizedBox(height: 20),
             _getTextArea(),
             const SizedBox(height: 20),
@@ -46,32 +62,26 @@ class _AddSOSState extends State<AddSOS> {
               child: NeumorphicButton(
                 style: const NeumorphicStyle(depth: 3, intensity: 0.8),
                 pressed: true,
-                onPressed: () {
-                  final str = getStringAsync('SOS');
-                  final json = jsonDecode(str);
-                  List<dynamic> tempList = json as List;
-                  List<SOSItem> sosList = [];
-                  for (var value in tempList) {
-                    sosList.add(SOSItem.fromJson(value));
-                  }
-                  bool cont = false;
-                  for (var value1 in sosList) {
-                    if (value1.title == newItem?.title) {
+                onPressed: () async {
+                  initSosList();
+
+                  for (var value1 in SosItemList) {
+                    if (value1.title == title) {
                       MyToast.showToast(msg: '名称重复', type: 'error');
-                      cont = true;
-                      break;
+                      return;
                     }
                   }
-                  if (cont == false) {
-                    if (newItem == null ||
-                        newItem!.to.isEmptyOrNull ||
-                        newItem!.title.isEmptyOrNull ||
-                        newItem!.content.isEmptyOrNull) {
-                      MyToast.showToast(msg: '内容不可为空', type: 'warning');
-                    }
-                    sosList.add(newItem!);
-                    setValue('SOS', jsonEncode(sosList));
+                  if (to.isEmptyOrNull ||
+                      title.isEmptyOrNull ||
+                      content.isEmptyOrNull) {
+                    MyToast.showToast(msg: '内容不可为空', type: 'warning');
+                    return;
                   }
+                  SosItemList.add(SOSItem(title!, content!, to!));
+                  List<String> strList = List.generate(SosItemList.length,
+                      (index) => SosItemList.elementAt(index).toString());
+                  await setValue(Constant.sosList, strList);
+                  debugPrint("add new SOSItem after: $strList");
                 },
                 child: const Text(
                   '添加',
@@ -98,7 +108,7 @@ class _AddSOSState extends State<AddSOS> {
         TextField(
           cursorColor: Colors.black,
           cursorWidth: 2,
-          onChanged: function,
+          onChanged: (text) => function(text),
           style: const TextStyle(fontSize: 16),
           inputFormatters: [LengthLimitingTextInputFormatter(15)],
           decoration: InputDecoration(
@@ -122,7 +132,7 @@ class _AddSOSState extends State<AddSOS> {
         TextField(
           maxLines: 5,
           onChanged: (text) {
-            newItem?.content = text;
+            content = text;
           },
           style: const TextStyle(fontSize: 16),
           inputFormatters: [

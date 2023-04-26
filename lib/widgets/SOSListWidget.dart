@@ -1,11 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/res/colours.dart';
-import 'package:sign_language/utils/PhoneStateUtils.dart';
+import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/PhoneUtils.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
@@ -17,36 +18,52 @@ class SOSListWidget extends StatefulWidget {
 }
 
 class _SOSListWidgetState extends State<SOSListWidget> {
-  List<SOSItem> sosList = [
-    SOSItem(
-        '家中失火报警',
-        '消防救援中心您好，我是一名聋哑人士，该音频为提前录制，我家中厨房失火，火势过大无法控制，我家在花园路幸福小区1单元6栋9号，请速来救援',
-        '18105022730'),
-    SOSItem(
-        '户外涉险',
-        '消防救援中心您好，我是一名聋哑人士，该音频为提前录制，我家中厨房失火，火势过大无法控制，我家在花园路幸福小区1单元6栋9号，请速来救援',
-        '18105022730'),
-    SOSItem(
-        '迷路报警',
-        '消防救援中心您好，我是一名聋哑人士，该音频为提前录制，我家中厨房失火，火势过大无法控制，我家在花园路幸福小区1单元6栋9号，请速来救援',
-        '18105022730'),
-  ];
+  final List<SOSItem> SosItemList = [];
 
-  final PhoneStateListener _phoneStateListener = PhoneStateListener();
-  late FlutterTts flutterTts;
-  bool isCalling = false;
-
-  void handleDelete(int index) {
+  void handleDelete(int index) async {
     showConfirmDialogCustom(context,
-        title: "确定要删除《${sosList[index].title}》吗？",
+        title: "确定要删除《${SosItemList[index].title}》吗？",
         dialogType: DialogType.DELETE, onAccept: (BuildContext context) {
-      sosList.removeAt(index);
+      SosItemList.removeAt(index);
       setState(() {});
     });
+    List<String> strList = List.generate(
+        SosItemList.length, (index) => SosItemList.elementAt(index).toString());
+    await setValue(Constant.sosList, strList);
   }
 
-  void handleEdit(int index) {
-    // Navigator.of(context).push(MySlidePageRoute(page: page))
+  // 初始化紧急呼救数据列表
+  void initSosList() async {
+    var temp = getStringListAsync(Constant.sosList);
+    debugPrint("initSosList : temp = $temp");
+
+    List<String>? strList = getStringListAsync(Constant.sosList);
+    debugPrint("初始化SosList : $strList");
+    if (strList == null || strList.isEmpty) {
+      SosItemList.add(SOSItem(
+          '户外紧急遇险', '消防中心你好，我是一名聋哑人士，我现在户外遭遇紧急情况，我的位置是乞灵山山顶，请速来救援', '1008611'));
+      List<String> strList = List.generate(SosItemList.length,
+          (index) => SosItemList.elementAt(index).toString());
+      await setValue(Constant.sosList, strList);
+      return;
+    }
+    for (var value in strList) {
+      var jsonItem = jsonDecode(value);
+      SOSItem item = SOSItem.fromJson(jsonItem);
+      SosItemList.add(item);
+    }
+    setState(() {});
+  }
+
+  void handleEdit(int index) async {
+    var sosItem = SosItemList.elementAt(index);
+    var res = await PhoneUtils.createShortCut(
+        sosItem.title, sosItem.to, sosItem.content);
+    if (res == true) {
+      MyToast.showToast(msg: '创建成功');
+    } else {
+      MyToast.showToast(msg: '创建失败');
+    }
   }
 
   void makeSOSPhoneCall(String to, String content) async {
@@ -63,75 +80,23 @@ class _SOSListWidgetState extends State<SOSListWidget> {
     }
   }
 
-  void makeSOSPhoneCallV1(String to, String content) async {
-    var audioPer = await Permission.audio.request();
-    await Permission.speech.request();
-    if (true) {
-      isCalling = true;
-      var status = await Permission.phone.request();
-      if (status == PermissionStatus.granted) {
-        var res = await PhoneUtils.makePhoneCall(to, content);
-        if (res) {
-          debugPrint("拨打成功");
-          if (!isCalling) {
-            return;
-          }
-          _phoneStateListener.phoneStateStream.listen((dynamic state) async {
-            debugPrint("Phone State : $state");
-            if (state == "offhook" || state == "connected") {
-              debugPrint("通话建立");
-              await initTTS(content);
-            }
-            if (state == "disconnected") {
-              debugPrint("通话已挂断停止");
-              await flutterTts.stop();
-            }
-          }).onDone(() {
-            flutterTts.stop();
-          });
-        } else {
-          debugPrint("发生异常");
-        }
-      }
-    } else {
-      MyToast.showToast(msg: '音频权限申请失败');
-    }
-  }
-
-  Future<void> initTTS(String content) async {
-    flutterTts = FlutterTts();
-    await flutterTts.awaitSpeakCompletion(true);
-    flutterTts.setSpeechRate(1.2); // 设置语速
-    flutterTts.setPitch(1.0); // 设置音调
-    flutterTts.setVolume(0.2); // 设置音量
-    flutterTts.setLanguage("zh-CN");
-    flutterTts.setCompletionHandler(() {
-      play(content);
-    });
-    flutterTts.speak(content);
-  }
-
-  void play(String content) async {
-    await flutterTts.speak(content);
-  }
-
-
   @override
-  void dispose() {
-    super.dispose();
-    flutterTts.stop();
+  void initState() {
+    initSosList();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       height: 400,
       child: SingleChildScrollView(
         child: Column(
           children: List.generate(
-            sosList.length,
-            (index) => _getSOSItem(sosList[index % 3], index),
+            SosItemList.length,
+            (index) => _getSOSItem(SosItemList[index], index),
           ),
         ),
       ),
@@ -172,7 +137,7 @@ class _SOSListWidgetState extends State<SOSListWidget> {
             backgroundColor: const Color(0xFF7BC043),
             foregroundColor: Colors.white,
             icon: Icons.home,
-            label: '添加到桌面快捷方式',
+            label: '添加到桌面',
           ),
         ],
       ),

@@ -31,7 +31,11 @@ class _TransPageState extends State<TransPage> {
     // 请求权限
     var permitCamera = await requestPermission();
     if (permitCamera) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CameraPage()));
+      final cameras = await availableCameras();
+      // final camera = cameras.first;
+      // Navigator.of(context).push(CameraPage(camera: camera));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => CameraPage(cameras: cameras)));
     } else {
       print('无相机权限');
     }
@@ -88,7 +92,11 @@ class _TransPageState extends State<TransPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [Text('Tips：'), Text('1.手持扶稳效果更好'), Text('2.确保手势完全包裹在取景框内')],
+              children: const [
+                Text('Tips：'),
+                Text('1.手持扶稳效果更好'),
+                Text('2.确保手势完全包裹在取景框内')
+              ],
             ),
           ),
         ],

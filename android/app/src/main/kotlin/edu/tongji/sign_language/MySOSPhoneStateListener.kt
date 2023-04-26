@@ -1,23 +1,15 @@
 package edu.tongji.sign_language
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.os.Build
-import android.speech.tts.TextToSpeech
 import android.telephony.PhoneStateListener
-import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
-import androidx.annotation.RequiresApi
+import com.iflytek.cloud.SpeechSynthesizer
 
 
-class MySOSPhoneStateListener(textToSpeech: TextToSpeech) : PhoneStateListener() {
+class MySOSPhoneStateListener : PhoneStateListener() {
 
-    private lateinit var textToSpeech: TextToSpeech;
+    private var textToSpeech: SpeechSynthesizer = SpeechSynthesizer.getSynthesizer();
+    var content: String = "";
 
-    init {
-        this.textToSpeech = textToSpeech
-    }
 
     @Deprecated("Deprecated in Java")
     override fun onCallStateChanged(state: Int, phoneNumber: String?) {
@@ -26,6 +18,10 @@ class MySOSPhoneStateListener(textToSpeech: TextToSpeech) : PhoneStateListener()
             TelephonyManager.CALL_STATE_OFFHOOK -> {
                 // 电话已接通
                 println("电话接通")
+
+                textToSpeech.startSpeaking("你好，我是一位残疾人士，我在户外遭遇危险，请速来救援", null);
+
+                println("语音通话")
             }
 
             TelephonyManager.CALL_STATE_RINGING -> {
@@ -36,8 +32,8 @@ class MySOSPhoneStateListener(textToSpeech: TextToSpeech) : PhoneStateListener()
             TelephonyManager.CALL_STATE_IDLE -> {
                 // 处于空闲状态
                 println("电话空闲")
-                println(textToSpeech.availableLanguages)
-                textToSpeech.stop();
+                println(textToSpeech.isSpeaking)
+                textToSpeech.stopSpeaking();
             }
         }
     }

@@ -96,8 +96,8 @@ class SOSItem {
         content = json['content'],
         to = json['to'];
 
-// @override
-// String toString() {
-//   return "{'title':$title,'content':$content,'to':$to}";
-// }
+  @override
+  String toString() {
+    return '{"title":"$title","to":"$to","content":"$content"}';
+  }
 }

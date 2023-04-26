@@ -17,27 +17,28 @@ class FlatSettingItem extends StatelessWidget {
     Color testColor = isInDark ? Colors.black : Colors.white;
     Color iconColor = isInDark ? Colors.grey : Colors.white;
     return Container(
-        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-        child: InkWell(
-          onTap: handleOnTap,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: testColor,
-                ),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
+      child: InkWell(
+        onTap: handleOnTap,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+                color: testColor,
               ),
-              const Expanded(child: SizedBox()),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 20,
-                color: iconColor,
-              )
-            ],
-          ),
-        ));
+            ),
+            const Expanded(child: SizedBox()),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 20,
+              color: iconColor,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

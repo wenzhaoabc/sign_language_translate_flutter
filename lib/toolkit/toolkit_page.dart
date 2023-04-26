@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 import 'package:sign_language/res/colours.dart';
+import 'package:sign_language/toolkit/chat/chat_page.dart';
 import 'package:sign_language/toolkit/sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 import 'package:sign_language/widgets/FlatSettingWidget.dart';
@@ -39,7 +41,15 @@ class _ToolkitPageState extends State<ToolkitPage> {
                           .push(MySlidePageRoute(page: const SOSPage()));
                     },
                     title: '紧急呼救'),
-                FlatSettingItem(handleOnTap: () {}, title: '无障碍通话')
+                FlatSettingItem(handleOnTap: () {}, title: '无障碍通话'),
+                FlatSettingItem(
+                    handleOnTap: () {
+                      // Navigator.of(context)
+                      //     .push(MySlidePageRoute(page: ChatPage()));
+                      // Get.to(ChatPage());
+                      Get.toNamed('/chat');
+                    },
+                    title: '聊天助手'),
               ],
             ),
           ),

@@ -85,13 +85,13 @@ class _StudyPageState extends State<StudyPage> {
                 boxShape: const NeumorphicBoxShape.circle(),
                 depth: 3,
                 intensity: 0.75,
-                color: isInDark() ? Colours.dark_btn_bg : Colours.app_main),
+                color: isInDark() ? Colours.dark_btn_bg : Colours.d_bg),
             margin: const EdgeInsets.all(8),
             child: IconButton(
               iconSize: 25,
               icon: Icon(
                 Icons.search_outlined,
-                color: isInDark() ? Colours.dark_btn_icon : Colors.blue,
+                color: isInDark() ? Colours.dark_btn_icon : Colors.white,
               ),
               onPressed: () {
                 Navigator.of(context).push(
@@ -121,6 +121,7 @@ class _StudyPageState extends State<StudyPage> {
             padding: const EdgeInsets.all(15),
             style: const NeumorphicStyle(
               depth: 2,
+              color: Colours.d_bg
             ),
             child: Column(
               children: [
@@ -168,6 +169,7 @@ class _StudyPageState extends State<StudyPage> {
             style: NeumorphicStyle(
               boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(10))),
               depth: 2,
+              color: Colours.er_bg
             ),
             child: Icon(icon, size: 35, color: _bgColors[index % _bgColors.length]),
           ),

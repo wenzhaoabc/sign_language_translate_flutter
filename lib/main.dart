@@ -4,13 +4,21 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_nb_net/flutter_net.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_language/home/home_page.dart';
 
 import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:sign_language/toolkit/chat/provider/auth_interceptor.dart';
+import 'package:sign_language/toolkit/chat/provider/constants.dart';
 
 import 'net/http.dart';
+import 'toolkit/chat/chat_bindings.dart';
+import 'toolkit/chat/chat_page.dart';
 
 Future<void> main() async {
   /// 确保初始化完成
@@ -25,6 +33,18 @@ Future<void> main() async {
 
   // 注册平台通道
   if (Platform.isAndroid) {}
+
+  NetOptions.instance
+      .setBaseUrl(baseUrl)
+      .addHeaders({
+        // 'Authorization': 'Bearer aiApiKey',
+        "Content-Type": "application/json"
+      })
+      .addInterceptor(AuthInterceptor())
+      .setConnectTimeout(const Duration(milliseconds: 5000))
+      .create();
+  await GetStorage.init();
+  GetStorage().write(StoreKey.API, aiApiKey);
 
   runApp(MyApp());
 }
@@ -56,14 +76,28 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _buildMaterialApp(ThemeProvider themeProvider) {
-    return MaterialApp(
+    EasyLoading.init();
+    return GetMaterialApp(
       title: '手语翻译',
       debugShowCheckedModeBanner: false,
       // showPerformanceOverlay: true,
       theme: theme ?? themeProvider.getTheme(),
       darkTheme: themeProvider.getTheme(isDarkMode: true),
-      home: home ?? const Home(),
+      // home: home ?? const Home(),
       navigatorKey: navigatorKey,
+      initialRoute: '/main',
+      getPages: [
+        GetPage(
+          name: '/main',
+          page: () => const Home(),
+          // binding: ImageBinding(),
+        ),
+        GetPage(
+          name: '/chat',
+          page: () => ChatPage(),
+          binding: ChatBinding(),
+        ),
+      ],
       builder: (BuildContext context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
@@ -79,7 +113,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      restorationScopeId: 'app',
+      // restorationScopeId: 'app',
     );
   }
 }
