@@ -115,7 +115,7 @@ class _SettingPageState extends State<SettingPage> {
                 style: const NeumorphicStyle(
                   color: Colours.d_bg,
                 ),
-                margin: const EdgeInsets.all(30),
+                margin: const EdgeInsets.only(left:30,right:30,),
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,43 +159,43 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          child: const Icon(
-                            Icons.upload_file_outlined,
-                            color: Colors.blueAccent,
-                            size: 30,
-                          ),
-                        ),
-                        Container(
-                          child: const Text(
-                            '我的录制',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        NeumorphicButton(
-                          style: const NeumorphicStyle(
-                              boxShape: NeumorphicBoxShape.circle(),
-                              depth: 2,
-                              intensity: 0.8),
-                          pressed: true,
-                          child: const Icon(Icons.arrow_forward,
-                              color: Colors.blueAccent),
-                          onPressed: () {
-                            var userStr = getStringAsync(Constant.user);
-                            if (userStr.isEmptyOrNull) {
-                              MyToast.showToast(msg: '请先登录');
-                            } else {
-                              Navigator.of(context).push(
-                                  MySlidePageRoute(page: const MyLoveWord()));
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       padding: const EdgeInsets.all(10),
+                    //       child: const Icon(
+                    //         Icons.upload_file_outlined,
+                    //         color: Colors.blueAccent,
+                    //         size: 30,
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       child: const Text(
+                    //         '我的录制',
+                    //         style: TextStyle(fontSize: 20),
+                    //       ),
+                    //     ),
+                    //     const Expanded(child: SizedBox()),
+                    //     NeumorphicButton(
+                    //       style: const NeumorphicStyle(
+                    //           boxShape: NeumorphicBoxShape.circle(),
+                    //           depth: 2,
+                    //           intensity: 0.8),
+                    //       pressed: true,
+                    //       child: const Icon(Icons.arrow_forward,
+                    //           color: Colors.blueAccent),
+                    //       onPressed: () {
+                    //         var userStr = getStringAsync(Constant.user);
+                    //         if (userStr.isEmptyOrNull) {
+                    //           MyToast.showToast(msg: '请先登录');
+                    //         } else {
+                    //           Navigator.of(context).push(
+                    //               MySlidePageRoute(page: const MyLoveWord()));
+                    //         }
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -203,7 +203,7 @@ class _SettingPageState extends State<SettingPage> {
                 style: const NeumorphicStyle(
                   color: Colours.d_bg,
                 ),
-                margin: const EdgeInsets.all(30),
+                margin: const EdgeInsets.all(0),
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,34 +239,34 @@ class _SettingPageState extends State<SettingPage> {
                     //     ),
                     //   ],
                     // ),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          child: const Icon(
-                            Icons.text_rotate_up,
-                            color: Colors.green,
-                            size: 30,
-                          ),
-                        ),
-                        Container(
-                          child: const Text(
-                            '超大字体',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        NeumorphicSwitch(
-                          height: 30,
-                          value: _superFontSize,
-                          onChanged: (bool value) {
-                            print(value);
-                            _superFontSize = value;
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       padding: const EdgeInsets.all(10),
+                    //       child: const Icon(
+                    //         Icons.text_rotate_up,
+                    //         color: Colors.green,
+                    //         size: 30,
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       child: const Text(
+                    //         '超大字体',
+                    //         style: TextStyle(fontSize: 20),
+                    //       ),
+                    //     ),
+                    //     const Expanded(child: SizedBox()),
+                    //     NeumorphicSwitch(
+                    //       height: 30,
+                    //       value: _superFontSize,
+                    //       onChanged: (bool value) {
+                    //         print(value);
+                    //         _superFontSize = value;
+                    //         setState(() {});
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
