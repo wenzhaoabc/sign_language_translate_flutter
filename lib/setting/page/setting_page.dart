@@ -87,7 +87,8 @@ class _SettingPageState extends State<SettingPage> {
                     left: 5, top: 5, bottom: 5, right: 30),
                 child: IconButton(
                   iconSize: 30,
-                  color: const Color.fromARGB(0xff, 255, 255, 255),
+                  color: Colors.blueAccent,
+                  // color: const Color.fromARGB(0xff, 255, 255, 255),
                   icon: const Icon(
                     Icons.account_circle_outlined,
                   ),

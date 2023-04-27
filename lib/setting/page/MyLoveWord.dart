@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/widgets/LearnItemWidget.dart';
+import 'package:sign_language/res/constant.dart';
 
 class MyLoveWord extends StatefulWidget {
   const MyLoveWord({Key? key}) : super(key: key);
@@ -32,57 +33,68 @@ class _MyLoveWordState extends State<MyLoveWord> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Color.fromARGB(255, 219, 230, 232),
-        leading: Neumorphic(
-          style: const NeumorphicStyle(
-              shape: NeumorphicShape.convex,
-              boxShape: NeumorphicBoxShape.circle(),
-              depth: 3,
-              lightSource: LightSource.topLeft,
-              intensity: 0.75,
-              surfaceIntensity: 0.1,
-              color: Color.fromARGB(0xff, 219, 230, 232)),
-          margin: const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
-          child: IconButton(
-            iconSize: 25,
-            color: const Color.fromARGB(0xff, 255, 255, 255),
-            icon: const Icon(Icons.arrow_back_sharp),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+    return Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(Constant.bg_img_url),
+            // image: AssetImage("images/R_C.jpg"),
+            fit: BoxFit.cover,
           ),
         ),
-        leadingWidth: 80,
-        actions: [
-          Neumorphic(
-            style: const NeumorphicStyle(
-                shape: NeumorphicShape.convex,
-                boxShape: NeumorphicBoxShape.circle(),
-                depth: 3,
-                lightSource: LightSource.topLeft,
-                intensity: 0.75,
-                surfaceIntensity: 0.1,
-                color: Color.fromARGB(0xff, 219, 230, 232)),
-            margin:
-                const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 30),
-            child: IconButton(
-              iconSize: 25,
-              color: const Color.fromARGB(0xff, 255, 255, 255),
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                // Navigator.of(context).pop();
-              },
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            // backgroundColor: Color.fromARGB(255, 219, 230, 232),
+            backgroundColor: Colors.transparent,
+            leading: Neumorphic(
+              style: const NeumorphicStyle(
+                  shape: NeumorphicShape.convex,
+                  boxShape: NeumorphicBoxShape.circle(),
+                  depth: 3,
+                  lightSource: LightSource.topLeft,
+                  intensity: 0.75,
+                  surfaceIntensity: 0.1,
+                  color: Color.fromARGB(0xff, 219, 230, 232)),
+              margin:
+                  const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
+              child: IconButton(
+                iconSize: 25,
+                color: const Color.fromARGB(0xff, 255, 255, 255),
+                icon: const Icon(Icons.arrow_back_sharp,color: Colors.blueAccent,),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
+            leadingWidth: 80,
+            actions: [
+              Neumorphic(
+                style: const NeumorphicStyle(
+                    shape: NeumorphicShape.convex,
+                    boxShape: NeumorphicBoxShape.circle(),
+                    depth: 3,
+                    lightSource: LightSource.topLeft,
+                    intensity: 0.75,
+                    surfaceIntensity: 0.1,
+                    color: Color.fromARGB(0xff, 219, 230, 232)),
+                margin: const EdgeInsets.only(
+                    left: 5, top: 5, bottom: 5, right: 30),
+                child: IconButton(
+                  iconSize: 25,
+                  color: const Color.fromARGB(0xff, 255, 255, 255),
+                  icon: const Icon(Icons.menu,color: Colors.blueAccent,),
+                  onPressed: () {
+                    // Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      // body: _getLearnList(),
-      body: _getLearnList(),
-    );
+          // body: _getLearnList(),
+          body: _getLearnList(),
+          backgroundColor: Colors.transparent,
+        ));
   }
 
   Widget _getLearnList() {

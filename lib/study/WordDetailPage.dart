@@ -6,6 +6,7 @@ import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
+import 'package:sign_language/res/constant.dart';
 
 class WordDetailPage extends StatefulWidget {
   const WordDetailPage(
@@ -83,58 +84,71 @@ class _WordDetailPageState extends State<WordDetailPage> {
   Widget build(BuildContext context) {
     Color bgColor = Theme.of(context).primaryColor;
     Color btnColor = isInDark() ? Colors.white : Colors.green;
-    return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: bgColor,
-        leading: Neumorphic(
-          style: NeumorphicStyle(
-              shape: NeumorphicShape.convex,
-              boxShape: NeumorphicBoxShape.circle(),
-              depth: 3,
-              lightSource: LightSource.topLeft,
-              intensity: 0.75,
-              color: bgColor),
-          margin: const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
-          child: IconButton(
-            iconSize: 25,
-            color: isInDark() ? Colors.green : btnColor,
-            icon: const Icon(Icons.arrow_back_sharp),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+
+    return Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(Constant.bg_img_url),
+            // image: AssetImage("images/R_C.jpg"),
+            fit: BoxFit.cover,
           ),
         ),
-        leadingWidth: 80,
-        actions: [
-          Neumorphic(
-            style: NeumorphicStyle(
-                shape: NeumorphicShape.convex,
-                boxShape: const NeumorphicBoxShape.circle(),
-                depth: 3,
-                lightSource: LightSource.topLeft,
-                intensity: 0.75,
-                surfaceIntensity: 0.1,
-                color: bgColor),
-            margin:
-                const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 30),
-            child: IconButton(
-              iconSize: 25,
-              color: Colors.red,
-              icon: Icon(
-                  isLoved ? Icons.favorite : Icons.favorite_border_outlined),
-              onPressed: () {
-                // 添加收藏
-                addMyLove();
-              },
+        child: Scaffold(
+          // backgroundColor: bgColor,
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            // backgroundColor: bgColor,
+            backgroundColor: Colors.transparent,
+            leading: Neumorphic(
+              style: NeumorphicStyle(
+                  shape: NeumorphicShape.convex,
+                  boxShape: NeumorphicBoxShape.circle(),
+                  depth: 3,
+                  lightSource: LightSource.topLeft,
+                  intensity: 0.75,
+                  color: bgColor),
+              margin:
+                  const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
+              child: IconButton(
+                iconSize: 25,
+                color: isInDark() ? Colors.green : btnColor,
+                icon: const Icon(Icons.arrow_back_sharp),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
+            leadingWidth: 80,
+            actions: [
+              Neumorphic(
+                style: NeumorphicStyle(
+                    shape: NeumorphicShape.convex,
+                    boxShape: const NeumorphicBoxShape.circle(),
+                    depth: 3,
+                    lightSource: LightSource.topLeft,
+                    intensity: 0.75,
+                    surfaceIntensity: 0.1,
+                    color: bgColor),
+                margin: const EdgeInsets.only(
+                    left: 5, top: 5, bottom: 5, right: 30),
+                child: IconButton(
+                  iconSize: 25,
+                  color: Colors.red,
+                  icon: Icon(isLoved
+                      ? Icons.favorite
+                      : Icons.favorite_border_outlined),
+                  onPressed: () {
+                    // 添加收藏
+                    addMyLove();
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: _getOneWordCard(widget.currentWord),
-    );
+          body: _getOneWordCard(widget.currentWord),
+          backgroundColor: Colors.transparent,
+        ));
   }
 
   Widget _getOneWordCard(WordItemInfo wordItemInfo) {
