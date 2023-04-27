@@ -21,6 +21,7 @@ import com.iflytek.cloud.InitListener
 import com.iflytek.cloud.SpeechConstant
 import com.iflytek.cloud.SpeechSynthesizer
 import com.iflytek.cloud.SpeechUtility
+import com.iflytek.cloud.SynthesizerListener
 import com.iflytek.cloud.util.ResourceUtil
 import com.iflytek.cloud.util.ResourceUtil.RESOURCE_TYPE
 import io.flutter.embedding.android.FlutterActivity
@@ -30,11 +31,11 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
     private val SOS_PHONE_CHANNEL = "SOS_PHONE";
+    private val VOICE_CHANNEL = "VOICE_AUDIO";
 
     private lateinit var telephonyManager: TelephonyManager;
     private lateinit var tts: SpeechSynthesizer;
     private lateinit var phoneStateListener: MySOSPhoneStateListener
-
 
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -43,10 +44,18 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SOS_PHONE_CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "makePhoneCall") {
                 val phoneNumber: String? = call.argument<String>("to")
-                val content: String? = call.argument<String>("content")
-
+                var content: String? = call.argument<String>("content")
+                val female: Boolean? = call.argument<Boolean>("voicer")
+                val repeat: Boolean? = call.argument<Boolean>("repeat")
+                if (repeat == true) {
+                    content = "$content。$content。$content。"
+                }
+                var _voicer = "xiaoyan"
+                if (female == true) {
+                    _voicer = "xiaofeng"
+                }
                 if (!phoneNumber.isNullOrEmpty() && !content.isNullOrEmpty()) {
-                    val success = dialPhoneNumber(phoneNumber, content)
+                    val success = dialPhoneNumber(phoneNumber, content, voicer = _voicer)
                     result.success(success)
                 } else {
                     result.error("200", "参数错误", null);
@@ -63,6 +72,22 @@ class MainActivity : FlutterActivity() {
                 }
             } else if (call.method == "None") {
                 println(call.method)
+            } else {
+                result.notImplemented();
+            }
+        }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, VOICE_CHANNEL).setMethodCallHandler { call, result ->
+            if (call.method == "textToSpeech") {
+                val content = call.argument<String>("content")
+                if (!content.isNullOrEmpty()) {
+                    val res = playVoiceAudio(content);
+                    result.success(res);
+                } else {
+                    result.error("200", "参数错误", null);
+                }
+            } else {
+                result.notImplemented()
             }
         }
     }
@@ -133,6 +158,22 @@ class MainActivity : FlutterActivity() {
             }
         } catch (e: ActivityNotFoundException) {
             false
+        }
+    }
+
+    /**
+     * 利用TTS播放音频
+     */
+    private fun playVoiceAudio(content: String): Boolean {
+        initTTS();
+        try {
+            tts.startSpeaking(content, null);
+            return true
+        } catch (e: Exception) {
+            println("TTS : 语音合成异常")
+            return false
+        } finally {
+            tts.stopSpeaking();
         }
     }
 

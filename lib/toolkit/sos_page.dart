@@ -17,6 +17,13 @@ class _SOSPageState extends State<SOSPage> {
   bool _voicer = true;
 
   @override
+  void initState() {
+    _voicer = getBoolAsync(Constant.sosVoicer);
+    _repeat = getBoolAsync(Constant.sosRepeat);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -33,18 +40,18 @@ class _SOSPageState extends State<SOSPage> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: const Icon(
-                    Icons.repeat,
-                    color: Colors.black,
-                    size: 20,
+                    Icons.autorenew_rounded,
+                    color: Colors.green,
+                    size: 30,
                   ),
                 ),
                 const Text(
                   '重复播报',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 25),
                 ),
                 const Expanded(child: SizedBox()),
                 NeumorphicSwitch(
-                  height: 20,
+                  height: 25,
                   value: _repeat,
                   onChanged: (bool value) {
                     _repeat = value;
@@ -61,16 +68,16 @@ class _SOSPageState extends State<SOSPage> {
                   child: const Icon(
                     Icons.speaker_phone_outlined,
                     color: Colors.green,
-                    size: 20,
+                    size: 30,
                   ),
                 ),
                 const Text(
                   '语音外放',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 25),
                 ),
                 const Expanded(child: SizedBox()),
                 NeumorphicSwitch(
-                  height: 20,
+                  height: 25,
                   value: _voicer,
                   onChanged: (bool value) {
                     _voicer = value;
@@ -89,8 +96,9 @@ class _SOSPageState extends State<SOSPage> {
         },
         icon: const Icon(
           Icons.add_circle_outlined,
-          size: 40,
+          size: 50,
           color: Colors.blue,
+          // weight: 100,
         ),
       ),
     );

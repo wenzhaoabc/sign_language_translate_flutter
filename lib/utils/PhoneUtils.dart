@@ -7,7 +7,7 @@ class PhoneUtils {
 
   static Future<bool> makePhoneCall(String to, String content) async {
     try {
-      bool repeat = getBoolAsync(Constant.sosRepeat, defaultValue: false);
+      bool repeat = getBoolAsync(Constant.sosRepeat, defaultValue: true);
       bool voicer = getBoolAsync(Constant.sosVoicer, defaultValue: true);
       final bool success = await _channel.invokeMethod('makePhoneCall',
           {"to": to, "content": content, "repeat": repeat, "voicer": voicer});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Phone {
-  static const MethodChannel _channel = MethodChannel('phone_plugin');
+  static const MethodChannel _channel = MethodChannel('SOS_PHONE');
 
   static Future<void> makeCall(String phoneNumber) async {
     try {
