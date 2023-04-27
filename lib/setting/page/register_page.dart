@@ -56,12 +56,14 @@ class _RegisterPageState extends State<RegisterPage> {
     if (!phone.validatePhone()) {
       MyToast.showToast(msg: '手机号不正确', type: 'error');
     }
-    final byteData = await rootBundle.load('assets/avatar.png');
-    final Uint8List bytes = byteData.buffer.asUint8List();
-    setState(() {
-      imageBytes = bytes;
-    });
-    var imgBase64 = base64Encode(bytes);
+    if (imageBytes == null) {
+      final byteData = await rootBundle.load('assets/images/avatar.png');
+      final Uint8List bytes = byteData.buffer.asUint8List();
+      setState(() {
+        imageBytes = bytes;
+      });
+    }
+    var imgBase64 = base64Encode(imageBytes!);
     debugPrint("imgBase64 = $imgBase64");
     String base64Image = "data:image/png;base64,$imgBase64";
     dio.post('/register', data: {
