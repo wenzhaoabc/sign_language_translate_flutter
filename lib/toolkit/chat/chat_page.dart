@@ -110,6 +110,7 @@ class ChatPage extends GetView<ChatController> {
                             child: TextField(
                               focusNode: focusNode,
                               controller: textEditingController,
+                              style:TextStyle(color:Colors.white),
                               onSubmitted: (value) async {
                                 await _sendMessage();
                               },
