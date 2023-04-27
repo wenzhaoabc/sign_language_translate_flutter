@@ -12,6 +12,7 @@ import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
+import 'package:sign_language/res/constant.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -86,64 +87,74 @@ class _RegisterPageState extends State<RegisterPage> {
 
     var deviceWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: bgColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 注册字样
-          Column(
+    return Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(Constant.bg_img_url),
+            // image: AssetImage("images/R_C.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          // backgroundColor: bgColor,
+          backgroundColor: Colors.transparent,
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 40, left: 20),
-                child: const Text(
-                  'Register',
-                  style: TextStyle(fontSize: 42, fontWeight: FontWeight.bold),
-
-                ),
+              // 注册字样
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 40, left: 20),
+                    child: const Text(
+                      'Register',
+                      style:
+                          TextStyle(fontSize: 42, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    width: 60,
+                    height: 4,
+                    color: inDark() ? Colors.grey : Colors.black,
+                    margin: const EdgeInsets.only(left: 20, top: 10),
+                  )
+                ],
               ),
-              Container(
-                width: 60,
-                height: 4,
-                color: inDark() ? Colors.grey : Colors.black,
-                margin: const EdgeInsets.only(left: 20, top: 10),
-              )
-            ],
-          ),
-          Expanded(
-            child: SizedBox(
-              width: deviceWidth > 500 ? 500 : deviceWidth,
-              child: Neumorphic(
-                style: const NeumorphicStyle(
-                  color: Colours.d_bg,
-                ),
-                margin: const EdgeInsets.only(
-                    left: 40, right: 40, top: 40, bottom: 80),
-                padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
-                child: Container(
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: Column(
-                    children: [
-                      _getAvatarCircle(),
-                      const SizedBox(height: 20),
-                      _getTagInput('昵称', '请输入昵称', handleUsername),
-                      const SizedBox(height: 25),
-                      _getTagInput('手机号', '请输入手机号', handlePhone),
-                      const SizedBox(height: 25),
-                      _getTagInput('密码', '请输入密码', handlePassword),
-                      const SizedBox(height: 25),
-                      _getRegisterBtn()
-                    ],
+              Expanded(
+                child: SizedBox(
+                  width: deviceWidth > 500 ? 500 : deviceWidth,
+                  child: Neumorphic(
+                    style: const NeumorphicStyle(
+                      color: Colours.d_bg,
+                    ),
+                    margin: const EdgeInsets.only(
+                        left: 40, right: 40, top: 40, bottom: 80),
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 30, right: 30),
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 20, right: 20),
+                      child: Column(
+                        children: [
+                          _getAvatarCircle(),
+                          const SizedBox(height: 20),
+                          _getTagInput('昵称', '请输入昵称', handleUsername),
+                          const SizedBox(height: 25),
+                          _getTagInput('手机号', '请输入手机号', handlePhone),
+                          const SizedBox(height: 25),
+                          _getTagInput('密码', '请输入密码', handlePassword),
+                          const SizedBox(height: 25),
+                          _getRegisterBtn()
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget _getAvatarCircle() {

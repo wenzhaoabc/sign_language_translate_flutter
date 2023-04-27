@@ -7,17 +7,14 @@ import 'package:sign_language/study/SerachPage.dart';
 import 'package:sign_language/study/SpecialTypePage.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/widgets/LearnItemWidget.dart';
+import 'package:sign_language/res/constant.dart';
+
 class StudyPage extends StatefulWidget {
   const StudyPage({Key? key}) : super(key: key);
 
   @override
   State<StudyPage> createState() => _StudyPageState();
 }
-
-
-
-
-
 
 class _StudyPageState extends State<StudyPage> {
   List<WordItemInfo>? _wordList;
@@ -42,7 +39,16 @@ class _StudyPageState extends State<StudyPage> {
     // SvgPicture.asset('assets/icons/sign_language_outlined.svg')
   ];
 
-  final _signTypesTitle = ['交通工具', '亲属称谓', '天气', '动植物', '民族', '节气', '政党', '手语生成'];
+  final _signTypesTitle = [
+    '交通工具',
+    '亲属称谓',
+    '天气',
+    '动植物',
+    '民族',
+    '节气',
+    '政党',
+    '手语生成'
+  ];
 
   bool isInDark() {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
@@ -73,7 +79,8 @@ class _StudyPageState extends State<StudyPage> {
           var begin = const Offset(0.0, 1.0);
           var end = Offset.zero;
           var curve = Curves.ease;
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           return SlideTransition(
             position: animation.drive(tween),
             child: child,
@@ -85,81 +92,100 @@ class _StudyPageState extends State<StudyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          '学习社区',
+    return Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(Constant.bg_img_url),
+            // image: AssetImage("images/R_C.jpg"),
+            fit: BoxFit.cover,
+          ),
         ),
-        elevation: 0,
-        actions: [
-          Neumorphic(
-            style: NeumorphicStyle(
-                shape: NeumorphicShape.convex,
-                boxShape: const NeumorphicBoxShape.circle(),
-                depth: 3,
-                intensity: 0.75,
-                color: isInDark() ? Colours.dark_btn_bg : Colours.d_bg),
-            margin: const EdgeInsets.all(8),
-            child: IconButton(
-              iconSize: 25,
-              icon: const Icon(
-                Icons.search_outlined,
-                color:Colors.blueAccent,
-                // color: isInDark() ? Colours.dark_btn_icon : Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => const SearchPage(),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      var begin = const Offset(0.0, 1.0);
-                      var end = Offset.zero;
-                      var curve = Curves.ease;
-                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                      return SlideTransition(
-                        position: animation.drive(tween),
-                        child: child,
-                      );
-                    },
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            title: const Text(
+              '学习社区',
+            ),
+            // elevation: 0,
+            actions: [
+              Neumorphic(
+                style: NeumorphicStyle(
+                    shape: NeumorphicShape.convex,
+                    boxShape: const NeumorphicBoxShape.circle(),
+                    depth: 3,
+                    intensity: 0.75,
+                    color: isInDark() ? Colours.dark_btn_bg : Colours.d_bg),
+                margin: const EdgeInsets.all(8),
+                child: IconButton(
+                  iconSize: 25,
+                  icon: const Icon(
+                    Icons.search_outlined,
+                    color: Colors.blueAccent,
+                    // color: isInDark() ? Colours.dark_btn_icon : Colors.white,
                   ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Neumorphic(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(15),
-            style: const NeumorphicStyle(
-              depth: 2,
-              color: Colours.d_bg
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:
-                      List.generate(4, (index) => _getGridItem(_signTypesIcon[index], _signTypesTitle[index], index)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const SearchPage(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          var begin = const Offset(0.0, 1.0);
+                          var end = Offset.zero;
+                          var curve = Curves.ease;
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                      4, (index) => _getGridItem(_signTypesIcon[index + 4], _signTypesTitle[index + 4], index + 4)),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Flexible(
-            child: _getLearnList(),
-          )
-        ],
-      ),
-    );
+          body: Column(
+            children: [
+              Neumorphic(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
+                style: const NeumorphicStyle(depth: 2, color: Colours.d_bg),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                          4,
+                          (index) => _getGridItem(_signTypesIcon[index],
+                              _signTypesTitle[index], index)),
+                    ),
+                    const SizedBox(height: 25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                          4,
+                          (index) => _getGridItem(_signTypesIcon[index + 4],
+                              _signTypesTitle[index + 4], index + 4)),
+                    ),
+                  ],
+                ),
+
+              ),
+
+              Flexible(
+                child: _getLearnList(),
+              )
+
+            ],
+
+          ),
+          backgroundColor: Colors.transparent,
+        ));
   }
 
   Widget _getGridItem(IconData icon, String title, int index) {
@@ -182,11 +208,12 @@ class _StudyPageState extends State<StudyPage> {
               _routeToPage(SpecialTypePage(index: index));
             },
             style: NeumorphicStyle(
-              boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(10))),
-              depth: 2,
-              color: Colours.er_bg
-            ),
-            child: Icon(icon, size: 35, color: _bgColors[index % _bgColors.length]),
+                boxShape: NeumorphicBoxShape.roundRect(
+                    const BorderRadius.all(Radius.circular(10))),
+                depth: 2,
+                color: Colours.er_bg),
+            child: Icon(icon,
+                size: 35, color: _bgColors[index % _bgColors.length]),
           ),
           Text(title, style: const TextStyle(fontSize: 17)),
         ],

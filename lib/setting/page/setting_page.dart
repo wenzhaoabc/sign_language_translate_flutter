@@ -16,6 +16,8 @@ import 'package:sign_language/setting/page/register_page.dart';
 import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
+import 'package:sign_language/res/constant.dart';
+
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -31,8 +33,7 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   void initState() {
-    setState(() {
-    });
+    setState(() {});
     _getUserInfo();
     super.initState();
   }
@@ -51,254 +52,271 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: isInDark() ? Colours.dark_app_main : Colours.app_main,
-      appBar: AppBar(
-        title: const Text('设置'),
-        centerTitle: true,
-        backgroundColor: isInDark() ? Colours.dark_app_main : Colours.app_main,
-        elevation: 0,
-        actions: [
-          Neumorphic(
-            style: NeumorphicStyle(
-              shape: NeumorphicShape.convex,
-              boxShape: NeumorphicBoxShape.circle(),
-              depth: 3,
-              lightSource: LightSource.topLeft,
-              intensity: 0.75,
-              surfaceIntensity: 0.1,
-              color: isInDark() ? Colours.dark_app_main : Colours.app_main,
-            ),
-            margin:
-                const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 30),
-            child: IconButton(
-              iconSize: 30,
-              color: const Color.fromARGB(0xff, 255, 255, 255),
-              icon: const Icon(
-                Icons.account_circle_outlined,
+    return Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(Constant.bg_img_url),
+            // image: AssetImage("images/R_C.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          // backgroundColor:
+          //     isInDark() ? Colours.dark_app_main : Colours.app_main,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: const Text('设置'),
+            centerTitle: true,
+            // backgroundColor:
+            //     isInDark() ? Colours.dark_app_main : Colours.app_main,
+            actions: [
+              Neumorphic(
+                style: NeumorphicStyle(
+                  shape: NeumorphicShape.convex,
+                  boxShape: NeumorphicBoxShape.circle(),
+                  depth: 3,
+                  lightSource: LightSource.topLeft,
+                  intensity: 0.75,
+                  surfaceIntensity: 0.1,
+                  color: isInDark() ? Colours.dark_app_main : Colours.app_main,
+                ),
+                margin: const EdgeInsets.only(
+                    left: 5, top: 5, bottom: 5, right: 30),
+                child: IconButton(
+                  iconSize: 30,
+                  color: const Color.fromARGB(0xff, 255, 255, 255),
+                  icon: const Icon(
+                    Icons.account_circle_outlined,
+                  ),
+                  onPressed: () {
+                    if (_user != null) {
+                      Navigator.of(context)
+                          .push(MySlidePageRoute(page: const PersonalInfo()));
+                    } else {
+                      MyToast.showToast(msg: '请先登录');
+                    }
+                  },
+                ),
               ),
-              onPressed: () {
-                if (_user != null) {
-                  Navigator.of(context)
-                      .push(MySlidePageRoute(page: const PersonalInfo()));
-                } else {
-                  MyToast.showToast(msg: '请先登录');
-                }
-              },
-            ),
+            ],
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Neumorphic(
-            style: const NeumorphicStyle(
-              color: Colours.d_bg,
-            ),
-            margin: const EdgeInsets.all(30),
-            child: _generateHeadUser(),
-          ),
-          Neumorphic(
-            style: const NeumorphicStyle(
-              color: Colours.d_bg,
-            ),
-            margin: const EdgeInsets.all(30),
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
+          body: Column(
+            children: [
+              Neumorphic(
+                style: const NeumorphicStyle(
+                  color: Colours.d_bg,
+                ),
+                margin: const EdgeInsets.all(30),
+                child: _generateHeadUser(),
+              ),
+              Neumorphic(
+                style: const NeumorphicStyle(
+                  color: Colours.d_bg,
+                ),
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.redAccent,
-                        size: 30,
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.favorite,
+                            color: Colors.redAccent,
+                            size: 30,
+                          ),
+                        ),
+                        const Text(
+                          '我的收藏',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        NeumorphicButton(
+                          style: const NeumorphicStyle(
+                              // color:Colors.blueAccent,
+                              boxShape: NeumorphicBoxShape.circle(),
+                              depth: 2,
+                              intensity: 0.8),
+                          pressed: true,
+                          child: const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.blueAccent,
+                          ),
+                          onPressed: () {
+                            var userStr = getStringAsync(Constant.user);
+                            if (userStr.isEmptyOrNull) {
+                              MyToast.showToast(msg: '请先登录');
+                            } else {
+                              Navigator.of(context).push(
+                                  MySlidePageRoute(page: const MyLoveWord()));
+                            }
+                          },
+                        ),
+                      ],
                     ),
-                    const Text(
-                      '我的收藏',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    NeumorphicButton(
-                      style: const NeumorphicStyle(
-                          // color:Colors.blueAccent,
-                          boxShape: NeumorphicBoxShape.circle(),
-                          depth: 2,
-                          intensity: 0.8),
-                      pressed: true,
-                      child: const Icon(Icons.arrow_forward,color: Colors.blueAccent,),
-                      onPressed: () {
-                        var userStr = getStringAsync(Constant.user);
-                        if (userStr.isEmptyOrNull) {
-                          MyToast.showToast(msg: '请先登录');
-                        } else {
-                          Navigator.of(context)
-                              .push(MySlidePageRoute(page: const MyLoveWord()));
-                        }
-                      },
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.upload_file_outlined,
+                            color: Colors.blueAccent,
+                            size: 30,
+                          ),
+                        ),
+                        Container(
+                          child: const Text(
+                            '我的录制',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        NeumorphicButton(
+                          style: const NeumorphicStyle(
+                              boxShape: NeumorphicBoxShape.circle(),
+                              depth: 2,
+                              intensity: 0.8),
+                          pressed: true,
+                          child: const Icon(Icons.arrow_forward,
+                              color: Colors.blueAccent),
+                          onPressed: () {
+                            var userStr = getStringAsync(Constant.user);
+                            if (userStr.isEmptyOrNull) {
+                              MyToast.showToast(msg: '请先登录');
+                            } else {
+                              Navigator.of(context).push(
+                                  MySlidePageRoute(page: const MyLoveWord()));
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                Row(
+              ),
+              Neumorphic(
+                style: const NeumorphicStyle(
+                  color: Colours.d_bg,
+                ),
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Icon(
-                        Icons.upload_file_outlined,
-                        color: Colors.blueAccent,
-                        size: 30,
-                      ),
-                    ),
-                    Container(
-                      child: const Text(
-                        '我的录制',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    NeumorphicButton(
-                      style: const NeumorphicStyle(
-                          boxShape: NeumorphicBoxShape.circle(),
-                          depth: 2,
-                          intensity: 0.8),
-                      pressed: true,
-                      child: const Icon(Icons.arrow_forward,color: Colors.blueAccent),
-                      onPressed: () {
-                        var userStr = getStringAsync(Constant.user);
-                        if (userStr.isEmptyOrNull) {
-                          MyToast.showToast(msg: '请先登录');
-                        } else {
-                          Navigator.of(context)
-                              .push(MySlidePageRoute(page: const MyLoveWord()));
-                        }
-                      },
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       padding: const EdgeInsets.all(10),
+                    //       child: const Icon(
+                    //         Icons.sunny,
+                    //         color: Colors.black,
+                    //         size: 30,
+                    //       ),
+                    //     ),
+                    //     const Text(
+                    //       '深色模式',
+                    //       style: TextStyle(fontSize: 20),
+                    //     ),
+                    //     const Expanded(child: SizedBox()),
+                    //     NeumorphicSwitch(
+                    //       height: 30,
+                    //       value: _blackMode,
+                    //       onChanged: (bool value) {
+                    //         _blackMode = value;
+                    //         if (_blackMode) {
+                    //           const ThemeMode themeMode = ThemeMode.dark;
+                    //           Provider.of<ThemeProvider>(context, listen: false)
+                    //               .setTheme(themeMode);
+                    //         }
+                    //         setState(() {});
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.text_rotate_up,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                        ),
+                        Container(
+                          child: const Text(
+                            '超大字体',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        NeumorphicSwitch(
+                          height: 30,
+                          value: _superFontSize,
+                          onChanged: (bool value) {
+                            print(value);
+                            _superFontSize = value;
+                            setState(() {});
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              Neumorphic(
+                style: const NeumorphicStyle(
+                  color: Colours.d_bg,
+                ),
+                margin: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.mail_outline,
+                            color: Colors.redAccent,
+                            size: 30,
+                          ),
+                        ),
+                        const Text(
+                          '联系我们',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        NeumorphicButton(
+                          style: const NeumorphicStyle(
+                              boxShape: NeumorphicBoxShape.circle(),
+                              depth: 2,
+                              intensity: 0.8),
+                          pressed: true,
+                          child: const Icon(Icons.arrow_forward,
+                              color: Colors.blueAccent),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const MyLoveWord()));
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Neumorphic(
-            style: const NeumorphicStyle(
-              color: Colours.d_bg,
-            ),
-            margin: const EdgeInsets.all(30),
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Icon(
-                        Icons.sunny,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                    ),
-                    const Text(
-                      '深色模式',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    NeumorphicSwitch(
-                      height: 30,
-                      value: _blackMode,
-                      onChanged: (bool value) {
-                        _blackMode = value;
-                        if (_blackMode) {
-                          const ThemeMode themeMode = ThemeMode.dark;
-                          Provider.of<ThemeProvider>(context, listen: false)
-                              .setTheme(themeMode);
-                        }
-                        setState(() {});
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Icon(
-                        Icons.text_rotate_up,
-                        color: Colors.green,
-                        size: 30,
-                      ),
-                    ),
-                    Container(
-                      child: const Text(
-                        '超大字体',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    NeumorphicSwitch(
-                      height: 30,
-                      value: _superFontSize,
-                      onChanged: (bool value) {
-                        print(value);
-                        _superFontSize = value;
-                        setState(() {});
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Neumorphic(
-            style: const NeumorphicStyle(
-              color: Colours.d_bg,
-            ),
-            margin: const EdgeInsets.all(30),
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Icon(
-                        Icons.mail_outline,
-                        color: Colors.redAccent,
-                        size: 30,
-                      ),
-                    ),
-                    const Text(
-                      '联系我们',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    NeumorphicButton(
-                      style: const NeumorphicStyle(
-                          boxShape: NeumorphicBoxShape.circle(),
-                          depth: 2,
-                          intensity: 0.8),
-                      pressed: true,
-                      child: const Icon(Icons.arrow_forward,color: Colors.blueAccent),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const MyLoveWord()));
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+          backgroundColor: Colors.transparent,
+        ));
   }
 
   Widget _generateHeadUser() {
