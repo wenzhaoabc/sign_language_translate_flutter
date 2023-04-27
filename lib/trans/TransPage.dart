@@ -62,6 +62,7 @@ class _TransPageState extends State<TransPage> {
               Center(
                 child: FloatingActionButton.large(
                   onPressed: () => startVideo(),
+                  // backgroundColor: Colors.deepPurpleAccent,
                   backgroundColor: Colors.deepPurpleAccent,
                   // foregroundColor: Colors.white,
                   // 阴影范围

@@ -31,10 +31,13 @@ class _ToolkitPageState extends State<ToolkitPage> {
           Neumorphic(
             margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             padding: const EdgeInsets.all(10),
+            style: const NeumorphicStyle(
+              color: Colours.d_bg,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _getHintText('特色功能'),
+                _getHintText('特色功能',Colors.black),
                 FlatSettingItem(
                     handleOnTap: () {
                       Navigator.of(context)
@@ -56,9 +59,12 @@ class _ToolkitPageState extends State<ToolkitPage> {
           Neumorphic(
             margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             padding: const EdgeInsets.all(10),
+            style: const NeumorphicStyle(
+              color: Colours.d_bg,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [_getHintText('我的紧急呼救'), const SOSListWidget()],
+              children: [_getHintText('我的紧急呼救',Colors.red), const SOSListWidget()],
             ),
           ),
         ],
@@ -66,9 +72,10 @@ class _ToolkitPageState extends State<ToolkitPage> {
     );
   }
 
-  Widget _getHintText(String text) {
+  Widget _getHintText(String text,Color in_color) {
     bool isInDark = Theme.of(context).primaryColor == Colours.dark_app_main;
-    Color textColor = isInDark ? Colors.grey : Colors.grey;
+    Color textColor=in_color;
+    // Color textColor = isInDark ? Colors.grey : Colors.grey;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Text(

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Colours {
-  static const Color app_main = Color.fromARGB(0xFF, 0x83, 0xB8, 0xFF);
+  // static const Color app_main = Color.fromARGB(0xFF, 0x83, 0xB8, 0xFF);
+  static const Color app_main = Colors.white;
   static const Color dark_app_main = Color.fromARGB(0xFF, 0x18, 0x19, 0x1A);
 
-  static const Color d_bg = Color.fromARGB(0xFF, 0xC6, 0xCD, 0xFF);
-  static const Color er_bg = Color.fromARGB(0xFF, 0x24, 0x8B, 0xD6);
-  static const Color most_bg = Color.fromARGB(0xFF, 0x0F, 0x6B, 0xAE);
+  // static const Color d_bg = Color.fromARGB(0xFF, 0xC6, 0xCD, 0xFF);
+  // static const Color d_bg = Color.fromARGB(0xFF, 0xC0, 0xD2, 0xFA);
+  static const Color d_bg = Color.fromARGB(0xFF, 0xED, 0xF9, 0xFE);
+  // static const Color d_bg = Color.fromARGB(0xFF, 0x96, 0xA9, 0xEB);
+  static const Color er_bg = Color.fromARGB(0xFF, 0x44, 0x9A, 0xDE);
+  // static const Color er_bg = Color.fromARGB(0xFF, 0x24, 0x8B, 0xD6);
+  // static const Color most_bg = Color.fromARGB(0xFF, 0x0F, 0x6B, 0xAE);
+  static const Color most_bg = Color.fromARGB(0xFF, 0xD3, 0xE9, 0xEE);
 
   static const Color bg_color = Color.fromARGB(0xff, 219, 230, 232);
   static const Color dark_bg_color = Color(0xFF18191A);

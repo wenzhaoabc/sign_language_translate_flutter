@@ -1,12 +1,12 @@
 import 'dart:core';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/study/SerachPage.dart';
 import 'package:sign_language/study/SpecialTypePage.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/widgets/LearnItemWidget.dart';
-
 class StudyPage extends StatefulWidget {
   const StudyPage({Key? key}) : super(key: key);
 
@@ -14,18 +14,32 @@ class StudyPage extends StatefulWidget {
   State<StudyPage> createState() => _StudyPageState();
 }
 
+
+
+
+
+
 class _StudyPageState extends State<StudyPage> {
   List<WordItemInfo>? _wordList;
 
   final _signTypesIcon = [
     Icons.local_airport,
-    Icons.people_outline,
-    Icons.sunny,
-    Icons.animation,
+    Icons.family_restroom,
+    Icons.wb_sunny_rounded,
+    Icons.nature,
     Icons.flag_circle_outlined,
-    Icons.calendar_view_day,
-    Icons.handyman,
-    Icons.sign_language_outlined
+    Icons.filter_vintage,
+    // Icons.handyman,
+    Icons.people_outline,
+    Icons.sign_language_outlined,
+    // SvgPicture.asset('assets/icons/local_airport.svg')
+    // SvgPicture.asset('assets/icons/people_outline.svg'),
+    // SvgPicture.asset('assets/icons/sunny.svg'),
+    // SvgPicture.asset('assets/icons/animation.svg'),
+    // SvgPicture.asset('assets/icons/flag_circle_outlined.svg'),
+    // SvgPicture.asset('assets/icons/calendar_view_day.svg'),
+    // SvgPicture.asset('assets/icons/handyman.svg'),
+    // SvgPicture.asset('assets/icons/sign_language_outlined.svg')
   ];
 
   final _signTypesTitle = ['交通工具', '亲属称谓', '天气', '动植物', '民族', '节气', '政党', '手语生成'];
@@ -89,9 +103,10 @@ class _StudyPageState extends State<StudyPage> {
             margin: const EdgeInsets.all(8),
             child: IconButton(
               iconSize: 25,
-              icon: Icon(
+              icon: const Icon(
                 Icons.search_outlined,
-                color: isInDark() ? Colours.dark_btn_icon : Colors.white,
+                color:Colors.blueAccent,
+                // color: isInDark() ? Colours.dark_btn_icon : Colors.white,
               ),
               onPressed: () {
                 Navigator.of(context).push(
@@ -151,9 +166,9 @@ class _StudyPageState extends State<StudyPage> {
     List<Color> _bgColors = const [
       Color(0xff5c2223),
       Color(0xffe6d2d5),
-      Color(0xff15559a),
-      Color(0xff8fb2c9),
-      Color(0xff12a182),
+      Color(0xffec9026),
+      Color(0xff15d939),
+      Color(0xff37d4cb),
       Color(0xfff9c116),
       Color(0xff5d3d21),
       Color(0xfff1908c)

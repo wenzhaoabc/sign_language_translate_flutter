@@ -92,6 +92,7 @@ class _SOSListWidgetState extends State<SOSListWidget> {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       height: 400,
+      // color:Colors.amber,
       child: SingleChildScrollView(
         child: Column(
           children: List.generate(

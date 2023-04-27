@@ -101,6 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: const Text(
                   'Register',
                   style: TextStyle(fontSize: 42, fontWeight: FontWeight.bold),
+
                 ),
               ),
               Container(
@@ -115,6 +116,9 @@ class _RegisterPageState extends State<RegisterPage> {
             child: SizedBox(
               width: deviceWidth > 500 ? 500 : deviceWidth,
               child: Neumorphic(
+                style: const NeumorphicStyle(
+                  color: Colours.d_bg,
+                ),
                 margin: const EdgeInsets.only(
                     left: 40, right: 40, top: 40, bottom: 80),
                 padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
@@ -154,6 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
           height: 150,
           child: (imageBytes == null)
               ? const Icon(Icons.tag_faces_sharp, color: Colors.grey, size: 130)
+              // ? const Icon(Icons.tag_faces_sharp, color: Colours.most_bg, size: 130)
               : Image.memory(imageBytes!, fit: BoxFit.cover),
         ),
       ),
