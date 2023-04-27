@@ -3,8 +3,10 @@ import 'dart:ffi';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shake_animation_widget/shake_animation_widget.dart';
+import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/system/AudioUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
@@ -38,7 +40,7 @@ class _CameraPageState extends State<CameraPage> {
   @override
   void initState() {
     super.initState();
-    _transText = '翻译文本将在这里显示...';
+    _transText = '文本 : ';
     _cameraController = CameraController(
         widget.cameras[currentCameraIndex % widget.cameras.length],
         ResolutionPreset.low,
@@ -72,8 +74,12 @@ class _CameraPageState extends State<CameraPage> {
         });
       } else if (_imgIndex2 == 0) {
         Future.microtask(() async {
-          dio.get('/trans_text').then((res) {
-            var temp = res.data.toString();
+          dio.get('/trans_text').then((value) {
+            ResponseBase<String> text = ResponseBase.fromJson(value.data);
+            var temp = '';
+            if (text.data != null) {
+              temp = text.data.toString();
+            }
             debugPrint("self-def $temp");
             if (temp.isNotEmpty && temp != _newTranslated) {
               if (_text2Audio) {
@@ -83,6 +89,8 @@ class _CameraPageState extends State<CameraPage> {
                 _newTranslated = temp;
                 _transText += _newTranslated;
               });
+            } else {
+              EasyLoading.showInfo('正在推理...');
             }
           });
         });
@@ -90,24 +98,9 @@ class _CameraPageState extends State<CameraPage> {
     });
   }
 
-  void getTranslatedText() {
-    dio.get('/trans_text').then((res) {
-      var temp = res.data.toString();
-      if (temp.isNotEmpty && temp != _newTranslated) {
-        if (_text2Audio) {
-          AudioUtil.playText(temp);
-        }
-        setState(() {
-          _newTranslated = temp;
-          _transText += _newTranslated;
-        });
-      }
-    });
-  }
-
   void startSocketChannel() {
     socket = IO.io(
-        'http://100.78.174.234:5002',
+        'http://47.103.223.106:5002',
         IO.OptionBuilder()
             .setTransports(['websocket']) // for Flutter or Dart VM
             .disableAutoConnect()

@@ -173,7 +173,7 @@ class MainActivity : FlutterActivity() {
             println("TTS : 语音合成异常")
             return false
         } finally {
-            tts.stopSpeaking();
+//            tts.stopSpeaking();
         }
     }
 
