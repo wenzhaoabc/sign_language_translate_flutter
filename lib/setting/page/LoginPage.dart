@@ -59,6 +59,9 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Neumorphic(
+                style: const NeumorphicStyle(
+                  color: Colours.d_bg,
+                ),
                 margin: const EdgeInsets.only(
                     left: 40, right: 40, top: 40, bottom: 80),
                 padding: const EdgeInsets.all(30),

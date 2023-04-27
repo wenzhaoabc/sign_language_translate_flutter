@@ -15,7 +15,7 @@ class FlatSettingItem extends StatelessWidget {
     double deviceWidth = MediaQuery.of(context).size.width;
     bool isInDark = Theme.of(context).primaryColor == Colours.app_main;
     Color testColor = isInDark ? Colors.black : Colors.white;
-    Color iconColor = isInDark ? Colors.grey : Colors.white;
+    Color iconColor = isInDark ? Colors.blueAccent : Colors.blueAccent;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
       child: InkWell(

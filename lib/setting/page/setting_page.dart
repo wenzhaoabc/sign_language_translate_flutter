@@ -93,10 +93,16 @@ class _SettingPageState extends State<SettingPage> {
       body: Column(
         children: [
           Neumorphic(
+            style: const NeumorphicStyle(
+              color: Colours.d_bg,
+            ),
             margin: const EdgeInsets.all(30),
             child: _generateHeadUser(),
           ),
           Neumorphic(
+            style: const NeumorphicStyle(
+              color: Colours.d_bg,
+            ),
             margin: const EdgeInsets.all(30),
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -120,11 +126,12 @@ class _SettingPageState extends State<SettingPage> {
                     const Expanded(child: SizedBox()),
                     NeumorphicButton(
                       style: const NeumorphicStyle(
+                          // color:Colors.blueAccent,
                           boxShape: NeumorphicBoxShape.circle(),
                           depth: 2,
                           intensity: 0.8),
                       pressed: true,
-                      child: const Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward,color: Colors.blueAccent,),
                       onPressed: () {
                         var userStr = getStringAsync(Constant.user);
                         if (userStr.isEmptyOrNull) {
@@ -160,7 +167,7 @@ class _SettingPageState extends State<SettingPage> {
                           depth: 2,
                           intensity: 0.8),
                       pressed: true,
-                      child: const Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward,color: Colors.blueAccent),
                       onPressed: () {
                         var userStr = getStringAsync(Constant.user);
                         if (userStr.isEmptyOrNull) {
@@ -177,6 +184,9 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ),
           Neumorphic(
+            style: const NeumorphicStyle(
+              color: Colours.d_bg,
+            ),
             margin: const EdgeInsets.all(30),
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -245,6 +255,9 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ),
           Neumorphic(
+            style: const NeumorphicStyle(
+              color: Colours.d_bg,
+            ),
             margin: const EdgeInsets.all(30),
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -272,7 +285,7 @@ class _SettingPageState extends State<SettingPage> {
                           depth: 2,
                           intensity: 0.8),
                       pressed: true,
-                      child: const Icon(Icons.arrow_forward),
+                      child: const Icon(Icons.arrow_forward,color: Colors.blueAccent),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const MyLoveWord()));
