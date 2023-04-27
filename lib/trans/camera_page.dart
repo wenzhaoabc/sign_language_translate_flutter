@@ -234,15 +234,15 @@ class _CameraPageState extends State<CameraPage> {
               child: RoteFloatingButton(
                 iconSize: 56,
                 iconList: [
-                  Icon(Icons.help_outline),
+                  Icon(Icons.help_outline,color:Colors.grey),
                   Icon(Icons.handshake,
-                      color: _startUpVideo ? Colors.blue : Colors.white),
-                  Icon(Icons.cameraswitch),
+                      color: _startUpVideo ? Colors.blue : Colors.grey),
+                  Icon(Icons.cameraswitch,color:Colors.grey),
                   Icon(Icons.text_fields,
-                      color: _visitable ? Colors.blue : Colors.white),
+                      color: _visitable ? Colors.blue : Colors.grey),
                   Icon(Icons.multitrack_audio,
-                      color: _text2Audio ? Colors.blue : Colors.white),
-                  Icon(Icons.keyboard_backspace)
+                      color: _text2Audio ? Colors.blue : Colors.grey),
+                  Icon(Icons.keyboard_backspace,color:Colors.grey)
                 ],
                 clickCallback: (int index) async {
                   debugPrint("点击了$index");
