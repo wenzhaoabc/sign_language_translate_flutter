@@ -12,6 +12,7 @@ import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/setting/page/LoginPage.dart';
 import 'package:sign_language/setting/page/MyLoveWord.dart';
 import 'package:sign_language/setting/page/PersonalInfo.dart';
+import 'package:sign_language/setting/page/about_us.dart';
 import 'package:sign_language/setting/page/register_page.dart';
 import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
@@ -305,7 +306,7 @@ class _SettingPageState extends State<SettingPage> {
                               color: Colors.blueAccent),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const MyLoveWord()));
+                                builder: (context) => const ContactUs()));
                           },
                         ),
                       ],
