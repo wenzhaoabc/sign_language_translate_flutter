@@ -41,7 +41,7 @@ Future<void> main() async {
         "Content-Type": "application/json"
       })
       .addInterceptor(AuthInterceptor())
-      .setConnectTimeout(const Duration(milliseconds: 5000))
+      .setConnectTimeout(const Duration(milliseconds: 10000))
       .create();
   await GetStorage.init();
   GetStorage().write(StoreKey.API, aiApiKey);
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _buildMaterialApp(ThemeProvider themeProvider) {
-    EasyLoading.init();
+    // EasyLoading.init();
     return GetMaterialApp(
       title: '手语翻译',
       debugShowCheckedModeBanner: false,
@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
           binding: ChatBinding(),
         ),
       ],
-      builder: (BuildContext context, Widget? child) {
+      builder: EasyLoading.init()/*(BuildContext context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: GestureDetector(
@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
             child: child,
           ),
         );
-      },
+      }*/,
       // restorationScopeId: 'app',
     );
   }
