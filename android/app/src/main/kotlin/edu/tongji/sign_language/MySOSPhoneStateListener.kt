@@ -15,18 +15,20 @@ class MySOSPhoneStateListener : PhoneStateListener() {
     override fun onCallStateChanged(state: Int, phoneNumber: String?) {
         // 监听电话状态改变
         when (state) {
+
             TelephonyManager.CALL_STATE_OFFHOOK -> {
-                // 电话已接通
-                println("电话接通")
-
-                textToSpeech.startSpeaking("你好，我是一位残疾人士，我在户外遭遇危险，请速来救援", null);
-
-                println("语音通话")
+                // 电话正在响铃
+                println("电话响铃")
             }
 
             TelephonyManager.CALL_STATE_RINGING -> {
-                // 电话正在响铃
-                println("电话响铃")
+
+                // 电话已接通
+                println("电话接通")
+
+                textToSpeech.startSpeaking(content, null);
+
+                println("语音通话")
             }
 
             TelephonyManager.CALL_STATE_IDLE -> {
