@@ -23,6 +23,9 @@ class _LoginPageState extends State<LoginPage> {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
   }
 
+  void popToLast(){
+    Navigator.pop(context);
+  }
   String? _userName;
   String? _password;
 
@@ -220,7 +223,8 @@ class _LoginPageState extends State<LoginPage> {
                                             Constant.user, res.data.toString());
                                       }
                                       // 返回设置页面
-                                      Navigator.pop(context);
+                                      // Navigator.pop(context);
+                                      popToLast();
                                     } else {
                                       Fluttertoast.showToast(
                                           msg: jsonDecode(

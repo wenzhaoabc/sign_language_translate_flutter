@@ -52,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
               margin: const EdgeInsets.all(8),
               child: IconButton(
                 iconSize: 25,
-                color: isInDark() ? Colors.green : Colors.green,
+                color: isInDark() ? Colors.green : Colors.blueAccent,
                 icon: const Icon(Icons.arrow_back_sharp),
                 onPressed: () {
                   Navigator.of(context).pop();

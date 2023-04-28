@@ -11,6 +11,8 @@ import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/trans/TransPage.dart';
+import 'package:sign_language/utils/SlidePageUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 import 'package:sign_language/res/constant.dart';
 
@@ -76,7 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
       if (res.code == 200) {
         setValue(Constant.user, res.data.toString());
         MyToast.showToast(msg: '注册成功', type: 'success');
-        Navigator.pop(context);
+        // Navigator.pop(context);
+        Navigator.push(context, MySlidePageRoute(page: const TransPage()));
       } else {
         MyToast.showToast(msg: (res.msg) ?? '注册失败');
       }

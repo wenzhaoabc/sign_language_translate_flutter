@@ -43,7 +43,7 @@ Future<void> main() async {
         "Content-Type": "application/json"
       })
       .addInterceptor(AuthInterceptor())
-      .setConnectTimeout(const Duration(milliseconds: 10000))
+      .setConnectTimeout(const Duration(milliseconds: 20000))
       .create();
   await GetStorage.init();
   GetStorage().write(StoreKey.API, aiApiKey);

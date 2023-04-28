@@ -41,7 +41,7 @@ class ContactUs extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      '灵动手语',
+                      'SignHear',
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(

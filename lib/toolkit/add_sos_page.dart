@@ -39,6 +39,9 @@ class _AddSOSState extends State<AddSOS> {
     }
   }
 
+  void popToLast(){
+    Navigator.pop(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,6 +96,7 @@ class _AddSOSState extends State<AddSOS> {
                           (index) => SosItemList.elementAt(index).toString());
                       await setValue(Constant.sosList, strList);
                       debugPrint("add new SOSItem after: $strList");
+                      popToLast();
                     },
                     child: const Text(
                       '添加',

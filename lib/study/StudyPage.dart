@@ -229,10 +229,10 @@ class _StudyPageState extends State<StudyPage> {
   Widget _getLearnList() {
     var itemCount = (_wordList?.length) ?? 0;
     return ListView.separated(
-      itemCount: itemCount * 10,
+      itemCount: itemCount,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return LearnItemWidget(_wordList![index % 4]);
+        return LearnItemWidget(_wordList![index]);
       },
       separatorBuilder: (BuildContext context, int index) {
         return const Divider(
