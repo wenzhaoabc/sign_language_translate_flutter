@@ -78,8 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
       if (res.code == 200) {
         setValue(Constant.user, res.data.toString());
         MyToast.showToast(msg: '注册成功', type: 'success');
-        // Navigator.pop(context);
-        Navigator.push(context, MySlidePageRoute(page: const TransPage()));
+        Navigator.pop(context);
+        // Navigator.push(context, MySlidePageRoute(page: const TransPage()));
       } else {
         MyToast.showToast(msg: (res.msg) ?? '注册失败');
       }

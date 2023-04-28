@@ -27,6 +27,7 @@ import com.iflytek.cloud.util.ResourceUtil.RESOURCE_TYPE
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import java.lang.Exception
 
 
 class MainActivity : FlutterActivity() {
@@ -40,6 +41,14 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+
+        try {
+            SpeechUtility.createUtility(context, SpeechConstant.APPID + "=8555eb27");
+
+//            tts = SpeechSynthesizer.createSynthesizer(context, mTtsInitListener)!!
+        }catch (e:Exception){
+            println(e)
+        }
 
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SOS_PHONE_CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "makePhoneCall") {

@@ -63,8 +63,9 @@ class _CameraPageState extends State<CameraPage> {
     int _imgIndex = 0;
     int _imgIndex2 = 0;
     _cameraController?.startImageStream((CameraImage image) async {
-      _imgIndex = (_imgIndex + 1) % 7;
-      _imgIndex2 = (_imgIndex2 + 1) % 150;
+      _imgIndex = (_imgIndex + 1) % 5;
+      // _imgIndex = (_imgIndex + 1) % 7;
+      _imgIndex2 = (_imgIndex2 + 1) % 100;
       if (_imgIndex == 0) {
         Future.microtask(() async {
           Yuvtransform.yuvTransform(image).then((res) {
@@ -152,10 +153,14 @@ class _CameraPageState extends State<CameraPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    // var newWidth = height * 240 / 320;
+    // double height_=double.infinity;
+    // double width_= width*height_/height;
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        // width: double.infinity,
+        // height: double.infinity,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
@@ -165,7 +170,9 @@ class _CameraPageState extends State<CameraPage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return AspectRatio(
+                    // aspectRatio: newWidth / height,
                     aspectRatio: width / height,
+                    // aspectRatio: 240 / 320,
                     child: CameraPreview(_cameraController!),
                   );
                 } else {
@@ -227,15 +234,15 @@ class _CameraPageState extends State<CameraPage> {
               child: RoteFloatingButton(
                 iconSize: 56,
                 iconList: [
-                  Icon(Icons.help_outline,color:Colors.grey),
+                  Icon(Icons.help_outline, color: Colors.grey),
                   Icon(Icons.handshake,
                       color: _startUpVideo ? Colors.blue : Colors.grey),
-                  Icon(Icons.cameraswitch,color:Colors.grey),
+                  Icon(Icons.cameraswitch, color: Colors.grey),
                   Icon(Icons.text_fields,
                       color: _visitable ? Colors.blue : Colors.grey),
                   Icon(Icons.multitrack_audio,
                       color: _text2Audio ? Colors.blue : Colors.grey),
-                  Icon(Icons.keyboard_backspace,color:Colors.grey)
+                  Icon(Icons.keyboard_backspace, color: Colors.grey)
                 ],
                 clickCallback: (int index) async {
                   debugPrint("点击了$index");
