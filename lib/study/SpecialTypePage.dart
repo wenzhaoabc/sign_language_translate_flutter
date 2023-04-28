@@ -4,6 +4,7 @@ import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/widgets/LearnItemWidget.dart';
+import 'package:sign_language/res/constant.dart';
 
 class SpecialTypePage extends StatefulWidget {
   const SpecialTypePage({Key? key, required this.index}) : super(key: key);
@@ -32,62 +33,75 @@ class _SpecialTypePageState extends State<SpecialTypePage> {
   void _getWordListByType(String type) {
     dio.get('/word_list?type=$type').then((value) {
       _wordList = ResponseBase<List<WordItemInfo>>.fromJson(value.data).data;
-      setState(() {
-      });
+      setState(() {});
     }).catchError((res) => Fluttertoast.showToast(msg: '查询失败'));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: isInDark() ? Colours.dark_app_main : Colours.app_main,
-        leading: Neumorphic(
-          style: NeumorphicStyle(
-              shape: NeumorphicShape.convex,
-              boxShape: NeumorphicBoxShape.circle(),
-              depth: 3,
-              lightSource: LightSource.topLeft,
-              intensity: 0.75,
-              surfaceIntensity: 0.1,
-              color: isInDark() ? Colours.dark_app_main : Colours.app_main),
-          margin: const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
-          child: IconButton(
-            iconSize: 25,
-            color: Colors.green,
-            icon: const Icon(Icons.arrow_back_sharp),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+    return Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(Constant.bg_img_url),
+            // image: AssetImage("images/R_C.jpg"),
+            fit: BoxFit.cover,
           ),
         ),
-        leadingWidth: 80,
-        actions: [
-          Neumorphic(
-            style: NeumorphicStyle(
-                shape: NeumorphicShape.convex,
-                boxShape: NeumorphicBoxShape.circle(),
-                depth: 3,
-                lightSource: LightSource.topLeft,
-                intensity: 0.75,
-                surfaceIntensity: 0.1,
-                color: isInDark() ? Colours.dark_app_main : Colours.app_main),
-            margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 30),
-            child: IconButton(
-              iconSize: 25,
-              color: isInDark() ? Colors.redAccent : Colors.blue,
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                // Navigator.of(context).pop();
-              },
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            // backgroundColor:
+            //     isInDark() ? Colours.dark_app_main : Colours.app_main,
+            backgroundColor: Colors.transparent,
+            leading: Neumorphic(
+              style: NeumorphicStyle(
+                  shape: NeumorphicShape.convex,
+                  boxShape: NeumorphicBoxShape.circle(),
+                  depth: 3,
+                  lightSource: LightSource.topLeft,
+                  intensity: 0.75,
+                  surfaceIntensity: 0.1,
+                  color: isInDark() ? Colours.dark_app_main : Colours.app_main),
+              margin:
+                  const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
+              child: IconButton(
+                iconSize: 25,
+                color: Colors.green,
+                icon: const Icon(Icons.arrow_back_sharp),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
+            leadingWidth: 80,
+            actions: [
+              Neumorphic(
+                style: NeumorphicStyle(
+                    shape: NeumorphicShape.convex,
+                    boxShape: NeumorphicBoxShape.circle(),
+                    depth: 3,
+                    lightSource: LightSource.topLeft,
+                    intensity: 0.75,
+                    surfaceIntensity: 0.1,
+                    color:
+                        isInDark() ? Colours.dark_app_main : Colours.app_main),
+                margin: const EdgeInsets.only(
+                    left: 5, top: 5, bottom: 5, right: 30),
+                child: IconButton(
+                  iconSize: 25,
+                  color: isInDark() ? Colors.redAccent : Colors.blue,
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    // Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: _getLearnList(),
-    );
+          body: _getLearnList(),
+          backgroundColor: Colors.transparent,
+        ));
   }
 
   Widget _getLearnList() {
