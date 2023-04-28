@@ -28,7 +28,8 @@ class _StudyPageState extends State<StudyPage> {
     Icons.filter_vintage,
     // Icons.handyman,
     Icons.people_outline,
-    Icons.sign_language_outlined,
+    // Icons.sign_language_outlined,
+    Icons.account_balance_rounded,
     // SvgPicture.asset('assets/icons/local_airport.svg')
     // SvgPicture.asset('assets/icons/people_outline.svg'),
     // SvgPicture.asset('assets/icons/sunny.svg'),
@@ -47,7 +48,7 @@ class _StudyPageState extends State<StudyPage> {
     '民族',
     '节气',
     '政党',
-    '手语生成'
+    '地名'
   ];
 
   bool isInDark() {
@@ -191,13 +192,13 @@ class _StudyPageState extends State<StudyPage> {
   Widget _getGridItem(IconData icon, String title, int index) {
     List<Color> _bgColors = const [
       Color(0xff5c2223),
-      Color(0xffe6d2d5),
+      Color(0xffaeade7),
       Color(0xffec9026),
       Color(0xff15d939),
       Color(0xff37d4cb),
       Color(0xfff9c116),
       Color(0xff5d3d21),
-      Color(0xfff1908c)
+      Color(0xff4e8ffd)
     ];
     return InkWell(
       child: Column(
@@ -211,7 +212,8 @@ class _StudyPageState extends State<StudyPage> {
                 boxShape: NeumorphicBoxShape.roundRect(
                     const BorderRadius.all(Radius.circular(10))),
                 depth: 2,
-                color: Colours.er_bg),
+                // color: Colours.er_bg,
+                color: Colours.item_bg),
             child: Icon(icon,
                 size: 35, color: _bgColors[index % _bgColors.length]),
           ),

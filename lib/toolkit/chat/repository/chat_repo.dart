@@ -11,7 +11,7 @@ class ChatRepository {
   Future<ModelList?> getModels() async {
     var result = await get(
       '/models',
-      decodeType: ModelList(),
+      decodeType: ModelList(),//get请求返回结果的类型
     );
     result.when(
         success: (data) {
@@ -32,7 +32,7 @@ class ChatRepository {
             }
           ]
         }),
-        decodeType: ChatModel());
+        decodeType: ChatModel());//Post 返回结果的类型
 
     List<ChatBean> chatList = [];
 
