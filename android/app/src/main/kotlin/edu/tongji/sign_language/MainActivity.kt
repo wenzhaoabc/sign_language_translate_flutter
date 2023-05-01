@@ -41,6 +41,13 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
+//        try {
+//            SpeechUtility.createUtility(context, SpeechConstant.APPID + "=8555eb27");
+////            tts = SpeechSynthesizer.createSynthesizer(context, mTtsInitListener)!!
+//        } catch (e: Exception) {
+//            println(e)
+//        }
+
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SOS_PHONE_CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "makePhoneCall") {
                 val phoneNumber: String? = call.argument<String>("to")
@@ -136,6 +143,7 @@ class MainActivity : FlutterActivity() {
      * 初始化TTS引擎
      * 初始化电话监听器
      */
+    @SuppressLint("QueryPermissionsNeeded")
     private fun dialPhoneNumber(phoneNumber: String, content: String, voicer: String = "xiaoyan", repeat: Boolean = true): Boolean {
         initTTS();
         println("打电话")
@@ -191,7 +199,6 @@ class MainActivity : FlutterActivity() {
         }
         if (!this::tts.isInitialized || SpeechSynthesizer.getSynthesizer() == null) {
             SpeechUtility.createUtility(context, SpeechConstant.APPID + "=8555eb27");
-
             tts = SpeechSynthesizer.createSynthesizer(context, mTtsInitListener)!!
             println("after : " + tts.toString())
         }

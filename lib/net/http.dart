@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:sign_language/res/constant.dart';
 
 final dio = Dio(
   BaseOptions(
-    baseUrl: 'http://47.103.223.106:5002',
+    baseUrl: Constant.baseURL,
   ),
 );

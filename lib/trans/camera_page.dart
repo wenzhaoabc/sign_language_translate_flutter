@@ -8,6 +8,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shake_animation_widget/shake_animation_widget.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/system/AudioUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
@@ -29,6 +30,7 @@ class _CameraPageState extends State<CameraPage> {
   bool _visitable = false;
   bool _startUpVideo = false;
   bool _text2Audio = false;
+  bool _withHand = true;
   String _newTranslated = "";
 
   late IO.Socket socket;
@@ -40,6 +42,7 @@ class _CameraPageState extends State<CameraPage> {
   @override
   void initState() {
     super.initState();
+    startSocketChannel();
     _transText = '文本 : ';
     _cameraController = CameraController(
         widget.cameras[currentCameraIndex % widget.cameras.length],
@@ -62,9 +65,13 @@ class _CameraPageState extends State<CameraPage> {
   void sendCameraStream() {
     int _imgIndex = 0;
     int _imgIndex2 = 0;
+    if (socket.disconnected) {
+      EasyLoading.showError('网络未连接');
+      return;
+    }
     _cameraController?.startImageStream((CameraImage image) async {
-      _imgIndex = (_imgIndex + 1) % 7;
-      _imgIndex2 = (_imgIndex2 + 1) % 150;
+      _imgIndex = (_imgIndex + 1) % 5;
+      _imgIndex2 = (_imgIndex2 + 1) % 60;
       if (_imgIndex == 0) {
         Future.microtask(() async {
           Yuvtransform.yuvTransform(image).then((res) {
@@ -72,7 +79,8 @@ class _CameraPageState extends State<CameraPage> {
             // debugPrint("self-def res-length ${res.length}");
           });
         });
-      } else if (_imgIndex2 == 0) {
+      }
+      if (_imgIndex2 == 0) {
         Future.microtask(() async {
           dio.get('/trans_text').then((value) {
             ResponseBase<String> text = ResponseBase.fromJson(value.data);
@@ -95,30 +103,28 @@ class _CameraPageState extends State<CameraPage> {
           });
         });
       }
+      if (_imgIndex2 % 40 == 0) {
+        EasyLoading.showInfo('正在推理...');
+      } else {}
     });
   }
 
   void startSocketChannel() {
     socket = IO.io(
-        'http://47.103.223.106:5002',
+        Constant.baseURL,
         IO.OptionBuilder()
             .setTransports(['websocket']) // for Flutter or Dart VM
             .disableAutoConnect()
             .enableReconnection() // disable auto-connection
             .build());
     socket.on('connect', (data) => debugPrint('self-def socket 连接开始'));
-    socket.on('trans', (data) {
+    socket.on('hand', (data) {
+      data = data as bool;
       setState(() {
-        _transText += data.toString();
+        _withHand = data;
       });
-      streamSocket.addResponse(data);
-      if (_text2Audio) {
-        AudioUtil.playText(data.toString());
-      }
-      debugPrint("self-def trans $data");
     });
-    socket.onDisconnect((_) => print('disconnect'));
-
+    socket.onDisconnect((_) => debugPrint('disconnect'));
     socket.connect();
   }
 
@@ -199,43 +205,28 @@ class _CameraPageState extends State<CameraPage> {
                               _transText.isEmpty ? Colors.grey : Colors.black,
                         ),
                       ),
-                      // child: StreamBuilder(
-                      //   stream: streamSocket.getResponse,
-                      //   builder: (BuildContext context,
-                      //       AsyncSnapshot<String> snapshot) {
-                      //     return Text(
-                      //       (snapshot.data) ?? '翻译文本',
-                      //       maxLines: 10,
-                      //       style: TextStyle(
-                      //         fontSize: 20,
-                      //         fontWeight: FontWeight.normal,
-                      //         color: _transText.isEmpty
-                      //             ? Colors.grey
-                      //             : Colors.black,
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
                     ),
                   ),
                 ),
               ),
             ),
+
+            /// 右下角按钮
             Positioned(
               right: 10,
               bottom: 20,
               child: RoteFloatingButton(
                 iconSize: 56,
                 iconList: [
-                  Icon(Icons.help_outline,color:Colors.grey),
+                  Icon(Icons.help_outline, color: Colors.grey),
                   Icon(Icons.handshake,
                       color: _startUpVideo ? Colors.blue : Colors.grey),
-                  Icon(Icons.cameraswitch,color:Colors.grey),
+                  Icon(Icons.cameraswitch, color: Colors.grey),
                   Icon(Icons.text_fields,
                       color: _visitable ? Colors.blue : Colors.grey),
                   Icon(Icons.multitrack_audio,
                       color: _text2Audio ? Colors.blue : Colors.grey),
-                  Icon(Icons.keyboard_backspace,color:Colors.grey)
+                  Icon(Icons.keyboard_backspace, color: Colors.grey)
                 ],
                 clickCallback: (int index) async {
                   debugPrint("点击了$index");
@@ -314,13 +305,31 @@ class _CameraPageState extends State<CameraPage> {
                   } else if (index == 5) {
                     try {
                       _cameraController?.stopImageStream();
+                      _cameraController?.dispose();
+                      socket?.dispose();
                     } catch (e) {
                       debugPrint("停止视频 - $e");
+                      // Navigator.pop(context);
                     }
-                    // Navigator.pop(context);
+                    // dispose();
+                    Navigator.pop(context);
                   } else {}
                 },
               ),
+            ),
+
+            /// 手部提示
+            Positioned(
+              top: 40,
+              // offstage: _startUpVideo,
+              child: AnimatedOpacity(
+                  opacity: _startUpVideo ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Icon(
+                    Icons.waving_hand,
+                    color: _withHand ? Colors.green : Colors.grey,
+                    size: 40,
+                  )),
             )
           ],
         ),

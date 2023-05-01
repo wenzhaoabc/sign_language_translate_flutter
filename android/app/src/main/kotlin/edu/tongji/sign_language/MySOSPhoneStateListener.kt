@@ -19,6 +19,7 @@ class MySOSPhoneStateListener : PhoneStateListener() {
             TelephonyManager.CALL_STATE_OFFHOOK -> {
                 // 电话正在响铃
                 println("电话响铃")
+                textToSpeech.startSpeaking(content, null);
             }
 
             TelephonyManager.CALL_STATE_RINGING -> {
@@ -26,7 +27,7 @@ class MySOSPhoneStateListener : PhoneStateListener() {
                 // 电话已接通
                 println("电话接通")
 
-                textToSpeech.startSpeaking(content, null);
+//                textToSpeech.startSpeaking(content, null);
 
                 println("语音通话")
             }

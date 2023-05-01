@@ -42,12 +42,16 @@ class _SOSListWidgetState extends State<SOSListWidget> {
     if (strList == null || strList.isEmpty) {
       SosItemList.add(SOSItem(
           '抢劫遇险', '110中心你好，我是一名聋哑人士，以下语音为文本合成，我现在顶山公寓室内遭遇抢劫情况，请速来救援', '110'));
-      SosItemList.add(SOSItem(
-          '车祸遇险', '120中心你好，我是一名聋哑人士，以下语音为文本合成，我现在户外遭遇车祸遇险，我的位置是乞灵山山下，请速来救援', '120'));
+      SosItemList.add(SOSItem('车祸遇险',
+          '120中心你好，我是一名聋哑人士，以下语音为文本合成，我现在户外遭遇车祸遇险，我的位置是乞灵山山下，请速来救援', '120'));
       SosItemList.add(SOSItem(
           '火灾遇险', '消防中心你好，我是一名聋哑人士，以下语音为文本合成，我现在平顶山公寓室内遭遇火灾情况，请速来救援', '119'));
+      SosItemList.add(SOSItem('户外紧急遇险',
+          '紧急中心你好，我是一名聋哑人士，以下语音为文本合成，我现在户外遭遇紧急情况，我的位置是乞灵山山顶，请速来救援', '1008611'));
       SosItemList.add(SOSItem(
-          '户外紧急遇险', '紧急中心你好，我是一名聋哑人士，以下语音为文本合成，我现在户外遭遇紧急情况，我的位置是乞灵山山顶，请速来救援', '1008611'));
+          '测试项',
+          '紧急中心你好，我是一名聋哑人士，以下语音为文本合成，我现在户外遭遇紧急情况，我的位置是乞灵山山顶，请速来救援',
+          '18105022730'));
       List<String> strList = List.generate(SosItemList.length,
           (index) => SosItemList.elementAt(index).toString());
       await setValue(Constant.sosList, strList);

@@ -1,5 +1,6 @@
 // 常量字符串
 class Constant {
+  static const String baseURL = 'http://47.101.135.44:5002';
   static const String data = 'data';
   static const String message = 'message';
   static const String code = 'code';
@@ -25,6 +26,8 @@ class Constant {
   static const String sosRepeat = 'SOSRepeat';
   static const String sosVoicer = 'SOSVoicer';
 
-  static const String bg_img_url="https://s2.loli.net/2023/04/27/7n4BiALgIF1qHOW.jpg";
-  static const String first_bg_url="https://s2.loli.net/2023/04/27/i9dVTF5XwQAPZxE.jpg";
+  static const String bg_img_url =
+      "https://s2.loli.net/2023/04/27/7n4BiALgIF1qHOW.jpg";
+  static const String first_bg_url =
+      "https://s2.loli.net/2023/04/27/i9dVTF5XwQAPZxE.jpg";
 }
