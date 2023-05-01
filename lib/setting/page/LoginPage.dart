@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
@@ -10,6 +11,7 @@ import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/HideKeybUtils.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/utils/ToastUtil.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,9 +25,10 @@ class _LoginPageState extends State<LoginPage> {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
   }
 
-  void popToLast(){
+  void popToLast() {
     Navigator.pop(context);
   }
+
   String? _userName;
   String? _password;
 
@@ -206,6 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                                       _password!.length > 8 &&
                                           _password!.length < 16;
 
+                                  debugPrint("usernameMatched ；$usernameMatched； passwordMatched : $passwordMatched ");
                                   if (usernameMatched && passwordMatched) {
                                     var postData = {
                                       'phone': _userName,
@@ -230,6 +234,8 @@ class _LoginPageState extends State<LoginPage> {
                                           msg: jsonDecode(
                                               response.data.toString())['msg']);
                                     }
+                                  } else {
+                                    MyToast.showToast(msg: "用户名或密码错误");
                                   }
                                 },
                               ),
