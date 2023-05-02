@@ -76,10 +76,13 @@ class _SOSListWidgetState extends State<SOSListWidget> {
     }
   }
 
-  void makeSOSPhoneCall(String to, String content) async {
+  void makeSOSPhoneCall(String title, String to, String content) async {
     var phonePermission = await Permission.phone.request();
-    if (phonePermission == PermissionStatus.granted) {
-      var res = await PhoneUtils.makePhoneCall(to, content);
+    var storagePermission = await Permission.storage.request();
+    await Permission.audio.request();
+    if (phonePermission == PermissionStatus.granted &&
+        storagePermission == PermissionStatus.granted) {
+      var res = await PhoneUtils.makePhoneCall(title, to, content);
       if (res) {
         debugPrint("flutter : 拨打成功");
       } else {
@@ -161,7 +164,7 @@ class _SOSListWidgetState extends State<SOSListWidget> {
         subtitle: Text('tel : ${sosItem.to}'),
         trailing: InkWell(
           onTap: () {
-            makeSOSPhoneCall(sosItem.to, sosItem.content);
+            makeSOSPhoneCall(sosItem.title, sosItem.to, sosItem.content);
           },
           child: const Icon(
             Icons.call_outlined,

@@ -17,6 +17,7 @@ import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sign_language/toolkit/chat/provider/auth_interceptor.dart';
 import 'package:sign_language/toolkit/chat/provider/constants.dart';
+import 'package:sign_language/utils/PhoneUtils.dart';
 
 import 'net/http.dart';
 import 'toolkit/chat/chat_bindings.dart';
@@ -33,13 +34,9 @@ Future<void> main() async {
   /// 平滑滚动效果
   GestureBinding.instance.resamplingEnabled = true;
 
-  // 注册平台通道
-  if (Platform.isAndroid) {}
-
   NetOptions.instance
       .setBaseUrl(baseUrl)
       .addHeaders({
-        // 'Authorization': 'Bearer aiApiKey',
         "Content-Type": "application/json"
       })
       .addInterceptor(AuthInterceptor())
@@ -47,6 +44,11 @@ Future<void> main() async {
       .create();
   await GetStorage.init();
   GetStorage().write(StoreKey.API, aiApiKey);
+
+  // 注册平台通道
+  // if (Platform.isAndroid) {
+  //   await PhoneUtils.initTTS();
+  // }
 
   runApp(MyApp());
 }

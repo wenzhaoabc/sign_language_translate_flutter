@@ -9,7 +9,7 @@ import 'package:shake_animation_widget/shake_animation_widget.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/constant.dart';
-import 'package:sign_language/system/AudioUtil.dart';
+import 'package:sign_language/utils/AudioUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -91,7 +91,7 @@ class _CameraPageState extends State<CameraPage> {
             debugPrint("self-def $temp");
             if (temp.isNotEmpty && temp != _newTranslated) {
               if (_text2Audio) {
-                AudioUtil.playText(temp);
+                Future.microtask(() => AudioUtil.playTextAudio(temp));
               }
               setState(() {
                 _newTranslated = temp;
@@ -304,8 +304,10 @@ class _CameraPageState extends State<CameraPage> {
                     ///
                   } else if (index == 5) {
                     try {
+                      // _cameraController?.hasListeners;
                       _cameraController?.stopImageStream();
                       _cameraController?.dispose();
+                      socket.close();
                       socket?.dispose();
                     } catch (e) {
                       debugPrint("停止视频 - $e");
