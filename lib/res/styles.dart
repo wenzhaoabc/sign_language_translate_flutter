@@ -35,6 +35,12 @@ class TextStyles {
       color: Colours.text,
       // https://github.com/flutter/flutter/issues/40248
       textBaseline: TextBaseline.alphabetic);
+
+  static const TextStyle largeText = TextStyle(
+    fontSize: 20,
+    color: Colours.text,
+    textBaseline: TextBaseline.alphabetic
+  );
   static const TextStyle textDark =
       TextStyle(fontSize: Dimens.font_sp14, color: Colours.dark_text, textBaseline: TextBaseline.alphabetic);
 

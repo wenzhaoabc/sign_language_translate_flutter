@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/setting/page/setting_page.dart';
 import 'package:sign_language/study/StudyPage.dart';
@@ -47,7 +49,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var res = Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
@@ -76,6 +78,11 @@ class _HomeState extends State<Home> {
           });
         },
       ),
+    );
+    return res;
+    return ChangeNotifierProvider(
+      create: (_) => AppProvider(),
+      child: res,
     );
   }
 }

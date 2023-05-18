@@ -26,6 +26,8 @@ class Constant {
   static const String sosRepeat = 'SOSRepeat';
   static const String sosVoicer = 'SOSVoicer';
 
+  static const String largeFont = 'largeFont';
+
   static const String bg_img_url =
       "https://s2.loli.net/2023/04/27/7n4BiALgIF1qHOW.jpg";
   static const String first_bg_url =

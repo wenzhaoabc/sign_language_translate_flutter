@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -126,32 +124,6 @@ class _CameraPageState extends State<CameraPage> {
     });
     socket.onDisconnect((_) => debugPrint('disconnect'));
     socket.connect();
-  }
-
-  Uint8List convertYUV420(CameraImage image) {
-    var Y = image.planes[0].bytes.toList();
-    var U = image.planes[1].bytes.toList();
-    // var V = image.planes[2].bytes.toList();
-    int bytesPerRow = image.planes.first.bytesPerRow;
-    int quotient = (bytesPerRow ~/ 255);
-    int remainder = (bytesPerRow % 255);
-    var result = List<int>.empty(growable: true);
-    // byte1*255*255 + bytes2*255 + byte3 为灰度通道Y的长度
-    // quotient*255 + remainder 为图片宽度
-    int byte1 = Y.length ~/ (255 * 255);
-    int temp = Y.length % (255 * 255);
-    int byte2 = temp ~/ 255;
-    int byte3 = temp % 255;
-    result
-      ..add(byte1)
-      ..add(byte2)
-      ..add(byte3)
-      ..add(quotient)
-      ..add(remainder)
-      ..addAll(Y)
-      ..addAll(U);
-    // ..addAll(V);
-    return Uint8List.fromList(result);
   }
 
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 
 class FlatSettingItem extends StatelessWidget {
@@ -23,13 +25,7 @@ class FlatSettingItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 20,
-                color: testColor,
-              ),
-            ),
+            Text(title, style: Provider.of<AppProvider>(context).textStyle),
             const Expanded(child: SizedBox()),
             Icon(
               Icons.arrow_forward_ios_rounded,

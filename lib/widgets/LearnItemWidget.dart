@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/study/WordDetailPage.dart';
 import 'package:sign_language/widgets/WordTagWidget.dart';
@@ -30,14 +32,16 @@ class _LearnItemWidgetState extends State<LearnItemWidget> {
     Color currentColor = isInDark() ? Colours.dark_app_main : Colours.d_bg;
     double marginTop = 10;
     // 字体大小
-    double wordFontSize = 22;
+    //  = 20;
+    // double wordFontSize = Provider.of<AppProvider>(context).normalFontSize;
     // 单词标签
     List<String>? tags = widget.word.tags?.split(',');
     return SizedBox(
       width: deviceWidth,
       height: 100,
       child: Neumorphic(
-        margin: EdgeInsets.only(top: marginTop, bottom: 10, left: 15, right: 15),
+        margin:
+            EdgeInsets.only(top: marginTop, bottom: 10, left: 15, right: 15),
         style: NeumorphicStyle(
           color: currentColor,
           boxShape: NeumorphicBoxShape.roundRect(
@@ -51,6 +55,8 @@ class _LearnItemWidgetState extends State<LearnItemWidget> {
               child: Image.network(
                 widget.word.img!,
                 fit: BoxFit.cover,
+                width: 80,
+                height: 60,
               ),
             ),
             Container(
@@ -59,10 +65,11 @@ class _LearnItemWidgetState extends State<LearnItemWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Consumer(builder: builder)
                   Text(
                     widget.word.word,
                     style: TextStyle(
-                      fontSize: wordFontSize,
+                      fontSize: Provider.of<AppProvider>(context).normalFontSize,
                     ),
                   ),
                   Row(
@@ -77,7 +84,8 @@ class _LearnItemWidgetState extends State<LearnItemWidget> {
             const Expanded(child: SizedBox()),
             InkWell(
               child: Container(
-                margin: const EdgeInsets.only(left: 12, top: 10, bottom: 10, right: 12),
+                margin: const EdgeInsets.only(
+                    left: 12, top: 10, bottom: 10, right: 12),
                 child: NeumorphicIcon(
                   style: const NeumorphicStyle(color: Colors.blueAccent),
                   Icons.arrow_forward_ios_rounded,
@@ -88,13 +96,16 @@ class _LearnItemWidgetState extends State<LearnItemWidget> {
                 WordItemInfo currentWord = widget.word;
                 Navigator.of(context).push(
                   PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => WordDetailPage(currentWord),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        WordDetailPage(currentWord),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
                       var begin = const Offset(0.0, 1.0);
                       var end = Offset.zero;
                       var curve = Curves.ease;
 
-                      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
                       return SlideTransition(
                         position: animation.drive(tween),
                         child: child,

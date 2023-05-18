@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_language/home/home_page.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 
 import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -36,9 +37,7 @@ Future<void> main() async {
 
   NetOptions.instance
       .setBaseUrl(baseUrl)
-      .addHeaders({
-        "Content-Type": "application/json"
-      })
+      .addHeaders({"Content-Type": "application/json"})
       .addInterceptor(AuthInterceptor())
       .setConnectTimeout(const Duration(milliseconds: 20000))
       .create();
@@ -70,31 +69,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget app = ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: Consumer(builder: (_, ThemeProvider theme, __) {
-        return _buildMaterialApp(theme);
-      }),
-    );
-    return app;
-  }
-
-  Widget _buildMaterialApp(ThemeProvider themeProvider) {
-    // EasyLoading.init();
-    return GetMaterialApp(
+    var res = GetMaterialApp(
       title: '手语翻译',
       debugShowCheckedModeBanner: false,
       // showPerformanceOverlay: true,
-      theme: theme ?? themeProvider.getTheme(),
-      darkTheme: themeProvider.getTheme(isDarkMode: true),
-      // home: home ?? const Home(),
+      theme: theme ?? ThemeProvider.getTheme(),
+      darkTheme: ThemeProvider.getTheme(isDarkMode: true),
       navigatorKey: navigatorKey,
       initialRoute: '/main',
       getPages: [
         GetPage(
           name: '/main',
           page: () => const Home(),
-          // binding: ImageBinding(),
         ),
         GetPage(
           name: '/chat',
@@ -102,22 +88,8 @@ class MyApp extends StatelessWidget {
           binding: ChatBinding(),
         ),
       ],
-      builder: EasyLoading.init()/*(BuildContext context, Widget? child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: GestureDetector(
-            onTap: () {
-              FocusScopeNode currentFocus = FocusScope.of(context);
-              if (!currentFocus.hasPrimaryFocus &&
-                  currentFocus.focusedChild != null) {
-                FocusManager.instance.primaryFocus!.unfocus();
-              }
-            },
-            child: child,
-          ),
-        );
-      }*/,
-      // restorationScopeId: 'app',
+      builder: EasyLoading.init(),
     );
+    return ChangeNotifierProvider(create: (_) => AppProvider(), child: res);
   }
 }

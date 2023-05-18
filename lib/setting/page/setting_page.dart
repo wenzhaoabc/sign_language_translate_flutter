@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/res/styles.dart';
@@ -18,7 +19,6 @@ import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 import 'package:sign_language/res/constant.dart';
-
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -34,8 +34,9 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   void initState() {
-    setState(() {});
+    // setState(() {});
     _getUserInfo();
+    _superFontSize = _getFontSize();
     super.initState();
   }
 
@@ -47,12 +48,21 @@ class _SettingPageState extends State<SettingPage> {
     }
   }
 
+  bool _getFontSize() {
+    var res = getBoolAsync(Constant.largeFont);
+    return res;
+  }
+
   bool isInDark() {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
   }
 
   @override
   Widget build(BuildContext context) {
+    // TextTheme textTheme = context.textTheme;
+    // debugPrint("textTheme : fontSize : ${textTheme.bodyMedium?.fontSize.size}");
+    final fontModel = Provider.of<AppProvider>(context);
+    var textStyle = fontModel.textStyle;
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -111,13 +121,16 @@ class _SettingPageState extends State<SettingPage> {
                   color: Colours.d_bg,
                 ),
                 margin: const EdgeInsets.all(30),
-                child: _generateHeadUser(),
+                child: _generateHeadUser(textStyle: textStyle),
               ),
               Neumorphic(
                 style: const NeumorphicStyle(
                   color: Colours.d_bg,
                 ),
-                margin: const EdgeInsets.only(left:30,right:30,),
+                margin: const EdgeInsets.only(
+                  left: 30,
+                  right: 30,
+                ),
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,9 +146,9 @@ class _SettingPageState extends State<SettingPage> {
                             size: 30,
                           ),
                         ),
-                        const Text(
+                        Text(
                           '我的收藏',
-                          style: TextStyle(fontSize: 20),
+                          style: textStyle,
                         ),
                         const Expanded(child: SizedBox()),
                         NeumorphicButton(
@@ -205,7 +218,7 @@ class _SettingPageState extends State<SettingPage> {
                 style: const NeumorphicStyle(
                   color: Colours.d_bg,
                 ),
-                margin: const EdgeInsets.all(0),
+                margin: const EdgeInsets.all(30),
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,34 +254,37 @@ class _SettingPageState extends State<SettingPage> {
                     //     ),
                     //   ],
                     // ),
-                    // Row(
-                    //   children: [
-                    //     Container(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: const Icon(
-                    //         Icons.text_rotate_up,
-                    //         color: Colors.green,
-                    //         size: 30,
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       child: const Text(
-                    //         '超大字体',
-                    //         style: TextStyle(fontSize: 20),
-                    //       ),
-                    //     ),
-                    //     const Expanded(child: SizedBox()),
-                    //     NeumorphicSwitch(
-                    //       height: 30,
-                    //       value: _superFontSize,
-                    //       onChanged: (bool value) {
-                    //         print(value);
-                    //         _superFontSize = value;
-                    //         setState(() {});
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Icon(
+                            Icons.text_rotate_up,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                        ),
+                        Text(
+                          '超大字体',
+                          // style: TextStyle(fontSize: 20),
+                          style: fontModel.textStyle,
+                        ),
+                        const Expanded(child: SizedBox()),
+                        NeumorphicSwitch(
+                          height: 30,
+                          value: _superFontSize,
+                          onChanged: (bool value) {
+                            setValue(Constant.largeFont, value);
+                            // print(value);
+                            _superFontSize = value;
+                            fontModel.setFontLarge(value);
+                            //context.read<ThemeProvider>().setTheme(themeMode);
+                            // Provider.of<ThemeProvider>(context,listen: false).setFontSize(value);
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -292,9 +308,9 @@ class _SettingPageState extends State<SettingPage> {
                             size: 30,
                           ),
                         ),
-                        const Text(
+                         Text(
                           '联系我们',
-                          style: TextStyle(fontSize: 20),
+                          style: textStyle,
                         ),
                         const Expanded(child: SizedBox()),
                         NeumorphicButton(
@@ -321,7 +337,8 @@ class _SettingPageState extends State<SettingPage> {
         ));
   }
 
-  Widget _generateHeadUser() {
+  Widget _generateHeadUser(
+      {TextStyle textStyle = const TextStyle(fontSize: 20)}) {
     if (_user != null) {
       return GestureDetector(
         onTap: () {
@@ -365,18 +382,20 @@ class _SettingPageState extends State<SettingPage> {
               margin: const EdgeInsets.all(10),
               child: GestureDetector(
                 onTap: () {},
-                child: Text((_user?.username) ?? '登录/注册',
-                    style: TextStyles.userName),
+                child: Text(
+                  (_user?.username) ?? '登录/注册',
+                  style: textStyle,
+                ),
               ),
             ),
           ],
         ),
       );
     } else {
-      const textStyle = TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          decoration: TextDecoration.underline);
+      // const textStyle = TextStyle(
+      //     color: Colors.black,
+      //     fontSize: 20,
+      //     decoration: TextDecoration.underline);
 
       return Row(
         children: [
@@ -420,7 +439,7 @@ class _SettingPageState extends State<SettingPage> {
                   },
                 ));
               },
-              child: const Text('登录', style: textStyle),
+              child: Text('登录', style: textStyle),
             ),
           ),
           Container(
@@ -438,7 +457,7 @@ class _SettingPageState extends State<SettingPage> {
                     context, MySlidePageRoute(page: const RegisterPage()));
               },
               child: InkWell(
-                child: const Text('注册', style: textStyle),
+                child: Text('注册', style: textStyle),
                 onTap: () {
                   Navigator.push(
                       context, MySlidePageRoute(page: const RegisterPage()));

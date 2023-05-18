@@ -4,7 +4,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/toolkit/add_sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
-import 'package:sign_language/res/constant.dart';
 
 class SOSPage extends StatefulWidget {
   const SOSPage({Key? key}) : super(key: key);

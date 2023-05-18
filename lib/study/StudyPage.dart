@@ -1,7 +1,8 @@
 import 'dart:core';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/study/SerachPage.dart';
 import 'package:sign_language/study/SpecialTypePage.dart';
@@ -40,16 +41,7 @@ class _StudyPageState extends State<StudyPage> {
     // SvgPicture.asset('assets/icons/sign_language_outlined.svg')
   ];
 
-  final _signTypesTitle = [
-    '交通工具',
-    '亲属称谓',
-    '天气',
-    '动植物',
-    '民族',
-    '节气',
-    '政党',
-    '地名'
-  ];
+  final _signTypesTitle = ['交通工具', '亲属称谓', '天气', '动植物', '民族', '节气', '政党', '地名'];
 
   bool isInDark() {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
@@ -175,15 +167,11 @@ class _StudyPageState extends State<StudyPage> {
                     ),
                   ],
                 ),
-
               ),
-
               Flexible(
                 child: _getLearnList(),
               )
-
             ],
-
           ),
           backgroundColor: Colors.transparent,
         ));
@@ -217,7 +205,9 @@ class _StudyPageState extends State<StudyPage> {
             child: Icon(icon,
                 size: 35, color: _bgColors[index % _bgColors.length]),
           ),
-          Text(title, style: const TextStyle(fontSize: 17)),
+          Text(title,
+              style: TextStyle(
+                  fontSize: Provider.of<AppProvider>(context).smallFontSize)),
         ],
       ),
       onTap: () {

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/PhoneUtils.dart';
@@ -159,7 +161,7 @@ class _SOSListWidgetState extends State<SOSListWidget> {
         contentPadding: const EdgeInsets.only(left: 10, right: 10),
         title: Text(
           sosItem.title,
-          style: TextStyle(fontSize: 18, color: textColor),
+          style: Provider.of<AppProvider>(context).sosTextStyle,
         ),
         subtitle: Text('tel : ${sosItem.to}'),
         trailing: InkWell(

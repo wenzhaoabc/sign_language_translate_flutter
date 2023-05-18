@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/HideKeybUtils.dart';
-import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,9 +19,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool inDark() {
-    return Theme.of(context).primaryColor == Colours.dark_app_main;
-  }
+  // bool inDark() {
+  //   return Theme.of(context).primaryColor == Colours.dark_app_main;
+  // }
 
   void popToLast() {
     Navigator.pop(context);
@@ -34,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var mainColor = inDark() ? Colours.dark_app_main : Colours.app_main;
+    // var mainColor = inDark() ? Colours.dark_app_main : Colours.app_main;
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

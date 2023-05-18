@@ -1,6 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/trans/camera_page.dart';
 import 'package:sign_language/res/constant.dart';
 
@@ -44,6 +46,8 @@ class _TransPageState extends State<TransPage> {
 
   @override
   Widget build(BuildContext context) {
+    var smallTextStyle =
+        TextStyle(fontSize: Provider.of<AppProvider>(context).smallFontSize);
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -89,10 +93,12 @@ class _TransPageState extends State<TransPage> {
                   ),
                 ],
               ),
-              const Center(
+              Center(
                 child: Text(
                   '点击录制，开始翻译',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(
+                      fontSize:
+                          Provider.of<AppProvider>(context).normalFontSize),
                 ),
               ),
               SizedBox(
@@ -105,10 +111,10 @@ class _TransPageState extends State<TransPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Tips：'),
-                    Text('1.手持扶稳效果更好'),
-                    Text('2.确保手势完全包裹在取景框内')
+                  children: [
+                    Text('Tips：', style: smallTextStyle),
+                    Text('1.手持扶稳效果更好', style: smallTextStyle),
+                    Text('2.确保手势完全包裹在取景框内', style: smallTextStyle)
                   ],
                 ),
               ),

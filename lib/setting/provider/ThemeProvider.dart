@@ -6,22 +6,31 @@ import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/res/styles.dart';
 
-extension ThemeModeExtension on ThemeMode {
-  String get value => <String>['system', 'light', 'dark'][index];
-}
+// extension ThemeModeExtension on ThemeMode {
+//   String get value => <String>['system', 'light', 'dark'][index];
+// }
 
-class ThemeProvider extends ChangeNotifier {
-  void syncTheme() {
-    final String theme = getStringAsync(Constant.theme) ?? '';
-    if (theme.isNotEmpty && theme != ThemeMode.system.value) {
-      notifyListeners();
-    }
-  }
+class ThemeProvider {
+  bool _largeFont = false;
 
-  void setTheme(ThemeMode themeMode) {
-    setValue(Constant.theme, themeMode.value);
-    notifyListeners();
-  }
+  // void syncTheme() {
+  //   final String theme = getStringAsync(Constant.theme) ?? '';
+  //   if (theme.isNotEmpty && theme != ThemeMode.system.value) {
+  //     notifyListeners();
+  //   }
+  // }
+  //
+  // void setTheme(ThemeMode themeMode) {
+  //   setValue(Constant.theme, themeMode.value);
+  //   notifyListeners();
+  // }
+  //
+  // void setFontSize(bool largeFont) {
+  //   setValue(Constant.largeFont, largeFont);
+  //   _largeFont = largeFont;
+  //   debugPrint("_largeFont = $_largeFont");
+  //   notifyListeners();
+  // }
 
   ThemeMode getThemeMode() {
     final String theme = getStringAsync(Constant.theme) ?? '';
@@ -35,7 +44,8 @@ class ThemeProvider extends ChangeNotifier {
     }
   }
 
-  ThemeData getTheme({bool isDarkMode = false}) {
+  static ThemeData getTheme({bool isDarkMode = false}) {
+    debugPrint("getTheme : ---- ");
     return ThemeData(
       primaryColor: isDarkMode ? Colours.dark_app_main : Colours.app_main,
       // Tab指示器颜色
@@ -62,6 +72,13 @@ class ThemeProvider extends ChangeNotifier {
         titleSmall:
             isDarkMode ? TextStyles.textDarkGray12 : TextStyles.textGray12,
       ),
+      // 文本大小
+      // primaryTextTheme: TextTheme(
+      //   headlineMedium: _largeFont ? TextStyles.largeText : TextStyles.text,
+      //   titleMedium: _largeFont ? TextStyles.largeText : TextStyles.text,
+      //   bodyMedium: _largeFont ? TextStyles.largeText : TextStyles.text,
+      //   titleSmall: _largeFont ? TextStyles.largeText : TextStyles.text,
+      // ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle:
             isDarkMode ? TextStyles.textHint14 : TextStyles.textDarkGray14,

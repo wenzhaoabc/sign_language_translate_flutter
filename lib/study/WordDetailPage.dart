@@ -1,3 +1,4 @@
+import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -7,6 +8,7 @@ import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/widgets/VideoWidget.dart';
 
 class WordDetailPage extends StatefulWidget {
   const WordDetailPage(
@@ -22,6 +24,8 @@ class WordDetailPage extends StatefulWidget {
 
 class _WordDetailPageState extends State<WordDetailPage> {
   bool isLoved = false;
+  late VideoPlayerController videoPlayerController;
+  late CustomVideoPlayerController _customVideoPlayerController;
 
   bool isInDark() {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
@@ -30,6 +34,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
   @override
   void initState() {
     _getIsLoved();
+
     super.initState();
   }
 
@@ -80,6 +85,24 @@ class _WordDetailPageState extends State<WordDetailPage> {
     });
   }
 
+  void _handleVideo(int value) {
+    if (value == 0) {
+      _customVideoPlayerController.dispose();
+    } else {
+      String videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      videoPlayerController =
+          VideoPlayerController.network(widget.currentWord.video ?? videoUrl)
+            ..initialize().then((value) => setState(() {}));
+      _customVideoPlayerController = CustomVideoPlayerController(
+        context: context,
+        videoPlayerController: videoPlayerController,
+      );
+    }
+    setState(() {
+      _selectedIndex = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Color bgColor = Theme.of(context).primaryColor;
@@ -103,7 +126,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
             leading: Neumorphic(
               style: NeumorphicStyle(
                   shape: NeumorphicShape.convex,
-                  boxShape: NeumorphicBoxShape.circle(),
+                  boxShape: const NeumorphicBoxShape.circle(),
                   depth: 3,
                   lightSource: LightSource.topLeft,
                   intensity: 0.75,
@@ -151,9 +174,11 @@ class _WordDetailPageState extends State<WordDetailPage> {
         ));
   }
 
+  var _selectedIndex = 0;
+
   Widget _getOneWordCard(WordItemInfo wordItemInfo) {
-    double deviceWidth = MediaQuery.of(context).size.width;
-    double deviceHeight = MediaQuery.of(context).size.height;
+    // double deviceWidth = MediaQuery.of(context).size.width;
+    // double deviceHeight = MediaQuery.of(context).size.height;
     return Neumorphic(
       style: NeumorphicStyle(
         boxShape: NeumorphicBoxShape.roundRect(
@@ -168,6 +193,50 @@ class _WordDetailPageState extends State<WordDetailPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Center(
+                child: Neumorphic(
+                  // margin: const EdgeInsets.only(left: 60, right: 60, top: 20),
+                  style: const NeumorphicStyle(
+                      color: Colours.app_main, depth: 0, intensity: 0),
+                  child: NeumorphicToggle(
+                      height: 30,
+                      width: 100,
+                      selectedIndex: _selectedIndex,
+                      padding: EdgeInsets.all(5),
+                      // displayForegroundOnlyIfSelected: true,
+                      children: [
+                        ToggleElement(
+                          background: const Center(
+                              child: Text("图片",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w500))),
+                          foreground: const Center(
+                              child: Text("图片",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w700))),
+                        ),
+                        ToggleElement(
+                          background: const Center(
+                              child: Text("视频",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w500))),
+                          foreground: const Center(
+                              child: Text("视频",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w700))),
+                        ),
+                      ],
+                      thumb: Neumorphic(
+                          style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            const BorderRadius.all(Radius.circular(12))),
+                      )),
+                      onChanged: _handleVideo),
+                ),
+              ),
+            ),
             Neumorphic(
               style: NeumorphicStyle(
                 boxShape: NeumorphicBoxShape.roundRect(
@@ -179,10 +248,12 @@ class _WordDetailPageState extends State<WordDetailPage> {
                 intensity: 0,
               ),
               margin: const EdgeInsets.all(30),
-              child: Image.network(
-                wordItemInfo.img!,
-                fit: BoxFit.cover,
-              ),
+              // TODO 视频
+              child: _getImgOrVideo(wordItemInfo)
+              // Image.network(
+              //   wordItemInfo.img!,
+              //   fit: BoxFit.cover,
+              // ),
             ),
             Neumorphic(
               margin: const EdgeInsets.all(30),
@@ -233,5 +304,19 @@ class _WordDetailPageState extends State<WordDetailPage> {
         ),
       ),
     );
+  }
+
+  Widget _getImgOrVideo(WordItemInfo wordItemInfo) {
+    if (_selectedIndex == 0) {
+      return Image.network(
+        wordItemInfo.img!,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return SafeArea(
+          child: CustomVideoPlayer(
+        customVideoPlayerController: _customVideoPlayerController,
+      ));
+    }
   }
 }
