@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/toolkit/add_sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
@@ -65,7 +67,7 @@ class _SOSPageState extends State<SOSPage> {
                       value: _repeat,
                       onChanged: (bool value) {
                         _repeat = value;
-                        setValue(Constant.sosRepeat, _repeat);
+                        Provider.of<AppProvider>(context,listen: false).setPhoneIsRepeat(value);
                         setState(() {});
                       },
                     ),
@@ -76,13 +78,13 @@ class _SOSPageState extends State<SOSPage> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       child: const Icon(
-                        Icons.speaker_phone_outlined,
+                        Icons.woman_outlined,
                         color: Colors.green,
                         size: 30,
                       ),
                     ),
                     const Text(
-                      '语音外放',
+                      '女性音色',
                       style: TextStyle(fontSize: 25),
                     ),
                     const Expanded(child: SizedBox()),
@@ -97,19 +99,48 @@ class _SOSPageState extends State<SOSPage> {
                     ),
                   ],
                 ),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: const Icon(
+                        Icons.phonelink_ring_rounded,
+                        color: Colors.green,
+                        size: 30,
+                      ),
+                    ),
+                    const Text(
+                      '险情感知',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    const Expanded(child: SizedBox()),
+                    NeumorphicSwitch(
+                      height: 25,
+                      value: Provider.of<AppProvider>(context,listen: false).detectSensor,
+                      onChanged: (bool value) {
+                        Provider.of<AppProvider>(context,listen: false).setDetectSensor(value);
+                        setState(() {
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          floatingActionButton: IconButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MySlidePageRoute(page: const AddSOS()));
-            },
-            icon: const Icon(
-              Icons.add_circle_outlined,
-              size: 50,
-              color: Colors.blue,
-              // weight: 100,
+          floatingActionButton: Container(
+            margin: EdgeInsets.only(bottom: 30,right: 30),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MySlidePageRoute(page: const AddSOS()));
+              },
+              icon: const Icon(
+                Icons.add_circle_outlined,
+                size: 60,
+                color: Colors.blue,
+                // weight: 100,
+              ),
             ),
           ),
           backgroundColor: Colors.transparent,

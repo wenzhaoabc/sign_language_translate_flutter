@@ -3,8 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:sign_language/res/colours.dart';
+import 'package:sign_language/toolkit/NewsPage.dart';
 import 'package:sign_language/toolkit/chat/chat_page.dart';
 import 'package:sign_language/toolkit/sos_page.dart';
+import 'package:sign_language/toolkit/text_to_voice.dart';
+import 'package:sign_language/toolkit/voice_to_text.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 import 'package:sign_language/widgets/FlatSettingWidget.dart';
 import 'package:sign_language/widgets/SOSListWidget.dart';
@@ -25,8 +28,7 @@ class _ToolkitPageState extends State<ToolkitPage> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(
-              Constant.bg_img_url),
+          image: NetworkImage(Constant.bg_img_url),
           // image: AssetImage("images/R_C.jpg"),
           fit: BoxFit.cover,
         ),
@@ -56,15 +58,23 @@ class _ToolkitPageState extends State<ToolkitPage> {
                             .push(MySlidePageRoute(page: const SOSPage()));
                       },
                       title: '紧急呼救'),
-                  // FlatSettingItem(handleOnTap: () {}, title: '无障碍通话'),
                   FlatSettingItem(
                       handleOnTap: () {
-                        // Navigator.of(context)
-                        //     .push(MySlidePageRoute(page: ChatPage()));
-                        // Get.to(ChatPage());
                         Get.toNamed('/chat');
                       },
                       title: '聊天助手'),
+                  FlatSettingItem(
+                      handleOnTap: () {
+                        Navigator.of(context)
+                            .push(MySlidePageRoute(page: const VoiceText()));
+                      },
+                      title: '无障碍对话'),
+                  FlatSettingItem(
+                      handleOnTap: () {
+                        Navigator.of(context)
+                            .push(MySlidePageRoute(page: const NewsListPage()));
+                      },
+                      title: '无障碍资讯'),
                 ],
               ),
             ),
@@ -76,9 +86,11 @@ class _ToolkitPageState extends State<ToolkitPage> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
                   _getHintText('我的紧急呼救', Colors.red),
-                  const SOSListWidget()
+                  // Expanded(child: SOSListWidget()),
+                  SOSListWidget()
                 ],
               ),
             ),

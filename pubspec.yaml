@@ -64,7 +64,11 @@ dependencies:
   # 侧滑组件
   flutter_slidable: ^2.0.0
   # websocket
-  # web_socket_channel: ^2.4.0
+  web_socket_channel: ^2.4.0
+  # 格式化
+  intl: ^0.17.0
+  # 加密
+  crypto: ^3.0.2
   # 垂直向上弹出菜单
   shake_animation_widget: ^3.0.4
   image: ^4.0.15
@@ -82,8 +86,12 @@ dependencies:
   phone_state: ^1.0.2
   audio_session: ^0.1.13
   appinio_video_player: ^1.2.1
+  flutter_html: ^3.0.0-beta.1
   # home_widget: ^0.2.1
   # video_player: ^2.6.1
+  flutter_sound: ^9.2.13
+  sensors_plus: ^3.0.1
+  audio_service: ^0.18.9
 
 
 dev_dependencies:

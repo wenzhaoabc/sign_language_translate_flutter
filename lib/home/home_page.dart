@@ -80,9 +80,9 @@ class _HomeState extends State<Home> {
       ),
     );
     return res;
-    return ChangeNotifierProvider(
-      create: (_) => AppProvider(),
-      child: res,
-    );
+    // return ChangeNotifierProvider(
+    //   create: (_) => AppProvider(),
+    //   child: res,
+    // );
   }
 }

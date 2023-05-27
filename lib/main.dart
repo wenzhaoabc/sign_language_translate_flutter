@@ -2,10 +2,12 @@
 
 import 'dart:io';
 
+import 'package:audio_service/audio_service.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_nb_net/flutter_net.dart';
 import 'package:get/get.dart';
@@ -18,7 +20,9 @@ import 'package:sign_language/setting/provider/ThemeProvider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:sign_language/toolkit/chat/provider/auth_interceptor.dart';
 import 'package:sign_language/toolkit/chat/provider/constants.dart';
+import 'package:sign_language/utils/MyAudioTask.dart';
 import 'package:sign_language/utils/PhoneUtils.dart';
+import 'package:sign_language/utils/SensorPhoneUtil.dart';
 
 import 'net/http.dart';
 import 'toolkit/chat/chat_bindings.dart';
@@ -48,8 +52,20 @@ Future<void> main() async {
   // if (Platform.isAndroid) {
   //   await PhoneUtils.initTTS();
   // }
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
+  SensorPhone _sensorListen = SensorPhone();
+  _sensorListen.StartListen('', '');
+  // AudioService.backgroundTaskEntryPoint = myAudioTaskEntryPoint;
+  // AudioService.
   runApp(MyApp());
+}
+
+void myAudioTaskEntryPoint() {
+  AudioServiceBackground.run(() => MyAudioTask());
 }
 
 class MyApp extends StatelessWidget {

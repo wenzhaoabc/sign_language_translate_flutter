@@ -3,10 +3,12 @@ import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:shake_animation_widget/shake_animation_widget.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/toolkit/xfyy/utils/xf_socket.dart';
 import 'package:sign_language/utils/AudioUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
@@ -48,6 +50,7 @@ class _CameraPageState extends State<CameraPage> {
         enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420);
     _initializeControllerFuture = _cameraController?.initialize();
+    initPlay();
   }
 
   @override
@@ -58,6 +61,19 @@ class _CameraPageState extends State<CameraPage> {
     _cameraController?.dispose();
     socket.destroy();
     super.dispose();
+  }
+
+  final FlutterSoundPlayer playerModule = FlutterSoundPlayer();
+
+  void _play(String path) async {
+    await playerModule.startPlayer(fromURI: path);
+  }
+
+  initPlay() async {
+    await playerModule.closePlayer();
+    await playerModule.openPlayer();
+    await playerModule
+        .setSubscriptionDuration(const Duration(milliseconds: 10));
   }
 
   void sendCameraStream() {
@@ -89,7 +105,9 @@ class _CameraPageState extends State<CameraPage> {
             debugPrint("self-def $temp");
             if (temp.isNotEmpty && temp != _newTranslated) {
               if (_text2Audio) {
-                Future.microtask(() => AudioUtil.playTextAudio(temp));
+                XfSocket.connect(temp, onFilePath: (path) {
+                  _play(path);
+                });
               }
               setState(() {
                 _newTranslated = temp;

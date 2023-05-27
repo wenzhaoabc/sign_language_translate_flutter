@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/res/colours.dart';
+import 'package:sign_language/res/constant.dart';
 
 class AppProvider extends ChangeNotifier {
   TextStyle _textStyle = const TextStyle(fontSize: 20, color: Colours.text);
@@ -34,5 +39,77 @@ class AppProvider extends ChangeNotifier {
         color: Colors.black,
         textBaseline: TextBaseline.alphabetic);
     _sosTextStyle = TextStyle(fontSize: sosFontSize, color: Colors.black);
+  }
+
+  // SOS - 紧急呼救项
+  List<SOSItem> _sosItemList = [];
+
+  List<SOSItem> get sosItemList {
+    if (_sosItemList.isEmpty) {
+      List<String>? strList = getStringListAsync(Constant.sosList);
+      if (strList == null) {
+        _sosItemList.addAll([
+          SOSItem('抢劫遇险', '110中心你好，我是一名聋哑人士，以下语音为文本合成，我现在顶山公寓室内遭遇抢劫情况，请速来救援',
+              '110'),
+          SOSItem(
+              '车祸遇险', '120中心你好，我是一名聋哑人士，我现在户外遭遇车祸遇险，我的位置是乞灵山山下，请速来救援', '120'),
+          SOSItem(
+              '测试项', '紧急中心你好，我是一名聋哑人士，我现在户外遭遇紧急情况，我在乞灵山山顶，请速来救援', '18105022730')
+        ]);
+      } else {
+        for (var value in strList) {
+          var jsonItem = jsonDecode(value);
+          SOSItem item = SOSItem.fromJson(jsonItem);
+          _sosItemList.add(item);
+        }
+      }
+    }
+    return _sosItemList;
+  }
+
+  void addSosItem(SOSItem item) {
+    _sosItemList.add(item);
+    notifyListeners();
+  }
+
+  void deleteSosItem(String title) {
+    _sosItemList.removeWhere((element) => element.title == title);
+    notifyListeners();
+  }
+
+  // 用户个人信息
+  User? _user;
+
+  User? get currentUser => _user;
+
+  void setUser(User user) {
+    _user = user;
+    notifyListeners();
+  }
+
+  // 电话呼救
+  bool _phoneIsRepeat = false;
+
+  bool get phoneIsRepeat => _phoneIsRepeat;
+
+  void setPhoneIsRepeat(bool repeat) {
+    if (repeat != _phoneIsRepeat) {
+      _phoneIsRepeat = repeat;
+      notifyListeners();
+      setValue(Constant.sosRepeat, repeat);
+    }
+  }
+
+  // 险情感知
+  bool _detectSensor = false;
+
+  bool get detectSensor => _detectSensor;
+
+  void setDetectSensor(bool detect) {
+    if (detect != _detectSensor) {
+      _detectSensor = detect;
+      notifyListeners();
+      setValue(Constant.detectDevice, detect);
+    }
   }
 }

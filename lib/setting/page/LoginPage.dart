@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/HideKeybUtils.dart';
@@ -207,7 +209,8 @@ class _LoginPageState extends State<LoginPage> {
                                       _password!.length > 8 &&
                                           _password!.length < 16;
 
-                                  debugPrint("usernameMatched ；$usernameMatched； passwordMatched : $passwordMatched ");
+                                  debugPrint(
+                                      "usernameMatched ；$usernameMatched； passwordMatched : $passwordMatched ");
                                   if (usernameMatched && passwordMatched) {
                                     var postData = {
                                       'phone': _userName,
@@ -223,6 +226,9 @@ class _LoginPageState extends State<LoginPage> {
                                       if (res.data != null) {
                                         setValue(
                                             Constant.user, res.data.toString());
+                                        Provider.of<AppProvider>(context,
+                                                listen: false)
+                                            .setUser(res.data!);
                                       }
                                       // 返回设置页面
                                       // Navigator.pop(context);

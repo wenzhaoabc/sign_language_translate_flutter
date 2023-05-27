@@ -51,6 +51,13 @@ class ResponseBase<T> {
         wordList.add(WordItemInfo.fromJson(element));
       }
       return wordList as T;
+    } else if (T.toString() == 'List<NewsItem>') {
+      List<dynamic> list = json as List;
+      List<NewsItem>? newsList = <NewsItem>[];
+      for (var e in list) {
+        newsList.add(NewsItem.fromJson(e));
+      }
+      return newsList as T;
     } else {
       // list类型数据
       print('list类型数据');
@@ -96,4 +103,24 @@ class SOSItem {
   String toString() {
     return '{"title":"$title","to":"$to","content":"$content"}';
   }
+}
+
+class NewsItem {
+  late int id;
+  late String title;
+  late String author;
+  String? content;
+  late String image;
+  late String created;
+
+  NewsItem(
+      this.id, this.title, this.author, this.content, this.image, this.created);
+
+  NewsItem.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        title = json['title'],
+        author = json['author'],
+        content = json['content'] ?? '',
+        image = json['image'],
+        created = json['created'];
 }

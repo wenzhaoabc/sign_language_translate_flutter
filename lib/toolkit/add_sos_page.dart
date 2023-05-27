@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
@@ -27,6 +29,8 @@ class _AddSOSState extends State<AddSOS> {
 
   // 初始化紧急呼救数据列表
   void initSosList() {
+    SosItemList = Provider.of<AppProvider>(context).sosItemList;
+    return;
     List<String>? strList = getStringListAsync(Constant.sosList);
     if (strList == null || strList.isEmpty) {
       return;
@@ -39,9 +43,10 @@ class _AddSOSState extends State<AddSOS> {
     }
   }
 
-  void popToLast(){
+  void popToLast() {
     Navigator.pop(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,6 +58,7 @@ class _AddSOSState extends State<AddSOS> {
           ),
         ),
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             centerTitle: true,
             title: const Text('添加'),
@@ -76,25 +82,29 @@ class _AddSOSState extends State<AddSOS> {
                   child: NeumorphicButton(
                     style: const NeumorphicStyle(depth: 3, intensity: 0.8),
                     pressed: true,
-                    onPressed: () async {
-                      initSosList();
-
-                      for (var value1 in SosItemList) {
-                        if (value1.title == title) {
-                          MyToast.showToast(msg: '名称重复', type: 'error');
-                          return;
-                        }
-                      }
+                    onPressed: ()  {
+                      // initSosList();
+                      //
+                      // for (var value1 in SosItemList) {
+                      //   if (value1.title == title) {
+                      //     MyToast.showToast(msg: '名称重复', type: 'error');
+                      //     return;
+                      //   }
+                      // }
                       if (to.isEmptyOrNull ||
                           title.isEmptyOrNull ||
                           content.isEmptyOrNull) {
                         MyToast.showToast(msg: '内容不可为空', type: 'warning');
                         return;
                       }
+                      Provider.of<AppProvider>(context, listen: false)
+                          .addSosItem(SOSItem(title!, content!, to!));
+                      popToLast();
+                      return;
                       SosItemList.add(SOSItem(title!, content!, to!));
                       List<String> strList = List.generate(SosItemList.length,
                           (index) => SosItemList.elementAt(index).toString());
-                      await setValue(Constant.sosList, strList);
+                       setValue(Constant.sosList, strList);
                       debugPrint("add new SOSItem after: $strList");
                       popToLast();
                     },

@@ -30,23 +30,23 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   bool _blackMode = false;
   bool _superFontSize = false;
-  User? _user;
+  // User? _user;
 
   @override
   void initState() {
     // setState(() {});
-    _getUserInfo();
+    // _getUserInfo();
     _superFontSize = _getFontSize();
     super.initState();
   }
 
-  void _getUserInfo() {
-    var userStr = getStringAsync(Constant.user, defaultValue: '');
-    if (userStr.runtimeType == " ".runtimeType && userStr.isNotEmpty) {
-      _user = User.fromJson(jsonDecode(userStr));
-      setState(() {});
-    }
-  }
+  // void _getUserInfo() {
+  //   var userStr = getStringAsync(Constant.user, defaultValue: '');
+  //   if (userStr.runtimeType == " ".runtimeType && userStr.isNotEmpty) {
+  //     _user = User.fromJson(jsonDecode(userStr));
+  //     setState(() {});
+  //   }
+  // }
 
   bool _getFontSize() {
     var res = getBoolAsync(Constant.largeFont);
@@ -103,7 +103,7 @@ class _SettingPageState extends State<SettingPage> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    if (_user != null) {
+                    if (Provider.of<AppProvider>(context).currentUser != null) {
                       Navigator.of(context)
                           .push(MySlidePageRoute(page: const PersonalInfo()));
                     } else {
@@ -339,6 +339,7 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget _generateHeadUser(
       {TextStyle textStyle = const TextStyle(fontSize: 20)}) {
+    User? _user = Provider.of<AppProvider>(context).currentUser;
     if (_user != null) {
       return GestureDetector(
         onTap: () {
