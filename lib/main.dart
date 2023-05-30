@@ -89,6 +89,8 @@ class MyApp extends StatelessWidget {
       title: '手语翻译',
       debugShowCheckedModeBanner: false,
       // showPerformanceOverlay: true,
+      // debugShowMaterialGrid: true,
+      // showSemanticsDebugger: true,
       theme: theme ?? ThemeProvider.getTheme(),
       darkTheme: ThemeProvider.getTheme(isDarkMode: true),
       navigatorKey: navigatorKey,

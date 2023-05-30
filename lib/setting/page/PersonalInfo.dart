@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
@@ -25,9 +27,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
   }
 
   void _logOut() async {
-    dio.post('/logout').then((value) async {
+    dio.post('/logout').then((value) {
       MyToast.showToast(msg: '已退出登录', type: 'success');
     });
+    Provider.of<AppProvider>(context, listen: false).setUser(null);
     await clearSharedPref();
   }
 

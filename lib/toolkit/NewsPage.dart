@@ -68,7 +68,7 @@ class _NewsListPageState extends State<NewsListPage> {
         title: const Text('无障碍资讯'),
         elevation: 0,
         leading: InkWell(
-          child: Icon(Icons.arrow_back_sharp, color: Colours.dark_btn_icon),
+          child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onTap: () => Navigator.of(context).pop(),
         ),
       ),

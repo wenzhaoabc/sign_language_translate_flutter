@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
+import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/study/SerachPage.dart';
 import 'package:sign_language/study/SpecialTypePage.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/widgets/LearnItemWidget.dart';
-import 'package:sign_language/res/constant.dart';
 
 class StudyPage extends StatefulWidget {
   const StudyPage({Key? key}) : super(key: key);
@@ -39,9 +39,26 @@ class _StudyPageState extends State<StudyPage> {
     // SvgPicture.asset('assets/icons/calendar_view_day.svg'),
     // SvgPicture.asset('assets/icons/handyman.svg'),
     // SvgPicture.asset('assets/icons/sign_language_outlined.svg')
+    Icons.pets_outlined,
+    Icons.data_usage,
+    Icons.beach_access,
+    Icons.monitor_heart,
   ];
 
-  final _signTypesTitle = ['交通工具', '亲属称谓', '天气', '动植物', '民族', '节气', '政党', '地名'];
+  final _signTypesTitle = [
+    '交通工具',
+    '亲属称谓',
+    '天气',
+    '动植物',
+    '民族',
+    '节气',
+    '政党',
+    '地名',
+    '代词',
+    '动词',
+    '形容词',
+    '其它',
+  ];
 
   bool isInDark() {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
@@ -86,20 +103,14 @@ class _StudyPageState extends State<StudyPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(Constant.bg_img_url),
-            // image: AssetImage("images/R_C.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: PageBgStyles.DeepWheelBimgDecoration,
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
             centerTitle: true,
             title: const Text(
-              '学习社区',
+              '手语分类词表',
             ),
             // elevation: 0,
             actions: [
@@ -141,6 +152,25 @@ class _StudyPageState extends State<StudyPage> {
                 ),
               ),
             ],
+            leading: Neumorphic(
+              style: NeumorphicStyle(
+                  shape: NeumorphicShape.convex,
+                  boxShape: const NeumorphicBoxShape.circle(),
+                  depth: 3,
+                  lightSource: LightSource.topLeft,
+                  intensity: 0.75,
+                  color: Colors.white),
+              margin: const EdgeInsets.only(top: 5, bottom: 5, right: 5),
+              child: IconButton(
+                iconSize: 25,
+                color: Colors.green,
+                icon: const Icon(Icons.arrow_back_sharp),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            leadingWidth: 80,
           ),
           body: Column(
             children: [
@@ -164,6 +194,14 @@ class _StudyPageState extends State<StudyPage> {
                           4,
                           (index) => _getGridItem(_signTypesIcon[index + 4],
                               _signTypesTitle[index + 4], index + 4)),
+                    ),
+                    const SizedBox(height: 25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                          4,
+                          (index) => _getGridItem(_signTypesIcon[index + 8],
+                              _signTypesTitle[index + 8], index + 8)),
                     ),
                   ],
                 ),
@@ -201,7 +239,7 @@ class _StudyPageState extends State<StudyPage> {
                     const BorderRadius.all(Radius.circular(10))),
                 depth: 2,
                 // color: Colours.er_bg,
-                color: Colours.item_bg),
+                color: Colors.white70),
             child: Icon(icon,
                 size: 35, color: _bgColors[index % _bgColors.length]),
           ),

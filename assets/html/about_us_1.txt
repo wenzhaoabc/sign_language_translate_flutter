@@ -1,0 +1,5 @@
+<p style="text-align: center;"><span style="font-size: 14pt;"><strong>开源代码与使用组件说明</strong></span></p>
+<p>使用了Yolo模型的开源代码进行确认是否出现手部</p>
+<p>使用ChatGPT接口提供聊天对话内容</p>
+<p>使用讯飞接口进行语音文本转换</p>
+<p>使用Flutter开源前端框架</p>

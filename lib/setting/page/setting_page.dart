@@ -28,25 +28,15 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  bool _blackMode = false;
   bool _superFontSize = false;
+
   // User? _user;
 
   @override
   void initState() {
-    // setState(() {});
-    // _getUserInfo();
     _superFontSize = _getFontSize();
     super.initState();
   }
-
-  // void _getUserInfo() {
-  //   var userStr = getStringAsync(Constant.user, defaultValue: '');
-  //   if (userStr.runtimeType == " ".runtimeType && userStr.isNotEmpty) {
-  //     _user = User.fromJson(jsonDecode(userStr));
-  //     setState(() {});
-  //   }
-  // }
 
   bool _getFontSize() {
     var res = getBoolAsync(Constant.largeFont);
@@ -59,29 +49,23 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TextTheme textTheme = context.textTheme;
-    // debugPrint("textTheme : fontSize : ${textTheme.bodyMedium?.fontSize.size}");
     final fontModel = Provider.of<AppProvider>(context);
     var textStyle = fontModel.textStyle;
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(Constant.bg_img_url),
-            // image: AssetImage("images/R_C.jpg"),
+            image: AssetImage(Constant.bg_img_assets),
+            opacity: 0.3,
             fit: BoxFit.cover,
           ),
         ),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          // backgroundColor:
-          //     isInDark() ? Colours.dark_app_main : Colours.app_main,
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
             title: const Text('设置'),
             centerTitle: true,
-            // backgroundColor:
-            //     isInDark() ? Colours.dark_app_main : Colours.app_main,
             actions: [
               Neumorphic(
                 style: NeumorphicStyle(
@@ -103,7 +87,9 @@ class _SettingPageState extends State<SettingPage> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    if (Provider.of<AppProvider>(context).currentUser != null) {
+                    if (Provider.of<AppProvider>(context, listen: false)
+                            .currentUser !=
+                        null) {
                       Navigator.of(context)
                           .push(MySlidePageRoute(page: const PersonalInfo()));
                     } else {
@@ -174,43 +160,6 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ],
                     ),
-                    // Row(
-                    //   children: [
-                    //     Container(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: const Icon(
-                    //         Icons.upload_file_outlined,
-                    //         color: Colors.blueAccent,
-                    //         size: 30,
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       child: const Text(
-                    //         '我的录制',
-                    //         style: TextStyle(fontSize: 20),
-                    //       ),
-                    //     ),
-                    //     const Expanded(child: SizedBox()),
-                    //     NeumorphicButton(
-                    //       style: const NeumorphicStyle(
-                    //           boxShape: NeumorphicBoxShape.circle(),
-                    //           depth: 2,
-                    //           intensity: 0.8),
-                    //       pressed: true,
-                    //       child: const Icon(Icons.arrow_forward,
-                    //           color: Colors.blueAccent),
-                    //       onPressed: () {
-                    //         var userStr = getStringAsync(Constant.user);
-                    //         if (userStr.isEmptyOrNull) {
-                    //           MyToast.showToast(msg: '请先登录');
-                    //         } else {
-                    //           Navigator.of(context).push(
-                    //               MySlidePageRoute(page: const MyLoveWord()));
-                    //         }
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
@@ -224,36 +173,6 @@ class _SettingPageState extends State<SettingPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // Row(
-                    //   children: [
-                    //     Container(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: const Icon(
-                    //         Icons.sunny,
-                    //         color: Colors.black,
-                    //         size: 30,
-                    //       ),
-                    //     ),
-                    //     const Text(
-                    //       '深色模式',
-                    //       style: TextStyle(fontSize: 20),
-                    //     ),
-                    //     const Expanded(child: SizedBox()),
-                    //     NeumorphicSwitch(
-                    //       height: 30,
-                    //       value: _blackMode,
-                    //       onChanged: (bool value) {
-                    //         _blackMode = value;
-                    //         if (_blackMode) {
-                    //           const ThemeMode themeMode = ThemeMode.dark;
-                    //           Provider.of<ThemeProvider>(context, listen: false)
-                    //               .setTheme(themeMode);
-                    //         }
-                    //         setState(() {});
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
                     Row(
                       children: [
                         Container(
@@ -278,8 +197,6 @@ class _SettingPageState extends State<SettingPage> {
                             // print(value);
                             _superFontSize = value;
                             fontModel.setFontLarge(value);
-                            //context.read<ThemeProvider>().setTheme(themeMode);
-                            // Provider.of<ThemeProvider>(context,listen: false).setFontSize(value);
                             setState(() {});
                           },
                         ),
@@ -308,8 +225,8 @@ class _SettingPageState extends State<SettingPage> {
                             size: 30,
                           ),
                         ),
-                         Text(
-                          '联系我们',
+                        Text(
+                          '关于我们',
                           style: textStyle,
                         ),
                         const Expanded(child: SizedBox()),

@@ -4,8 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/setting/page/setting_page.dart';
+import 'package:sign_language/study/StudyMainPage.dart';
 import 'package:sign_language/study/StudyPage.dart';
+import 'package:sign_language/toolkit/ToolMainPage.dart';
 import 'package:sign_language/toolkit/toolkit_page.dart';
+import 'package:sign_language/trans/TransMainPage.dart';
 import 'package:sign_language/trans/TransPage.dart';
 
 class Home extends StatefulWidget {
@@ -30,9 +33,12 @@ class _HomeState extends State<Home> {
 
   void initData() {
     _pageList = [
-      const TransPage(),
-      const StudyPage(),
-      const ToolkitPage(),
+      // const TransPage(),
+      const TransMainPage(),
+      // const StudyPage(),
+      const StudyMainPage(),
+      const ToolMainPage(),
+      // const ToolkitPage(),
       const SettingPage()
     ];
     _bottomIcons = const [

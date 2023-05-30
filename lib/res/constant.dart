@@ -1,8 +1,10 @@
 // 常量字符串
 class Constant {
   // static const String baseURL = 'http://47.101.135.44:5002';
-  static const String baseURL = 'http://47.101.135.44:5003';
-  // static const String baseURL = 'http://100.80.86.3:5003';
+  static const String baseURL = 'http://47.101.33.130:5003';
+  // static const String baseURL = 'http://192.168.130.70:5003';
+  // static const String baseURL = 'http://100.78.174.234:5003';
+
   static const String data = 'data';
   static const String message = 'message';
   static const String code = 'code';
@@ -41,4 +43,6 @@ class Constant {
       "https://s2.loli.net/2023/04/27/7n4BiALgIF1qHOW.jpg";
   static const String first_bg_url =
       "https://s2.loli.net/2023/04/27/i9dVTF5XwQAPZxE.jpg";
+
+  static const String bg_img_assets = 'assets/images/bg_balloon.jpg';
 }

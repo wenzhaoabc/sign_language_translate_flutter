@@ -1,0 +1,362 @@
+<h3 style="text-align: center;">汉语手指字母方案</h3>
+<p>&nbsp;</p>
+<p>1&nbsp;&nbsp;范围</p>
+<p>本规范规定了代表汉语拼音字母的指式和表示规则。适用于全国范围内的公务活动、各级各类教育、&nbsp;电视和网络媒体、图书出版、公共服务、信息处理中的汉语手指字母的使用以及手语水平等级考试。</p>
+<p>&nbsp;</p>
+<p>2&nbsp;&nbsp;&nbsp;规范性引用文件</p>
+<p>下列注日期的引用文件均适用于本规范。</p>
+<p>《汉语拼音方案》(1958年2月11日第一届全国人民代表大会第五次会议批准)GF0020&mdash;2018《国家通用手语常用词表》(2018年3月9日中华人民共和国教育部、国家语言文字&nbsp;工作委员会、中国残疾人联合会发布，2018年7月1日实施)</p>
+<p>&nbsp;</p>
+<p>3&nbsp;&nbsp;&nbsp;术语和定义</p>
+<p>下列术语和定义适用于本规范。</p>
+<p>3.1 汉语拼音方案&nbsp;scheme&nbsp;for&nbsp;the&nbsp;Chinese&nbsp;phonetic&nbsp;alphabet</p>
+<p>给汉字注音和拼写普通话语音的方案。1958年2月11日第一届全国人民代表大会第五次会议批准。&nbsp;采用拉丁字母，并用附加符号表示声调，是帮助学习汉字和推广普通话的工具。</p>
+<p>3.2 手形&nbsp;handshape</p>
+<p>表达汉语手指字母时手指的屈、伸、开、合的形状。</p>
+<p>3.3 位置&nbsp;location</p>
+<p>表达汉语手指字母时手的空间位置。</p>
+<p>3.4 朝向&nbsp;orientation</p>
+<p>表达汉语手指字母时手指所指的方向和掌心(手背、虎口)所对的方向。</p>
+<p>3.5 动作&nbsp;movement</p>
+<p>表达加符字母&Ecirc、&Uuml&nbsp;时手的晃动动作。</p>
+<p>3.6 指式&nbsp;finger&nbsp;shape</p>
+<p>含有位置、朝向和附加动作的代表拼音字母的手形。</p>
+<p>3.7 汉语手指字母&nbsp;Chinese&nbsp;manual&nbsp;alphabet</p>
+<p>用指式代表汉语拼音字母，按照《汉语拼音方案》拼成普通话；也可构成手语词或充当手语词的语素，&nbsp;是手语的组成部分</p>
+<p>3.8 远节指&nbsp;distal&nbsp;phalanx</p>
+<p>带有指甲的手指节</p>
+<p>3.9 近节指&nbsp;proximal&nbsp;phalanx</p>
+<p>靠近手掌的手指节</p>
+<p>3.10 中节指&nbsp;middle&nbsp;phalanx</p>
+<p>远节指与近节指之间的手指节。</p>
+<p>3.11 书空&nbsp;spanacing&nbsp;the&nbsp;character&nbsp;in&nbsp;the&nbsp;air</p>
+<p>用手指在空中比画汉语拼音声调符号或隔音符号。</p>
+<p>&nbsp;</p>
+<p>4&nbsp;&nbsp;&nbsp;汉语手指字母指式</p>
+<p>4.1 单字母指式</p>
+<p>《汉语拼音方案》所规定的二十六个字母，用下列指式表示：</p>
+<span style="border-collapse: collapse; width: 62.7906%; height: 2882px;" >
+
+<span style="height: 150px;" >
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/w2CsUu1KRla6Ezr.png" alt="" width="62" height="76" /></span></p>
+<p><span style="font-size: 14pt;">Aa</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手伸拇指，指尖朝上，食、中、无名、小指弯曲，指尖抵于掌心，手背向右。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height:150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/KJ9Hro4lQG5eDCz.png" alt="" width="57" height="107" /></span></p>
+<p><span style="font-size: 14pt;">Bb</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指向掌心弯曲，食、中、无名、小指并拢直立，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/29/GMjbqLY7VhDtupl.png" alt="" width="64" height="86" /></span></p>
+<p><span style="font-size: 14pt;">Cc</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指向上弯曲，食、中、无名、小指并拢向下弯曲，指尖相对成C形，虎口朝内。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/29/OzMf2r86hjRKnN5.png" alt="" width="65" height="80" /></span></p>
+<p><span style="font-size: 14pt;">Dd</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手握拳，拇指搭在中指中节指上，虎口朝后上方。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/29/4KY91EigFhSuadP.png" alt="" width="105" height="58" /></span></p>
+<p><span style="font-size: 14pt;">Ee</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、食指搭成圆形，中、无名、小指横伸，稍分开，指尖朝左，手背向外。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/29/QxseVBZ3akLOubR.png" alt="" width="105" height="63" /></span></p>
+<p><span style="font-size: 14pt;">Ff</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、中指横伸，稍分开，指尖朝左，拇、无名、小指弯曲，拇指搭在无名指远节指上，手背向外。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/sueRGaf5AU6dwBL.png" alt="" width="127" height="68" /></span></p>
+<p><span style="font-size: 14pt;">Gg</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食指横伸，指尖朝左，中、无名、小指弯曲，指尖抵于掌心，拇指搭在中指中节指上，手背向外。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/631KLDsJ4c7yWIn.png" alt="" width="57" height="106" /></span></p>
+<p><span style="font-size: 14pt;">Hh</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、中指并拢直立，拇、无名、小指弯曲，拇指搭在无名指，远节指上，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/wJSAfl6xXNoQ38c.png" alt="" width="63" height="110" />Ii</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食指直立，中、无名、小指弯曲，指尖抵于掌心，拇指搭在，中指中节指上，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 150px;">
+<span style="width: 29.8207%; height: 150px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/kQ5FGeO8nlCAP9N.png" alt="" width="67" height="95" /></span></p>
+<p><span style="font-size: 14pt;">Jj</span></p>
+</span>
+<span style="width: 67.5853%; height: 150px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食指弯曲，中节指指背向上，中、无名、小指弯曲，指尖抵，于掌心，拇指搭在中指中节指上，虎口朝内。</p>
+</span>
+</span>
+<span style="height: 177px;">
+<span style="width: 29.8207%; height: 177px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/JrBnxtuIAOMHWpP.png" alt="" width="70" height="107" /></span></p>
+<p><span style="font-size: 14pt;">Kk</span></p>
+</span>
+<span style="width: 67.5853%; height: 177px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食指直立，中指横伸，拇指搭在中指中节指上，无名、小指弯曲，指尖抵于掌心，虎口朝内。</p>
+</span>
+</span>
+<span style="height: 169px;">
+<span style="width: 29.8207%; height: 169px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/PczLbpIJvN4VYWD.png" alt="" width="76" height="99" /></span></p>
+<p><span style="font-size: 14pt;">Ll</span></p>
+</span>
+<span style="width: 67.5853%; height: 169px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、食指张开，食指指尖朝上，中、无名、小指弯曲，指尖，抵于掌心，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 169px;">
+<span style="width: 29.8207%; height: 169px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/Wtw3h29IP8oZfM7.png" alt="" width="74" height="73" /></span></p>
+<p><span style="font-size: 14pt;">Mm</span></p>
+</span>
+<span style="width: 67.5853%; height: 169px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、小指弯曲，拇指搭在小指中节指上，食、中、无名指并，拢弯曲搭在拇指上，指尖朝前下方，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 134px;">
+<span style="width: 29.8207%; height: 134px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/cbHFjY1fs3mGdU8.png" alt="" width="64" height="64" /></span></p>
+<p><span style="font-size: 14pt;">Nn</span></p>
+</span>
+<span style="width: 67.5853%; height: 134px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、无名、小指弯曲，拇指搭在无名指中节指上，食、中指 并拢弯曲搭在拇指上，指尖朝前下方，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 155px;">
+<span style="width: 29.8207%; height: 155px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/OSrRyhvHJt6LTe8.png" alt="" width="60" height="85" /></span></p>
+<p><span style="font-size: 14pt;">Oo</span></p>
+</span>
+<span style="width: 67.5853%; height: 155px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;右手拇指向上弯曲，食、中、无名、小指并拢向下弯曲，拇、食、 中指指尖相抵成0形，虎口朝内。</p>
+</span>
+</span>
+<span style="height: 168px;">
+<span style="width: 29.8207%; height: 168px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/CAUJhyf69wEPtxB.png" alt="" width="80" height="98" /></span></p>
+<p><span style="font-size: 14pt;">Pp</span></p>
+</span>
+<span style="width: 67.5853%; height: 168px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、食指搭成圆形，中、无名、小指并拢伸直，指尖朝下 虎口朝前偏左。</p>
+</span>
+</span>
+<span style="height: 147px;">
+<span style="width: 29.8207%; height: 147px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/duA6hZHwPzNnTir.png" alt="" width="76" height="77" /></span></p>
+<p><span style="font-size: 14pt;">Qq</span></p>
+</span>
+<span style="width: 67.5853%; height: 147px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指在下，食、中指并拢在上，拇、食、中指指尖相捏，指 尖朝前偏左，无名、小指弯曲，指尖抵于掌心。</p>
+</span>
+</span>
+<span style="height: 144px;">
+<span style="width: 29.8207%; height: 144px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/ukKw45FTIe62YLC.png" alt="" width="110" height="74" /></span></p>
+<p><span style="font-size: 14pt;">Rr</span></p>
+</span>
+<span style="width: 67.5853%; height: 144px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、食指张开，食指指尖朝左，拇指指尖朝上，中、无名、 小指弯曲，指尖抵于掌心，手背向外。</p>
+</span>
+</span>
+<span style="height: 151px;">
+<span style="width: 29.8207%; height: 151px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/9UHkx7RTge6L5EC.png" alt="" width="75" height="81" /></span></p>
+<p><span style="font-size: 14pt;">Ss</span></p>
+</span>
+<span style="width: 67.5853%; height: 151px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指贴近手掌，食、中、无名、小指并拢微曲与手掌成90度角，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 170px;">
+<span style="width: 29.8207%; height: 170px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/gvQ2bkDysTPFWNS.png" alt="" width="67" height="100" /></span></p>
+<p><span style="font-size: 14pt;">Tt</span></p>
+</span>
+<span style="width: 67.5853%; height: 170px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇、中、无名指指尖相抵，食、小指直立，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 176px;">
+<span style="width: 29.8207%; height: 176px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/oYsnUTFZGmuf7Vv.png" alt="" width="60" height="106" /></span></p>
+<p><span style="font-size: 14pt;">Uu</span></p>
+</span>
+<span style="width: 67.5853%; height: 176px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指贴近手掌，食、中、无名、小指并拢直立，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 170px;">
+<span style="width: 29.8207%; height: 170px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/ZdvVRuhyb958PTA.png" alt="" width="48" height="100" /></span></p>
+<p><span style="font-size: 14pt;">Vv</span></p>
+</span>
+<span style="width: 67.5853%; height: 170px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、中指直立分开成V形，拇、无名、小指弯曲，拇指搭在无名指远节指上，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 175px;">
+<span style="width: 29.8207%; height: 175px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/CFg5rU1RlvLQMTy.png" alt="" width="55" height="105" /></span></p>
+<p><span style="font-size: 14pt;">Ww</span></p>
+</span>
+<span style="width: 67.5853%; height: 175px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、中、无名指直立分开成W形，拇、小指弯曲，拇指搭在小指远节指上，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 177px;">
+<span style="width: 29.8207%; height: 177px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/Jfe421PlVWADG8Y.png" alt="" width="55" height="107" /></span></p>
+<p><span style="font-size: 14pt;">Xx</span></p>
+</span>
+<span style="width: 67.5853%; height: 177px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、中指直立，中指搭在食指上，拇、无名、小指弯曲，拇指搭在无名指远节指上，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 155px;">
+<span style="width: 29.8207%; height: 155px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/T2zSscOgo9GJbHj.png" alt="" width="77" height="85" /></span></p>
+<p><span style="font-size: 14pt;">Yy</span></p>
+</span>
+<span style="width: 67.5853%; height: 155px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手伸拇、小指，指尖朝上，食、中、无名指弯曲，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 123px;">
+<span style="width: 29.8207%; height: 123px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/Hr2tzix7XAnUZPe.png" alt="" width="102" height="53" /></span></p>
+<p><span style="font-size: 14pt;">Zz</span></p>
+</span>
+<span style="width: 67.5853%; height: 123px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、小指横伸，指尖朝左，拇、中、无名指弯曲，拇指搭在中、无名指远节指上，手背向外。</p>
+</span>
+</span>
+
+</span>
+<span style="width:100%;float:left">
+<p>4.2</p>
+<p>双字母指式</p>
+<p>《汉语拼音方案》所规定的四组双字母(ZH,CH,SH,NG),用下列指式表示</p>
+</span>
+<span style="width:100%; width: 62.8801%; height: 545px;">
+
+<span style="height: 131px;">
+<span style="width: 25.3351%; height:131px;float:left">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/xQ1YuDPlENBXCbZ.png" alt="" width="110" height="55" /></span></p>
+<p><span style="font-size: 14pt;">ZH zh</span></p>
+</span>
+<span style="width: 70.7775%; height:131px;float:right">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手食、中、小指横伸，食、中指并拢，指尖朝左，拇、无名指弯曲，拇指搭在无名指远节指上，手背向外。</p>
+</span>
+</span>
+<span style="height: 131px;">
+<span style="width: 25.3351%; height: 131px;float:left" width="189">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/pJzXwAYcZT7oCLk.png" alt="" width="89" height="81" /></span></p>
+<p><span style="font-size: 14pt;">CH ch</span></p>
+</span>
+<span style="width: 70.7775%; height: 131px;float:right" width="528">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指在下，食、中、无名、小指并拢在上，指尖朝左成扁形，虎口朝内。</p>
+</span>
+</span>
+<span style="height: 169px;">
+<span style="width: 25.3351%; height: 169px;float:left" width="189">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/Sx9A8WhnbQgvR2t.png" alt="" width="83" height="85" /></span></p>
+<p><span style="font-size: 14pt;">SH sh</span></p>
+</span>
+<span style="width: 70.7775%; height: 169px;float:right" width="528">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手拇指贴近手掌，食、中指并拢微曲与手掌成90度角，无名、小指弯曲，指尖抵于掌心，掌心向前偏左。</p>
+</span>
+</span>
+<span style="height: 169px;">
+<span style="width: 25.3351%; height: 169px;float:left" width="189">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/PJCy1XVOBoQ5Uwl.png" alt="" width="102" height="52" /></span></p>
+<p><span style="font-size: 14pt;">NG ng</span></p>
+</span>
+<span style="width: 70.7775%; height: 169px;float:right" width="528">
+<p style="text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; 右手小指横伸，指尖朝左，拇、食、中、无名指弯曲，拇指搭在食指中、无名指上，手背向外。</p>
+</span>
+</span>
+
+</span>
+<span style="width:100%;float:left">
+<p>4.3</p>
+<p>加符字母指式</p>
+<p>《汉语拼音方案》所规定的两个加符字母(&Ecirc;、&Uuml;)用原字母(E、U)指式附加如下动作表示：</p>
+</span>
+
+<span style="width:100%;; width: 62.6117%;">
+
+<span style="width:100%;height: 169px;float:left">
+<span style="width: 25.4717%;float:left" width="189">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/OvBPuReKfYoZTLa.png" alt="" width="95" height="64" /></span></p>
+<p><span style="font-size: 14pt;">&Ecirc; &ecirc;</span></p>
+</span>
+<span style="width: 70.6199%;float:right" >
+<p style="text-align:left;">&nbsp; &nbsp; &nbsp; &nbsp; 用E的指式，手上下晃动两下。</p>
+</span>
+</span>
+
+<span style="width:100%;height: 169px;float:left">
+<span style="width: 25.4717%;float:left" width="189">
+<p><span style="font-size: 14pt;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/6EfuUdKGaF1lT8H.png" alt="" width="52" height="90" /></span></p>
+<p><span style="font-size: 14pt;">&Uuml;&nbsp;&uuml;</span></p>
+</span>
+<span style="width: 70.6199%;float:right" >
+<p style="text-align:left;">&nbsp; &nbsp; &nbsp; &nbsp; 用U的指式，食、中、无名、小指前后晃动两下。(不论0上两点是否省略，均用本指式表示）</p>
+</span>
+</span>
+
+</span>
+
+<span style="float:left">
+<p>4.4 声调符号和隔音符号表示方式</p>
+<p>阴平(一)、阳平(1)、上声(V)、去声(\)四种声调符号，用书空方式表示。&nbsp;隔音符号&ldquo;&rsquo;&rdquo;也用书空方式表示。</p>
+<p>&nbsp;</p>
+<p>5&nbsp;&nbsp;&nbsp;使用规则</p>
+<p>5.1 使用手</p>
+<p>汉语手指字母、声调符号和隔音符号一般用右手表示；如用左手表示，方向作相应的改变。</p>
+<p>5.2 手的位置</p>
+<p>表示汉语手指字母时，手自然抬起，不超过肩宽。</p>
+<p>表示手指字母&ldquo;A、B、C、D、H、I、J、K、L、M、N、O、Q、S、T、U、V、W、X、Y、SH&rdquo;时&nbsp;&nbsp;手的位置在同侧胸前；表示手指字母&nbsp;&ldquo;E、F、G、R、Z、ZH、CH、NG&rdquo;时，手的位置在胸前正中；表&nbsp;示手指字母&ldquo;P&rdquo;时，手的位置在同侧腹部前。</p>
+<p>5.3 图示角度</p>
+<p>本规范的汉语手指字母图为平视图，以观看者的角度呈现。</p>
+</span>

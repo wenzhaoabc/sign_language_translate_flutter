@@ -1,3 +1,4 @@
+import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/toolkit/chat/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,52 +23,21 @@ class ChatPage extends GetView<ChatController> {
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(builder: (logic) {
       return Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(Constant.bg_img_url),
-              // image: AssetImage("images/R_C.jpg"),
-              fit: BoxFit.cover,
-            ),
-          ),
+          decoration: PageBgStyles.PageBallonDecoration,
           child: Scaffold(
             // backgroundColor: const Color(0xFF6750A4),
             backgroundColor: Colors.transparent,
-            // drawer:
-            //   IconButton(
-            //     onPressed: () async {
-            //       Get.toNamed('/main');
-            //     },
-            //     icon: const Icon(Icons.arrow_back_sharp),
-            //   ),
             appBar: AppBar(
               // backgroundColor: const Color(0xFF6750A4),
               backgroundColor: Colors.transparent,
               centerTitle: true,
               title: const Text(
-                '智能聊天',
+                '陪伴助手',
               ),
-              // actions: <Widget>[
-              //   // IconButton(
-              //   //   onPressed: () async {
-              //   //     await controller.getModels();
-              //   //   },
-              //   //   icon: const Icon(Icons.more_vert_rounded),
-              //   // ),
-              //   IconButton(
-              //     onPressed: () async {
-              //       // TODO - 翻译
-              //       // Get.toNamed(Routes.TRANSLATE);
-              //     },
-              //     icon: const Icon(Icons.translate),
-              //   ),
-              //   IconButton(
-              //     onPressed: () async {
-              //       // TODO - 生成图片
-              //       // Get.toNamed(Routes.IMAGE);
-              //     },
-              //     icon: const Icon(Icons.image),
-              //   ),
-              // ],
+              leading: InkWell(
+                child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+                onTap: () => Navigator.of(context).pop(),
+              ),
             ),
             body: SafeArea(
               child: Column(

@@ -3,6 +3,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/widgets/LearnItemWidget.dart';
 import 'package:sign_language/res/constant.dart';
 
@@ -34,13 +35,7 @@ class _MyLoveWordState extends State<MyLoveWord> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(Constant.bg_img_url),
-            // image: AssetImage("images/R_C.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: PageBgStyles.PageBimgDecoration,
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,

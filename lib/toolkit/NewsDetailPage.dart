@@ -21,12 +21,12 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
         title: Text(widget.newsItem.title),
         elevation: 1,
         leading: InkWell(
-          child: Icon(Icons.arrow_back_sharp, color: Colours.dark_btn_icon),
+          child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onTap: () => Navigator.of(context).pop(),
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           // color: Colors.
         ),
         child: Html(data: widget.newsItem.content),

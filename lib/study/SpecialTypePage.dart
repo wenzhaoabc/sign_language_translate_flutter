@@ -18,7 +18,20 @@ class SpecialTypePage extends StatefulWidget {
 class _SpecialTypePageState extends State<SpecialTypePage> {
   List<WordItemInfo>? _wordList;
 
-  final _wordType = ['交通工具', '亲属', '天气', '动植物', '民族', '节气', '政党', '手语生成'];
+  final _wordType = [
+    '交通工具',
+    '亲属称谓',
+    '天气',
+    '动植物',
+    '民族',
+    '节气',
+    '政党',
+    '地名',
+    '代词',
+    '动词',
+    '形容词',
+    '其它',
+  ];
 
   bool isInDark() {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
@@ -64,7 +77,7 @@ class _SpecialTypePageState extends State<SpecialTypePage> {
                   surfaceIntensity: 0.1,
                   color: isInDark() ? Colours.dark_app_main : Colours.app_main),
               margin:
-                  const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
+                  const EdgeInsets.only( top: 5, bottom: 5, right: 5),
               child: IconButton(
                 iconSize: 25,
                 color: Colors.green,
@@ -87,7 +100,7 @@ class _SpecialTypePageState extends State<SpecialTypePage> {
                     color:
                         isInDark() ? Colours.dark_app_main : Colours.app_main),
                 margin: const EdgeInsets.only(
-                    left: 5, top: 5, bottom: 5, right: 30),
+                    left: 5, top: 5, bottom: 5, right: 10),
                 child: IconButton(
                   iconSize: 25,
                   color: isInDark() ? Colors.redAccent : Colors.blue,

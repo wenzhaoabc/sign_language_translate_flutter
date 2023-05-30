@@ -2,13 +2,13 @@ import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
-import 'package:sign_language/res/constant.dart';
-import 'package:sign_language/widgets/VideoWidget.dart';
 
 class WordDetailPage extends StatefulWidget {
   const WordDetailPage(
@@ -31,10 +31,16 @@ class _WordDetailPageState extends State<WordDetailPage> {
     return Theme.of(context).primaryColor == Colours.dark_app_main;
   }
 
+  void _dataCheckWord() async {
+    dio.get(
+      '/data-check-word?word-id=${widget.currentWord.id ?? 0}',
+    );
+  }
+
   @override
   void initState() {
     _getIsLoved();
-
+    _dataCheckWord();
     super.initState();
   }
 
@@ -76,10 +82,6 @@ class _WordDetailPageState extends State<WordDetailPage> {
     debugPrint("查看收藏");
     dio.get('/is_loved?id=${widget.currentWord.id}').then((value) {
       debugPrint(value.data.toString());
-      // var res = ResponseBase.fromJson(value.data);
-      // isLoved = res.data!;
-      // debugPrint("res.data = ${res.data}");
-      // Fluttertoast.showToast(msg: (res.msg) ?? '收藏失败');
     }).catchError((err) {
       Fluttertoast.showToast(msg: '网络错误', textColor: Colours.red);
     });
@@ -89,7 +91,8 @@ class _WordDetailPageState extends State<WordDetailPage> {
     if (value == 0) {
       _customVideoPlayerController.dispose();
     } else {
-      String videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      String videoUrl =
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
       videoPlayerController =
           VideoPlayerController.network(widget.currentWord.video ?? videoUrl)
             ..initialize().then((value) => setState(() {}));
@@ -103,10 +106,13 @@ class _WordDetailPageState extends State<WordDetailPage> {
     });
   }
 
+  late double fontSize;
+
   @override
   Widget build(BuildContext context) {
     Color bgColor = Theme.of(context).primaryColor;
     Color btnColor = isInDark() ? Colors.white : Colors.green;
+    fontSize = Provider.of<AppProvider>(context).normalFontSize;
 
     return Container(
         decoration: const BoxDecoration(
@@ -131,8 +137,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
                   lightSource: LightSource.topLeft,
                   intensity: 0.75,
                   color: bgColor),
-              margin:
-                  const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 5),
+              margin: const EdgeInsets.only(top: 5, bottom: 5, right: 5),
               child: IconButton(
                 iconSize: 25,
                 color: isInDark() ? Colors.green : btnColor,
@@ -154,7 +159,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
                     surfaceIntensity: 0.1,
                     color: bgColor),
                 margin: const EdgeInsets.only(
-                    left: 5, top: 5, bottom: 5, right: 30),
+                    left: 5, top: 5, bottom: 5, right: 10),
                 child: IconButton(
                   iconSize: 25,
                   color: Colors.red,
@@ -185,7 +190,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
             const BorderRadius.all(Radius.circular(10))),
         depth: 4,
         intensity: 0.8,
-        color: isInDark() ? Colours.dark_bg_color : Colours.app_main,
+        color: Colors.white12,
       ),
       margin: const EdgeInsets.only(top: 30, left: 40, right: 40, bottom: 40),
       child: SizedBox(
@@ -238,29 +243,29 @@ class _WordDetailPageState extends State<WordDetailPage> {
               ),
             ),
             Neumorphic(
-              style: NeumorphicStyle(
-                boxShape: NeumorphicBoxShape.roundRect(
-                  const BorderRadius.all(
-                    Radius.circular(10),
+                style: NeumorphicStyle(
+                  boxShape: NeumorphicBoxShape.roundRect(
+                    const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                   ),
+                  depth: -5,
+                  intensity: 0,
                 ),
-                depth: -5,
-                intensity: 0,
-              ),
-              margin: const EdgeInsets.all(30),
-              // TODO 视频
-              child: _getImgOrVideo(wordItemInfo)
-              // Image.network(
-              //   wordItemInfo.img!,
-              //   fit: BoxFit.cover,
-              // ),
-            ),
+                margin: const EdgeInsets.all(30),
+                // TODO 视频
+                child: _getImgOrVideo(wordItemInfo)
+                // Image.network(
+                //   wordItemInfo.img!,
+                //   fit: BoxFit.cover,
+                // ),
+                ),
             Neumorphic(
               margin: const EdgeInsets.all(30),
               padding: const EdgeInsets.all(10),
               child: Text(
                 wordItemInfo.word,
-                style: const TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: fontSize),
               ),
             ),
             SizedBox(
@@ -277,7 +282,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
                     ),
                     Text(
                       wordItemInfo.notes ?? wordItemInfo.word,
-                      style: const TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: fontSize - 4),
                     )
                   ],
                 ),
@@ -295,7 +300,7 @@ class _WordDetailPageState extends State<WordDetailPage> {
                   ),
                   Text(
                     wordItemInfo.description ?? '无',
-                    style: const TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: fontSize - 4),
                   )
                 ],
               ),

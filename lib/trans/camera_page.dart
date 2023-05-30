@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:provider/provider.dart';
 import 'package:shake_animation_widget/shake_animation_widget.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/toolkit/xfyy/utils/xf_socket.dart';
 import 'package:sign_language/utils/AudioUtil.dart';
@@ -43,10 +45,10 @@ class _CameraPageState extends State<CameraPage> {
   void initState() {
     super.initState();
     startSocketChannel();
-    _transText = '文本 : ';
+    // _transText = '文本 : ';
     _cameraController = CameraController(
         widget.cameras[currentCameraIndex % widget.cameras.length],
-        ResolutionPreset.low,
+        ResolutionPreset.ultraHigh,
         enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420);
     _initializeControllerFuture = _cameraController?.initialize();
@@ -146,46 +148,84 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            /// 相机画面
-            FutureBuilder<void>(
-              future: _initializeControllerFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return AspectRatio(
-                    aspectRatio: width / height,
-                    child: CameraPreview(_cameraController!),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceRatio = MediaQuery.of(context).size.aspectRatio;
+    double fontSize = Provider.of<AppProvider>(context).normalFontSize;
 
-            /// 底部弹窗
-            AnimatedOpacity(
-              opacity: _visitable ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 300),
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('实时手语转译'),
+        leading: InkWell(
+          child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          onTap: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: Container(
+        width: deviceWidth,
+        height: deviceHeight,
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            SizedBox(
+                width: deviceWidth,
+                child: FutureBuilder<void>(
+                  future: _initializeControllerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Transform.scale(
+                        scale:
+                            _cameraController!.value.aspectRatio / deviceRatio,
+                        child: AspectRatio(
+                          aspectRatio: _cameraController!.value.aspectRatio,
+                          child: Center(
+                            child: CameraPreview(_cameraController!),
+                          ),
+                        ),
+                      );
+                      var a = AspectRatio(
+                        aspectRatio: (deviceWidth + 100) / (deviceHeight - 100),
+                        child: CameraPreview(_cameraController!),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                )),
+
+            /// 文本框
+            Positioned(
+              bottom: 0,
+              child: AnimatedOpacity(
+                opacity: _visitable ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 300),
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 20,
+                  width: deviceWidth,
                   height: 200,
                   child: Neumorphic(
+                    style: NeumorphicStyle(color: Colors.white, depth: 0),
                     child: SingleChildScrollView(
-                      padding: EdgeInsets.all(10),
-                      scrollDirection: Axis.vertical,
-                      child: Text(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        scrollDirection: Axis.vertical,
+                        child: Text.rich(
+                          TextSpan(
+                              text: '转译文本 : ',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: fontSize - 3,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: _transText,
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: fontSize),
+                                )
+                              ]),
+                        )
+                        /*Text(
                         _transText ?? '翻译文本',
                         maxLines: 10,
                         style: TextStyle(
@@ -194,8 +234,9 @@ class _CameraPageState extends State<CameraPage> {
                           color:
                               _transText.isEmpty ? Colors.grey : Colors.black,
                         ),
-                      ),
-                    ),
+                      ),*/
+
+                        ),
                   ),
                 ),
               ),

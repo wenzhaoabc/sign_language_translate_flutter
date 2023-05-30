@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -27,7 +26,11 @@ class AppProvider extends ChangeNotifier {
 
   double get smallFontSize => _smallFontSize;
 
+  bool _isInLargeFont = false;
+  bool get inLargeFont => _isInLargeFont;
+
   void setFontLarge(bool large) {
+    _isInLargeFont = large;
     double fontSize = large ? 24 : 20;
     double hintFontSize = large ? 18 : 14;
     double sosFontSize = large ? 22 : 18;
@@ -82,7 +85,7 @@ class AppProvider extends ChangeNotifier {
 
   User? get currentUser => _user;
 
-  void setUser(User user) {
+  void setUser(User? user) {
     _user = user;
     notifyListeners();
   }

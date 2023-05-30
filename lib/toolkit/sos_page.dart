@@ -4,6 +4,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/toolkit/add_sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 
@@ -27,23 +28,23 @@ class _SOSPageState extends State<SOSPage> {
 
   @override
   Widget build(BuildContext context) {
+    double fontSize = Provider.of<AppProvider>(context).normalFontSize;
+
     return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(Constant.bg_img_url),
-            // image: AssetImage("images/R_C.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: PageBgStyles.BeHappyBimgDecoration,
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
             title: const Text('紧急呼救'),
             elevation: 0,
             backgroundColor: Colors.transparent,
+            leading: InkWell(
+              child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+              onTap: () => Navigator.of(context).pop(),
+            ),
           ),
           body: Container(
-            margin: const EdgeInsets.all(20),
+            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
@@ -51,15 +52,15 @@ class _SOSPageState extends State<SOSPage> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
-                      child: const Icon(
+                      child: Icon(
                         Icons.autorenew_rounded,
                         color: Colors.green,
-                        size: 30,
+                        size: fontSize,
                       ),
                     ),
-                    const Text(
+                    Text(
                       '重复播报',
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(fontSize: fontSize),
                     ),
                     const Expanded(child: SizedBox()),
                     NeumorphicSwitch(
@@ -67,7 +68,8 @@ class _SOSPageState extends State<SOSPage> {
                       value: _repeat,
                       onChanged: (bool value) {
                         _repeat = value;
-                        Provider.of<AppProvider>(context,listen: false).setPhoneIsRepeat(value);
+                        Provider.of<AppProvider>(context, listen: false)
+                            .setPhoneIsRepeat(value);
                         setState(() {});
                       },
                     ),
@@ -77,15 +79,15 @@ class _SOSPageState extends State<SOSPage> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
-                      child: const Icon(
+                      child: Icon(
                         Icons.woman_outlined,
                         color: Colors.green,
-                        size: 30,
+                        size: fontSize,
                       ),
                     ),
-                    const Text(
+                    Text(
                       '女性音色',
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(fontSize: fontSize),
                     ),
                     const Expanded(child: SizedBox()),
                     NeumorphicSwitch(
@@ -103,24 +105,25 @@ class _SOSPageState extends State<SOSPage> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
-                      child: const Icon(
+                      child: Icon(
                         Icons.phonelink_ring_rounded,
                         color: Colors.green,
-                        size: 30,
+                        size: fontSize,
                       ),
                     ),
-                    const Text(
+                    Text(
                       '险情感知',
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(fontSize: fontSize),
                     ),
                     const Expanded(child: SizedBox()),
                     NeumorphicSwitch(
                       height: 25,
-                      value: Provider.of<AppProvider>(context,listen: false).detectSensor,
+                      value: Provider.of<AppProvider>(context, listen: false)
+                          .detectSensor,
                       onChanged: (bool value) {
-                        Provider.of<AppProvider>(context,listen: false).setDetectSensor(value);
-                        setState(() {
-                        });
+                        Provider.of<AppProvider>(context, listen: false)
+                            .setDetectSensor(value);
+                        setState(() {});
                       },
                     ),
                   ],
@@ -129,7 +132,7 @@ class _SOSPageState extends State<SOSPage> {
             ),
           ),
           floatingActionButton: Container(
-            margin: EdgeInsets.only(bottom: 30,right: 30),
+            margin: EdgeInsets.only(bottom: 30, right: 30),
             child: IconButton(
               onPressed: () {
                 Navigator.of(context)

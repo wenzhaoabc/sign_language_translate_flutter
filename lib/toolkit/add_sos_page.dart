@@ -10,6 +10,7 @@ import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
 
 class AddSOS extends StatefulWidget {
@@ -29,18 +30,8 @@ class _AddSOSState extends State<AddSOS> {
 
   // 初始化紧急呼救数据列表
   void initSosList() {
-    SosItemList = Provider.of<AppProvider>(context).sosItemList;
+    SosItemList = Provider.of<AppProvider>(context,listen: false).sosItemList;
     return;
-    List<String>? strList = getStringListAsync(Constant.sosList);
-    if (strList == null || strList.isEmpty) {
-      return;
-    }
-    debugPrint("添加SOS : strList = $strList");
-    for (var value in strList) {
-      var jsonItem = jsonDecode(value);
-      SOSItem item = SOSItem.fromJson(jsonItem);
-      SosItemList.add(item);
-    }
   }
 
   void popToLast() {
@@ -50,13 +41,7 @@ class _AddSOSState extends State<AddSOS> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(Constant.bg_img_url),
-            // image: AssetImage("images/R_C.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: PageBgStyles.BeHappyBimgDecoration,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -64,6 +49,12 @@ class _AddSOSState extends State<AddSOS> {
             title: const Text('添加'),
             backgroundColor: Colors.transparent,
             elevation: 0,
+            // scrolledUnderElevation: 1,
+            bottomOpacity: 1,
+            leading: InkWell(
+              child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+              onTap: () => Navigator.of(context).pop(),
+            ),
           ),
           body: Neumorphic(
             style: const NeumorphicStyle(depth: 2, color: Colours.d_bg),
@@ -82,15 +73,15 @@ class _AddSOSState extends State<AddSOS> {
                   child: NeumorphicButton(
                     style: const NeumorphicStyle(depth: 3, intensity: 0.8),
                     pressed: true,
-                    onPressed: ()  {
-                      // initSosList();
-                      //
-                      // for (var value1 in SosItemList) {
-                      //   if (value1.title == title) {
-                      //     MyToast.showToast(msg: '名称重复', type: 'error');
-                      //     return;
-                      //   }
-                      // }
+                    onPressed: () {
+                      initSosList();
+
+                      for (var value1 in SosItemList) {
+                        if (value1.title == title) {
+                          MyToast.showToast(msg: '名称重复', type: 'error');
+                          return;
+                        }
+                      }
                       if (to.isEmptyOrNull ||
                           title.isEmptyOrNull ||
                           content.isEmptyOrNull) {
@@ -101,12 +92,6 @@ class _AddSOSState extends State<AddSOS> {
                           .addSosItem(SOSItem(title!, content!, to!));
                       popToLast();
                       return;
-                      SosItemList.add(SOSItem(title!, content!, to!));
-                      List<String> strList = List.generate(SosItemList.length,
-                          (index) => SosItemList.elementAt(index).toString());
-                       setValue(Constant.sosList, strList);
-                      debugPrint("add new SOSItem after: $strList");
-                      popToLast();
                     },
                     child: const Text(
                       '添加',
@@ -131,6 +116,7 @@ class _AddSOSState extends State<AddSOS> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(tag, style: TextStyle(color: textColor, fontSize: 16)),
+        SizedBox(height: 10),
         TextField(
           cursorColor: Colors.black,
           cursorWidth: 2,
@@ -138,9 +124,10 @@ class _AddSOSState extends State<AddSOS> {
           style: const TextStyle(fontSize: 16),
           inputFormatters: [LengthLimitingTextInputFormatter(15)],
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-            border:
-                const UnderlineInputBorder(borderSide: BorderSide(width: 1)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+            border: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             hintText: hintText,
           ),
         )
@@ -154,20 +141,22 @@ class _AddSOSState extends State<AddSOS> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('求救内容', style: TextStyle(color: textColor, fontSize: 16)),
-        const SizedBox(height: 5),
+        const SizedBox(height: 10),
         TextField(
           maxLines: 5,
           onChanged: (text) {
             content = text;
           },
+          cursorColor: Colors.black,
           style: const TextStyle(fontSize: 16),
           inputFormatters: [
             FilteringTextInputFormatter.deny(RegExp('[\[\]\(\)\{\}]'))
           ],
           decoration: const InputDecoration(
-            // contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-            border: OutlineInputBorder(),
-          ),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              hintText: '请输入求救内容'),
         )
       ],
     );

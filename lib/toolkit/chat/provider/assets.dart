@@ -3,7 +3,7 @@ class Assets {
   Assets._();
 
   static const String imagesChatLogo = 'assets/images/app_logo.png';
-  static const String imagesOpenaiLogo = 'assets/images/app_logo.jpg';
+  static const String imagesOpenaiLogo = 'assets/images/app_logo.png';
   static const String imagesPerson = 'assets/images/person.jpeg';
   static const String jsonLanguages = 'assets/json/languages.json';
 

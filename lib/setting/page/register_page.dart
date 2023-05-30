@@ -1,16 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_pickers/image_pickers.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_language/net/DataModel.dart';
 import 'package:sign_language/net/http.dart';
+import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/colours.dart';
 import 'package:sign_language/res/constant.dart';
+import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/trans/TransPage.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 import 'package:sign_language/utils/ToastUtil.dart';
@@ -24,15 +29,15 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  static const img_selection_gallery = 'assets/images/trans_gallery.png';
+  static const img_selection_camera = 'assets/images/trans_camera_green.png';
+  String _avatarPath = '';
+
   Uint8List? imageBytes;
   String? username;
   String? phone;
   String? password;
   final ImagePicker picker = ImagePicker();
-
-  bool inDark() {
-    return Theme.of(context).primaryColor == Colours.dark_app_main;
-  }
 
   void handleUsername(String name) {
     if (!name.isEmptyOrNull) {
@@ -48,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
     password = pwd;
   }
 
-  void _register() async {
+  void _register(BuildContext context) async {
     if (username.isEmptyOrNull ||
         phone.isEmptyOrNull ||
         password.isEmptyOrNull) {
@@ -58,48 +63,42 @@ class _RegisterPageState extends State<RegisterPage> {
     if (!phone.validatePhone()) {
       MyToast.showToast(msg: '手机号不正确', type: 'error');
     }
-    if (imageBytes == null) {
-      final byteData = await rootBundle.load('assets/images/avatar.png');
-      final Uint8List bytes = byteData.buffer.asUint8List();
-      setState(() {
-        imageBytes = bytes;
-      });
+    if (_avatarPath.length < 1) {
+      MyToast.showToast(msg: '请选择头像', type: 'warning');
     }
-    var imgBase64 = base64Encode(imageBytes!);
-    debugPrint("imgBase64 = $imgBase64");
-    String base64Image = "data:image/png;base64,$imgBase64";
-    dio.post('/register', data: {
-      "phone": phone,
-      "password": password,
-      "username": username,
-      "avatar": base64Image
-    }).then((value) {
+
+    Map<String, dynamic> data = Map();
+    data['avatar'] = await MultipartFile.fromFile(_avatarPath);
+    data['phone'] = phone;
+    data['password'] = password;
+    data['username'] = username;
+    FormData formData = FormData.fromMap(data);
+    dio.post('/register-form', data: formData).then((value) {
       var res = ResponseBase<User>.fromJson(value.data);
       if (res.code == 200) {
         setValue(Constant.user, res.data.toString());
+        User u = res.data!;
         MyToast.showToast(msg: '注册成功', type: 'success');
-        Navigator.pop(context);
-        // Navigator.push(context, MySlidePageRoute(page: const TransPage()));
+        Provider.of<AppProvider>(context, listen: false).setUser(u);
+        _backLastPage();
       } else {
         MyToast.showToast(msg: (res.msg) ?? '注册失败');
       }
-    }).catchError((res) => MyToast.showToast(msg: '网络错误', type: 'error'));
+    }) /*.catchError((res) => Future.microtask(() => debugPrint(res.toString())))*/;
+  }
+
+  void _backLastPage() {
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    var bgColor = inDark() ? Colours.dark_app_main : Colours.app_main;
+    // var bgColor = inDark() ? Colours.dark_app_main : Colours.app_main;
 
     var deviceWidth = MediaQuery.of(context).size.width;
 
     return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(Constant.bg_img_url),
-            // image: AssetImage("images/R_C.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: PageBgStyles.DeepWheelBimgDecoration,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           // backgroundColor: bgColor,
@@ -122,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Container(
                     width: 60,
                     height: 4,
-                    color: inDark() ? Colors.grey : Colors.black,
+                    color: Colors.grey,
                     margin: const EdgeInsets.only(left: 20, top: 10),
                   )
                 ],
@@ -172,25 +171,59 @@ class _RegisterPageState extends State<RegisterPage> {
         child: SizedBox(
           width: 150,
           height: 150,
-          child: (imageBytes == null)
+          child: (_avatarPath.isEmpty)
               ? const Icon(Icons.tag_faces_sharp, color: Colors.grey, size: 130)
               // ? const Icon(Icons.tag_faces_sharp, color: Colours.most_bg, size: 130)
-              : Image.memory(imageBytes!, fit: BoxFit.cover),
+              : Image.file(File(_avatarPath), fit: BoxFit.cover),
         ),
       ),
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return _buildBottomSheetWidget(context);
-          },
-        );
+      // showModalBottomSheet(
+      //   context: context,
+      //   builder: (BuildContext context) {
+      //     return _buildBottomSheetWidget(context);
+      //   },
+      // );
+      onTap: () async {
+        var res = await await _showCustomModalBottomSheet(context, null);
+        if (res == 0) {
+          // 选择相册
+          ImagePickers.pickerPaths(
+                  galleryMode: GalleryMode.image,
+                  selectCount: 1,
+                  showGif: false,
+                  showCamera: true)
+              .then((value) {
+            if (value.isNotEmpty) {
+              var image = value[0];
+              if (image.path != null) {
+                // TODO
+                setState(() {
+                  _avatarPath = image.path!;
+                });
+              }
+            }
+          });
+        } else if (res == 1) {
+          // 相机拍摄
+          ImagePickers.openCamera(
+            cameraMimeType: CameraMimeType.photo,
+          ).then((value) {
+            if (value != null) {
+              if (value.path != null) {
+                // TODO
+                setState(() {
+                  _avatarPath = value.path!;
+                });
+              }
+            }
+          });
+        }
       },
     );
   }
 
   Widget _getTagInput(String tag, String hintText, Function(String) function) {
-    var textColor = !inDark() ? Colors.black : Colors.white;
+    var textColor = Colors.black;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -200,9 +233,10 @@ class _RegisterPageState extends State<RegisterPage> {
           style: const TextStyle(fontSize: 16),
           inputFormatters: [LengthLimitingTextInputFormatter(15)],
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-            border:
-                const UnderlineInputBorder(borderSide: BorderSide(width: 1)),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+            border: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             hintText: hintText,
           ),
         )
@@ -216,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: NeumorphicButton(
         style: const NeumorphicStyle(depth: 3, intensity: 0.8),
         pressed: true,
-        onPressed: _register,
+        onPressed: () => _register(context),
         child: const Text(
           '注册',
           style: TextStyle(
@@ -313,6 +347,78 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [icon, const SizedBox(width: 10), Text(title)],
         ),
       ),
+    );
+  }
+
+  Future<Future<int?>> _showCustomModalBottomSheet(
+      context, List<String>? options) async {
+    return showModalBottomSheet<int>(
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+          ),
+          height: 180,
+          child: Column(children: [
+            SizedBox(
+              height: 50,
+              child: Stack(
+                textDirection: TextDirection.rtl,
+                children: [
+                  const Center(
+                    child: Text(
+                      '选择来源',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.0),
+                    ),
+                  ),
+                  IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        // return;
+                        Navigator.of(context).pop();
+                      }),
+                ],
+              ),
+            ),
+            const Divider(height: 1.0),
+            Expanded(
+                child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    child: Column(children: [
+                      Image.asset(img_selection_gallery,
+                          width: 60, height: 60, fit: BoxFit.cover),
+                      const Text('相册')
+                    ]),
+                    onTap: () {
+                      Navigator.of(context).pop(0);
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  GestureDetector(
+                      child: Column(children: [
+                        Image.asset(img_selection_camera,
+                            width: 60, height: 60, fit: BoxFit.cover),
+                        const Text('相机')
+                      ]),
+                      onTap: () => Navigator.of(context).pop(1)),
+                ],
+              ),
+            )),
+          ]),
+        );
+      },
     );
   }
 }

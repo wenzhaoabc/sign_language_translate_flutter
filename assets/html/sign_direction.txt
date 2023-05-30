@@ -1,0 +1,46 @@
+<h3 style="text-align: center;">手位和朝向图示说明</h3>
+<span style="border-collapse: collapse; width: 100%; height: 1000px;">
+
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/FmzcM4YptTB5e2C.png" alt="" width="100" height="86" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手侧立，手指指尖朝前，掌心向左或向右。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/dUtGPmV6wCzZigq.png" alt="" width="100" height="96" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手横立，手指指尖朝左或朝右，掌心向前或向后。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/FQl8dU5gp1W7TAa.png" alt="" width="100" height="92" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手直立，手指指尖朝上，掌心向前或向后、向左、向右。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/bNuI2k1rhVDwEs5.png" alt="" width="100" height="102" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手斜立，手指指尖朝左前方或右前方，掌心向左前方或右前方、左后方、右后方。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/Kw6jEH4BDeLVo5R.png" alt="" width="100" height="103" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手垂立，手指指尖朝下，掌心向前或向后、向左、向右。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/KB3cSpR8o7NOsYg.png" alt="" width="100" height="93" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手平伸，手指指尖朝前，掌心向上或向下。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/qIAtki8h42MDNzr.png" alt="" width="100" height="104" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手横伸，手指指尖朝左或朝右，掌心向上或向下。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/MR1kxHf2CbDABaZ.png" alt="" width="110" height="83" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手侧伸，手指指尖朝左侧、右侧的斜上方或斜下方，掌心向左侧、右侧的斜上方或斜下方。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/XexyDstAigcWYzP.png" alt="" width="171" height="109" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手斜伸，手指指尖朝前、后、左、右的斜上方或斜下方，掌心向前、后、左、右的斜上方或斜下方。</span>
+</span>
+<span style="width:100%;height: 100px;">
+<span style="width: 48.7566%; height: 100px;float:left"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://s2.loli.net/2023/05/28/fkTxstcD1RbNO9L.png" alt="" width="175" height="120" /></span>
+<span style="width: 48.7566%; height: 100px;float:right">手斜伸，手指指尖朝前、后、左、右的斜上方或斜下方，掌心向前、后、左、右的斜上方或斜下方。</span>
+</span>
+
+</span>
+

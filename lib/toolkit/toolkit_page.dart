@@ -103,7 +103,6 @@ class _ToolkitPageState extends State<ToolkitPage> {
   }
 
   Widget _getHintText(String text, Color in_color) {
-    bool isInDark = Theme.of(context).primaryColor == Colours.dark_app_main;
     Color textColor = in_color;
     // Color textColor = isInDark ? Colors.grey : Colors.grey;
     return Container(
