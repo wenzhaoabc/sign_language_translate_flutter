@@ -27,6 +27,7 @@ class AppProvider extends ChangeNotifier {
   double get smallFontSize => _smallFontSize;
 
   bool _isInLargeFont = false;
+
   bool get inLargeFont => _isInLargeFont;
 
   void setFontLarge(bool large) {
@@ -54,8 +55,6 @@ class AppProvider extends ChangeNotifier {
         _sosItemList.addAll([
           SOSItem('抢劫遇险', '110中心你好，我是一名聋哑人士，以下语音为文本合成，我现在顶山公寓室内遭遇抢劫情况，请速来救援',
               '110'),
-          SOSItem(
-              '车祸遇险', '120中心你好，我是一名聋哑人士，我现在户外遭遇车祸遇险，我的位置是乞灵山山下，请速来救援', '120'),
           SOSItem(
               '测试项', '紧急中心你好，我是一名聋哑人士，我现在户外遭遇紧急情况，我在乞灵山山顶，请速来救援', '18105022730')
         ]);
@@ -114,5 +113,30 @@ class AppProvider extends ChangeNotifier {
       notifyListeners();
       setValue(Constant.detectDevice, detect);
     }
+  }
+
+  List<SMSItem> _smsList = [];
+
+  List<SMSItem> get smsList {
+    if (_smsList.isEmpty) {
+      _smsList.addAll([
+        SMSItem(
+          '测试项',
+          '紧急救援中心你好，我是一名聋哑人士，我在户外遇险，腿部受伤，丧失活动能力，我的位置是${Constant.smsLocation}，请速来救援。',
+          '18105022730',
+        ),
+      ]);
+    }
+    return _smsList;
+  }
+
+  void addSMSItem(SMSItem item) {
+    _smsList.add(item);
+    notifyListeners();
+  }
+
+  void deleteSMSItem(String title) {
+    _smsList.removeWhere((element) => element.title == title);
+    notifyListeners();
   }
 }

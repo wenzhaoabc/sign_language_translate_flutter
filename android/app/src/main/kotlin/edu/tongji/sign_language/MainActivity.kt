@@ -1,17 +1,23 @@
 package edu.tongji.sign_language
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
+import android.location.LocationManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.telephony.PhoneStateListener
+import android.telephony.SmsManager
 import android.telephony.TelephonyManager
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.LocationServices
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -73,11 +79,36 @@ class MainActivity : FlutterActivity() {
                 } else {
                     result.error("200", "参数错误", null);
                 }
+            } else if (call.method == "getLocation") {
+                // TODO 获取位置信息
+                val locMan = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager;
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    result.error("200", "无权限", null);
+                }
+                val location = locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location == null) {
+                    locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                }
+                if (location == null) {
+                    result.error("200", "无权限", null);
+                } else {
+                    val resMap = mapOf<String, Double>("lat" to location.latitude, "lon" to location.longitude)
+                    result.success(resMap)
+                }
+
             } else {
                 result.notImplemented();
             }
         }
 
+    }
+
+    private fun sendSMS(phoneNumber: String, content: String) {
+        val smsManage = SmsManager.getDefault();
+        smsManage.sendTextMessage(phoneNumber, null, content, null, null)
     }
 
 

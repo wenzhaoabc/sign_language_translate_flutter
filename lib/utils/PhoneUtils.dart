@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:ffi';
 import 'dart:isolate';
 
 import 'package:audio_session/audio_session.dart';
@@ -6,15 +6,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:just_audio/just_audio.dart';
+
+// import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:phone_state/phone_state.dart';
 import 'package:sign_language/net/http.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/toolkit/xfyy/utils/xf_socket.dart';
 import 'package:sign_language/utils/FileUtil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PhoneUtils {
   static const MethodChannel _channel = MethodChannel('SOS_PHONE');
@@ -183,7 +188,7 @@ class PhoneUtils {
     return true;
   }
 
-  static void PlayM(String filePath){
+  static void PlayM(String filePath) {
     WidgetsFlutterBinding.ensureInitialized();
     var player = AudioPlayer();
     player.setAndroidAudioAttributes(
@@ -200,4 +205,88 @@ class PhoneUtils {
   // void _play(String path) async {
   //   await playerModule.startPlayer(fromURI: path);
   // }
+
+  static Future<bool> sendSOSMessage(String to, String content) async {
+    int locationIndex = content.indexOf(Constant.smsLocation);
+    debugPrint("to = $to : content = $content");
+
+    if (locationIndex >= 0) {
+      // Location location = Location();
+      //
+      // bool _serviceEnabled;
+      // PermissionStatus _permissionGranted;
+      // LocationData _locationData;
+
+      // _serviceEnabled = await location.serviceEnabled();
+      // if (!_serviceEnabled) {
+      //   _serviceEnabled = await location.requestService();
+      //   if (!_serviceEnabled) {
+      //     return false;
+      //   }
+      // }
+
+      // _permissionGranted = await location.hasPermission();
+      // if (_permissionGranted == PermissionStatus.denied) {
+      //   _permissionGranted = await location.requestPermission();
+      //   if (_permissionGranted != PermissionStatus.granted) {
+      //     return false;
+      //   }
+      // }
+      // _locationData = await location.getLocation();
+      var loper = await Permission.location.request();
+      if (loper.isDenied) {
+        return false;
+      }
+
+      Map<Object?, Object?> res = await _channel.invokeMethod('getLocation');
+      debugPrint(res.toString());
+
+      String locationStr =
+          "经度 : ${res['lon'] ?? 122.3}，维度 : ${res['lat'] ?? 23.34}";
+
+      content = content.substring(0, locationIndex) +
+          locationStr +
+          content.substring(locationIndex + Constant.smsLocation.length);
+    }
+
+    debugPrint("发送文本 $content");
+
+    var smsPer = await Permission.sms.request();
+    if (smsPer.isDenied) {
+      return false;
+    }
+
+    try {
+      // var res = await _channel
+      //     .invokeMethod("sendSOSMessage", {"to": to, "content": content});
+
+      var smsLaunchUri = Uri(
+        scheme: 'sms',
+        path: '+86$to',
+        query: encodeQueryParameters(<String, String>{
+          'body': content,
+        }),
+
+        /// 注意：sms采用query
+        // queryParameters: <String, dynamic>{
+        //   'body': Uri.encodeComponent(content),
+        // },
+      );
+      debugPrint(smsLaunchUri.toString());
+      // Uri.encodeFull(smsLaunchUri);
+      launchUrl(smsLaunchUri);
+      // await sendSMS(message: content, recipients: [to]);
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  static String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
 }

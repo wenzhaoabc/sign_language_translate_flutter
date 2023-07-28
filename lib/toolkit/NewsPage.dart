@@ -35,28 +35,28 @@ class _NewsListPageState extends State<NewsListPage> {
     } catch (e) {
       toast('网络错误');
     }
-    var t = NewsItem(
-        0,
-        '你好',
-        '🙌 无障碍服务',
-        """
-        <h1 style="text-align: center;">文明办关于提高社会无障碍服务保障的通知</h1>
-<p style="text-align: center;"><span style="font-size: 14px;">社会主义核心价值观文明办公室</span></p>
-<p style="text-align: center;"><span style="font-size: 14px;">2023年5月18日</span></p>
-<p style="text-align: left;"><span style="font-size: 16px;">各区县：</span></p>
-<p style="text-align: left;"><span style="font-size: 16px;">为切实加强我县残障人士的生活质量，现对各场所无障碍服务做出如下倡议：</span></p>
-<p style="text-align: left;"><span style="font-size: 16px;"><img src="https://s2.loli.net/2023/05/18/oG6LuTybQtK4EP9.png"></span></p>
-<p style="text-align: left;"><span style="font-size: 16px;">请严格落实以上规定内容。</span></p>
-<p style="text-align: right;"><span style="font-size: 16px;">县委文明办公室</span></p>
-        """,
-        'https://s2.loli.net/2023/05/04/jlOSp5LQRzYWX3d.jpg',
-        '2023-05-16 18:32:45');
-    _newsItemList.add(t);
-    _newsItemList.add(t);
-    _newsItemList.add(t);
-    _newsItemList.add(t);
-    _newsItemList.add(t);
-    _newsItemList.add(t);
+//     var t = NewsItem(
+//         0,
+//         '你好',
+//         '🙌 无障碍服务',
+//         """
+//         <h1 style="text-align: center;">文明办关于提高社会无障碍服务保障的通知</h1>
+// <p style="text-align: center;"><span style="font-size: 14px;">社会主义核心价值观文明办公室</span></p>
+// <p style="text-align: center;"><span style="font-size: 14px;">2023年5月18日</span></p>
+// <p style="text-align: left;"><span style="font-size: 16px;">各区县：</span></p>
+// <p style="text-align: left;"><span style="font-size: 16px;">为切实加强我县残障人士的生活质量，现对各场所无障碍服务做出如下倡议：</span></p>
+// <p style="text-align: left;"><span style="font-size: 16px;"><img src="https://s2.loli.net/2023/05/18/oG6LuTybQtK4EP9.png"></span></p>
+// <p style="text-align: left;"><span style="font-size: 16px;">请严格落实以上规定内容。</span></p>
+// <p style="text-align: right;"><span style="font-size: 16px;">县委文明办公室</span></p>
+//         """,
+//         'https://s2.loli.net/2023/05/04/jlOSp5LQRzYWX3d.jpg',
+//         '2023-05-16 18:32:45');
+//     _newsItemList.add(t);
+//     _newsItemList.add(t);
+//     _newsItemList.add(t);
+//     _newsItemList.add(t);
+//     _newsItemList.add(t);
+//     _newsItemList.add(t);
   }
 
   @override

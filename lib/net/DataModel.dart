@@ -105,6 +105,24 @@ class SOSItem {
   }
 }
 
+class SMSItem {
+  late final String title;
+  late final String content;
+  late final String to;
+
+  SMSItem(this.title, this.content, this.to);
+
+  SMSItem.fromJson(Map<String, dynamic> json)
+      : title = json['title'],
+        content = json['content'],
+        to = json['to'];
+
+  @override
+  String toString() {
+    return '{"title":"$title","to":"$to","content":"$content"}';
+  }
+}
+
 class NewsItem {
   late int id;
   late String title;

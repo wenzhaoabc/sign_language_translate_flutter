@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sign_language/provider/AppProvider.dart';
 import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/res/styles.dart';
+import 'package:sign_language/toolkit/add_sms_page.dart';
 import 'package:sign_language/toolkit/add_sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
 
@@ -48,7 +49,7 @@ class _SOSPageState extends State<SOSPage> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                Row(
+                /*Row(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
@@ -100,7 +101,7 @@ class _SOSPageState extends State<SOSPage> {
                       },
                     ),
                   ],
-                ),
+                ),*/
                 Row(
                   children: [
                     Container(
@@ -127,6 +128,57 @@ class _SOSPageState extends State<SOSPage> {
                       },
                     ),
                   ],
+                ),
+                Divider(height: 10),
+                GestureDetector(
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Icon(
+                          Icons.sms_failed,
+                          color: Colors.green,
+                          size: fontSize,
+                        ),
+                      ),
+                      Text(
+                        '添加求救短信',
+                        style: TextStyle(fontSize: fontSize),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      Icon(Icons.add_circle_outline, size: fontSize + 5),
+                      SizedBox(width: 10)
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MySlidePageRoute(page: const AddSMSPage()));
+                  },
+                ),
+                Divider(height: 10),
+                GestureDetector(
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Icon(
+                          Icons.phonelink_ring_rounded,
+                          color: Colors.green,
+                          size: fontSize,
+                        ),
+                      ),
+                      Text(
+                        '添加紧急呼救',
+                        style: TextStyle(fontSize: fontSize),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      Icon(Icons.phone, size: fontSize + 5),
+                      SizedBox(width: 10)
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MySlidePageRoute(page: const AddSOS()));
+                  },
                 ),
               ],
             ),

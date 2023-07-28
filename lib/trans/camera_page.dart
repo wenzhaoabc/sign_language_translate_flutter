@@ -48,7 +48,7 @@ class _CameraPageState extends State<CameraPage> {
     // _transText = '文本 : ';
     _cameraController = CameraController(
         widget.cameras[currentCameraIndex % widget.cameras.length],
-        ResolutionPreset.ultraHigh,
+        ResolutionPreset.low,
         enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420);
     _initializeControllerFuture = _cameraController?.initialize();

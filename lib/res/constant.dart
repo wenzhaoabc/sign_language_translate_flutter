@@ -45,4 +45,6 @@ class Constant {
       "https://s2.loli.net/2023/04/27/i9dVTF5XwQAPZxE.jpg";
 
   static const String bg_img_assets = 'assets/images/bg_balloon.jpg';
+
+  static const String smsLocation = '{📍}';
 }

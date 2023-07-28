@@ -7,6 +7,7 @@ import 'package:sign_language/res/constant.dart';
 import 'package:sign_language/res/styles.dart';
 import 'package:sign_language/toolkit/sos_page.dart';
 import 'package:sign_language/utils/SlidePageUtil.dart';
+import 'package:sign_language/widgets/SMSListWidget.dart';
 import 'package:sign_language/widgets/SOSListWidget.dart';
 
 class ToolMainPage extends StatefulWidget {
@@ -60,7 +61,7 @@ class _ToolMainPageState extends State<ToolMainPage> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              '紧急呼救',
+                              '紧急求救',
                               style: TextStyle(fontSize: fontSize - 3),
                             )
                           ],
@@ -98,6 +99,21 @@ class _ToolMainPageState extends State<ToolMainPage> {
               ),
             ),
             Neumorphic(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(10),
+              style: const NeumorphicStyle(
+                color: Colors.white,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _getHintText('我的短信求助', Colors.red),
+                  SMSListWidget()
+                ],
+              ),
+            ),
+            SizedBox(height: 5),
+            Neumorphic(
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               padding: const EdgeInsets.all(10),
               style: const NeumorphicStyle(
@@ -105,7 +121,6 @@ class _ToolMainPageState extends State<ToolMainPage> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisSize: MainAxisSize.min,
                 children: [
                   _getHintText('我的紧急呼救', Colors.red),
                   // Expanded(child: SOSListWidget()),

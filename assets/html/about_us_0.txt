@@ -1,1 +1,44 @@
-<h1>操作指南</h1>
+<h1 style="font-size:xx-large">使用说明</h1>
+<h2>1. 手语交流功能使用</h2>
+<p>实时手语: 通过摄像头对准手语动作，系统会实时识别并进行中文手语的翻译。</p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/Dz7dYAfs2kyTlKO.png" alt="实时手语" width="50%" height=auto /></p>
+<p>手语视频翻译: 上传你的手语视频，我们的系统将进行翻译，将手语转化为文字。</p>
+<p><img src="https://s2.loli.net/2023/05/30/S8iyqsaAuUOgPjQ.png" alt="手语视频翻译" width="50%" height=auto /></p>
+<p>&nbsp;</p>
+<p>手语图片翻译: 上传手语动作图片，系统将识别并提供相应的文字翻译。</p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/kAB8i6yfZCNexuT.png" alt="手语图像翻译" width="50%" height=auto /></p>
+<p>双向对话: 聋哑人通过文字或手语视频翻译转语音外放，其他人可通过语音转文字呈现给聋哑人。</p>
+<p><img src="https://s2.loli.net/2023/05/30/EQhWAwUZvK2tNpS.png" alt="双向对话" width="75%" height=auto /></p>
+<h2>2. 手语社区功能使用</h2>
+<p>手语词表: 输入需要查询的词语，系统将显示对应的手语动作释义和视频演示。</p>
+<p><img src="https://s2.loli.net/2023/05/30/kqR6chagjzNGprm.png" alt="手语词表" width="50%" height=auto /></p>
+<p><img src="https://s2.loli.net/2023/05/30/yG2AIdt4xiNoHrm.png" alt="手语词表" width="50%" height=auto /></p>
+<p>新闻资讯: 在这里，你可以浏览到最新的关于手语和聋哑人群体的新闻资讯。</p>
+<p><img src="https://s2.loli.net/2023/05/30/FV2csbmGvO4gkXr.png" alt="新闻资讯" width="50%" height=auto /></p>
+<p>手语挑战: 通过参与手语知识答题挑战，增进你的手语知识。</p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/wQBeslmG8kDhjCW.png" alt="手语挑战" width="75%" height=auto /></p>
+<p>手势说明: 包含汉语手指字母方案、手势动作图解符号方案、手语和朝向图示说明，帮助你理解和学习手语。</p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/Q4M1zpjcF93vBdi.png" alt="手势说明" width="50%" height=auto /></p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/iOVX3q4yrRQ7Tsc.png" alt="手势说明" width="50%" height=auto /></p>
+<h2>3. 工具箱功能使用</h2>
+<p>紧急呼救: 在遇到紧急情况时，你可以使用预设的紧急呼救功能进行一键拨号和晃动拨号呼救。</p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/D2q7MYTgFGfu98i.png" alt="紧急呼救" width="100%" height=auto /></p>
+<p>&nbsp;<img src="https://s2.loli.net/2023/05/30/ZXjI3xcJ4l6QPVy.png" alt="紧急呼救" width="50%" height=auto /></p>
+<p>陪伴助手: 我们的AI聊天助手将陪伴你，为你提供问答服务。</p>
+<p><img src="https://s2.loli.net/2023/05/30/Q1qYjG9DX7Jari8.png" alt="陪伴助手" width="50%" height=auto /></p>
+<p>&nbsp;</p>
+<h2>4. 个人中心功能使用</h2>
+<p>登录注册: 进行账户登录或注册，享受更多个性化的服务。</p>
+<p><img src="https://s2.loli.net/2023/05/30/8xJR174BlsjVvhL.png" alt="登录注册" width="50%" height=auto /></p>
+<p>大字功能: 在应用设置中，你可以调整字体大小，以适应你的视觉需求。</p>
+<p><img src="https://s2.loli.net/2023/05/30/xNpsBTRGLhiM4yw.png" alt="打字功能" width="50%" height=auto /></p>
+<p>我的收藏: 你可以在这里查看和学习你在手语词典部分收藏的词语。</p>
+<p><img src="https://s2.loli.net/2023/05/30/Yv3BoPGNXtjlyJh.png" alt="我的收藏" width="50%" height=auto /></p>
+<p>&nbsp;</p>
+<p>关于我们: 在这里，你可以了解更多关于我们团队的信息。</p>
+<p>操作指南: 提供详细的使用帮助，帮你更好地使用我们的产品。</p>
+<p>开源说明: 在这里，你可以查看我们的开源代码和相应的使用说明。</p>
+<p>隐私政策: 我们尊重并保护每一位用户的隐私，你可以在这里查看我们的隐私政策。</p>
+<p><img src="https://s2.loli.net/2023/05/30/x2dHjsoZOgBpYTi.png" alt="关于我们" width="75%" height=auto /></p>
+<p>&nbsp;</p>
+

@@ -131,12 +131,12 @@ class _SOSListWidgetState extends State<SOSListWidget> {
     initSosList();
     return Container(
       // margin: const EdgeInsets.only(bottom: 20),
-      height: 300,
-      child: ListView.builder(
+      height: (SosItemList.length * 80) ?? 100,
+      child: SingleChildScrollView(child: ListView.builder(
         shrinkWrap: true,
         itemCount: SosItemList.length,
         itemBuilder: (context, index) => _getSOSItem(SosItemList[index], index),
-      ),
+      ),)
     );
   }
 
